@@ -1,0 +1,54 @@
+/** General style */
+body * {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main.content {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 600pt;
+}
+
+/** Visual hardbreaks */
+
+hr {
+  max-width: 75%;
+}
+
+/** Navigation area */
+
+nav {
+  padding: 1em;
+  background-color: var(--navbar-background);
+  transition: background-color var(--color-transition-duration);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+nav a {
+  text-decoration: none;
+  padding: 16pt 12pt;
+  border-radius: 3pt;
+  overflow: hidden;
+}
+
+@media (hover: hover) {
+  nav a:hover {
+    background-color: var(--navbar-button-highlight);
+  }
+}

@@ -1,0 +1,110 @@
+html {
+  font-family: var(--fontFamily);
+  color: var(--label);
+  background-color: var(--background);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: auto;
+}
+
+strong,
+.heading {
+  font-weight: bold;
+}
+
+a {
+  color: var(--link);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+  color: var(--label);
+  transition: color var(--color-transition-duration);
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: var(--label);
+  transition: color var(--color-transition-duration);
+}
+
+ul,
+ol {
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li > a:first-of-type {
+  font-weight: bold;
+}
+
+blockquote {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+code {
+  background-color: var(--cloud);
+  vertical-align: bottom;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--label-code);
+  transition-property: color, background-color;
+  transition-duration: var(--color-transition-duration);
+}
+
+.float--right {
+  float: right;
+}
+
+.float--left {
+  float: left;
+}
