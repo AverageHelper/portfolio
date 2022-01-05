@@ -2,7 +2,6 @@ html {
   font-family: var(--fontFamily);
   color: var(--label);
   background-color: var(--background);
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   -moz-osx-font-smoothing: grayscale;
@@ -64,6 +63,7 @@ h6 {
 p {
   margin-top: 0;
   margin-bottom: 1.2rem;
+  line-height: 2;
   color: var(--label);
   transition: color var(--color-transition-duration);
 }
