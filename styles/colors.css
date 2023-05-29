@@ -94,11 +94,6 @@
 
   --clear: rgba(0, 0, 0, 0);
   --transparent-gray: rgba(0, 0, 0, 0.38);
-
-  /* animate color transitions */
-  transition: color var(--color-transition-duration),
-    background-color var(--color-transition-duration), border-color,
-    var(--color-transition-duration);
 }
 
 /* Applying Colors Dynamically */
