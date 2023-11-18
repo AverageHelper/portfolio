@@ -13,5 +13,5 @@ steps:
     image: node:18
     commands:
       - npm ci
-      - ./node_modules/.bin/wrangler pages publish ./pages --project-name=$CLOUDFLARE_PROJECT_NAME
+      - ./node_modules/.bin/wrangler pages deploy ./pages --project-name=$CLOUDFLARE_PROJECT_NAME
     secrets: [cloudflare_account_id, cloudflare_api_token, cloudflare_project_name]
