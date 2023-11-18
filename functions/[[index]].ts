@@ -2,7 +2,6 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-pages";
 
 const app = new Hono()
-	.get("/", serveStatic()) // Serves the /pages dir
 	.get("/.well-known/webfinger", c =>
 		c.json({
 			subject: "acct:avg@average.name",
@@ -28,7 +27,8 @@ const app = new Hono()
 				},
 			],
 		}),
-	);
+	)
+	.get("*", serveStatic()); // Serves the /pages dir
 
 // The filename [[foo]].ts means we accept any path here.
 // See https://developers.cloudflare.com/pages/platform/functions/get-started/
