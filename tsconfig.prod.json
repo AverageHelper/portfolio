@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": ["pages/functions/**/*.ts", "pages/functions/**/*.json"],
-  "exclude": ["pages/functions/**/*.test.ts", "**/__mocks__/**/*.ts"]
+	"extends": "./tsconfig.base.json",
+	"include": ["**/*.ts"],
+	"exclude": ["**/*.test.ts", "**/__mocks__/**/*.ts"]
 }
