@@ -5,7 +5,7 @@ when:
     branch: main
   - event: push
     branch: main
-    path: pages/*
+    path: pages/**
 
 steps:
   deploy:
