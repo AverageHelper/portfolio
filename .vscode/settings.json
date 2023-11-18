@@ -1,0 +1,17 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "todo-tree.filtering.excludeGlobs": ["**/dist/**", "**/node_modules/**", "coverage/**"],
+  "files.eol": "auto",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "editor.formatOnSave": true,
+  "coverage-gutters.coverageFileNames": [
+    "clover.xml",
+    "lcov.info",
+    "cov.xml",
+    "coverage.xml",
+    "jacoco.xml",
+    "coverage.cobertura.xml"
+  ]
+}

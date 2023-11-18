@@ -1,74 +1,74 @@
 /** General style */
 body * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 main.content {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 600pt;
-  line-height: 2;
+	margin: 0 auto;
+	padding: 1em;
+	max-width: 600pt;
+	line-height: 2;
 }
 
 /** Visual hardbreaks */
 
 hr {
-  max-width: 75%;
+	max-width: 75%;
 }
 
 /** Navigation area */
 
 nav {
-  padding: 1em;
-  background-color: var(--navbar-background);
+	padding: 1em;
+	background-color: var(--navbar-background);
 }
 
 nav ul {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-flow: row nowrap;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-flow: row nowrap;
 }
 
 nav li {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 nav a {
-  text-decoration: none;
-  padding: 16pt 12pt;
-  border-radius: 3pt;
-  overflow: hidden;
+	text-decoration: none;
+	padding: 16pt 12pt;
+	border-radius: 3pt;
+	overflow: hidden;
 }
 
 @media (hover: hover) {
-  nav a:hover {
-    background-color: var(--navbar-button-highlight);
-  }
+	nav a:hover {
+		background-color: var(--navbar-button-highlight);
+	}
 }
 
 /* Mobile styles */
 @media only screen and (max-width: 450px) {
-  main.content {
-    margin: 0 auto;
-    padding: 2em;
-  }
+	main.content {
+		margin: 0 auto;
+		padding: 2em;
+	}
 
-  nav ul {
-    justify-content: center;
-  }
+	nav ul {
+		justify-content: center;
+	}
 }
 
 /* Tablet styles */
 @media only screen and (min-width: 451px) and (max-width: 960px) {
-  main.content {
-    margin: 0 auto;
-    padding: 2em;
-  }
+	main.content {
+		margin: 0 auto;
+		padding: 2em;
+	}
 }

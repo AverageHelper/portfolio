@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "My personal website. Very basic.",
   "private": true,
-  "scripts": {
-    "deploy": "vitest"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://codeberg.org/AverageHelper/portfolio.git"
