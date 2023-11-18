@@ -17,6 +17,11 @@ a {
   color: var(--link);
 }
 
+a.hint {
+  color: var(--label);
+  font-weight: bold;
+}
+
 h1,
 h2,
 h3,
