@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "My personal website. Very basic.",
+  "private": true,
+  "scripts": {
+    "deploy": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/AverageHelper/portfolio.git"
+  },
+  "keywords": [
+    "css",
+    "html"
+  ],
+  "author": "Average Helper <https://codeberg.org/AverageHelper>",
+  "license": "ISC",
+  "devDependencies": {
+    "wrangler": "3.16.0"
+  }
+}

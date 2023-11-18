@@ -1,0 +1,17 @@
+# On push to main, if Pages files were changed, deploy to CloudFlare
+
+when:
+  - event: manual
+    branch: main
+  - event: push
+    branch: main
+    path: pages/*
+
+steps:
+  deploy:
+    name: Deploy Pages
+    image: node:18
+    commands:
+      - npm ci
+      - ./node_modules/.bin/wrangler pages publish ./pages --project-name=$CLOUDFLARE_PROJECT_NAME
+    secrets: [cloudflare_account_id, cloudflare_api_token, cloudflare_project_name]
