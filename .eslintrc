@@ -26,9 +26,6 @@
 		"project": "./tsconfig.prod.json",
 		"tsconfigRootDir": "./"
 	},
-	"env": {
-		"node": true
-	},
 	"rules": {
 		"file-progress/activate": 1,
 		"deprecation/deprecation": "warn",
@@ -59,22 +56,5 @@
 		"@typescript-eslint/consistent-type-imports": "warn",
 		"new-cap": "off", // Many decorators do not follow normal function conventions
 		"unicorn/catch-error-name": ["warn", { "name": "error" }]
-	},
-
-	"overrides": [
-		{
-			"files": ["./*.ts", "functions/**/*.test.ts", "tests/**/*.ts", "**/__mocks__/**/*.ts"],
-			"extends": ["plugin:prettier/recommended", "plugin:vitest/recommended"],
-			"plugins": ["prettier", "@typescript-eslint", "vitest"],
-			"parser": "@typescript-eslint/parser",
-			"parserOptions": {
-				"project": "./tsconfig.test.json",
-				"tsconfigRootDir": "."
-			},
-			"rules": {
-				"prettier/prettier": "warn",
-				"max-nested-callbacks": "off" // Unit tests involve a lot of nested callbacks
-			}
-		}
-	]
+	}
 }

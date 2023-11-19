@@ -5,8 +5,6 @@
 	"private": true,
 	"scripts": {
 		"start": "./node_modules/.bin/wrangler pages dev pages",
-		"test": "./node_modules/.bin/vitest run",
-		"test:watch": "./node_modules/.bin/vitest watch --coverage=false",
 		"lint": "./node_modules/.bin/eslint . --ext .ts",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix"
 	},
@@ -27,7 +25,6 @@
 		"@cloudflare/workers-types": "4.20231025.0",
 		"@typescript-eslint/eslint-plugin": "6.11.0",
 		"@typescript-eslint/parser": "6.11.0",
-		"@vitest/coverage-istanbul": "0.34.6",
 		"eslint": "8.54.0",
 		"eslint-config-prettier": "9.0.0",
 		"eslint-config-strictest": "0.8.1",
@@ -37,10 +34,8 @@
 		"eslint-plugin-prettier": "5.0.1",
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-unicorn": "49.0.0",
-		"eslint-plugin-vitest": "0.3.9",
 		"prettier": "3.1.0",
 		"typescript": "5.2.2",
-		"vitest": "0.34.6",
 		"wrangler": "3.16.0"
 	}
 }
