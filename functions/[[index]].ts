@@ -31,11 +31,13 @@ const app = new Hono()
 		const resourceUri = url(resourceQuery);
 		if (!resourceUri) return badRequest();
 
-		const resource = resourceUri.protocol === "acct:" ? url(resourceUri.pathname) : null;
+		const resource =
+			resourceUri.protocol === "acct:" ? url(resourceUri.pathname) ?? resourceUri.pathname : null;
 		if (!resource) return badRequest();
 
 		// "If the "resource" parameter is a value for which the server has no information, the server MUST indicate [not found]"
-		if (resource.host !== "average.name") return notFound();
+		const host = typeof resource === "string" ? resource.split("@").at(-1) : resource.host;
+		if (host !== "average.name") return notFound();
 
 		const relQueries = c.req.queries("rel") ?? [];
 
