@@ -16,6 +16,10 @@ const app = new Hono()
 	.get("/foo", c => {
 		return c.text("bar");
 	})
+	.get("/ip", c => {
+		const ip = c.req.header("CF-Connecting-IP");
+		return c.text(ip ?? "unknown");
+	})
 
 	// ** Webfinger
 	// See https://www.rfc-editor.org/rfc/rfc7033.html
