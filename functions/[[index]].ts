@@ -9,7 +9,7 @@ import { serveStatic } from "hono/cloudflare-pages";
 // Dynamic content is served here.
 
 const app = new Hono()
-	.use(cors())
+	.use("*", cors())
 	.use(
 		secureHeaders({
 			contentSecurityPolicy: {
@@ -21,7 +21,7 @@ const app = new Hono()
 			},
 		}),
 	)
-	.use("*", async (c, next) => {
+	.use(async (c, next) => {
 		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
 		await next();
 	})
@@ -76,7 +76,6 @@ const app = new Hono()
 				: availableLinks.filter(link => relQueries.includes(link.rel));
 
 		// "The media type used for the JSON Resource Descriptor (JRD) is `application/jrd+json`"
-		c.header("Access-Control-Allow-Origin", "*");
 		c.header("Content-Type", "application/jrd+json; charset=UTF=8");
 
 		return c.json({
