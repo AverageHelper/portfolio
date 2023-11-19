@@ -12,6 +12,11 @@ const app = new Hono()
 		await next();
 	})
 
+	// ** Fun
+	.get("/foo", c => {
+		return c.text("bar");
+	})
+
 	// ** Webfinger
 	// See https://www.rfc-editor.org/rfc/rfc7033.html
 	.get("/.well-known/webfinger", c => {
