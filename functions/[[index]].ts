@@ -66,9 +66,6 @@ const app = new Hono()
 			{
 				// subject: "acct:avg@average.name",
 				subject: "acct:avghelper@fosstodon.org",
-				properties: {
-					"http://webfinger.example/ns/name": "Bob Smith",
-				},
 				aliases: [
 					"https://average.name",
 					"https://fosstodon.org/@avghelper",
