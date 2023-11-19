@@ -62,22 +62,25 @@ const app = new Hono()
 				? availableLinks
 				: availableLinks.filter(link => relQueries.includes(link.rel));
 
-		// "The media type used for the JSON Resource Descriptor (JRD) is `application/jrd+json`"
-		c.header("Content-Type", "application/jrd+json; charset=UTF=8");
-
-		return c.json({
-			// subject: "acct:avg@average.name",
-			subject: "acct:avghelper@fosstodon.org",
-			properties: {
-				"http://webfinger.example/ns/name": "Bob Smith",
+		return c.json(
+			{
+				// subject: "acct:avg@average.name",
+				subject: "acct:avghelper@fosstodon.org",
+				properties: {
+					"http://webfinger.example/ns/name": "Bob Smith",
+				},
+				aliases: [
+					"https://average.name",
+					"https://fosstodon.org/@avghelper",
+					"https://fosstodon.org/users/avghelper",
+				],
+				links,
 			},
-			aliases: [
-				"https://average.name",
-				"https://fosstodon.org/@avghelper",
-				"https://fosstodon.org/users/avghelper",
-			],
-			links,
-		});
+			200,
+
+			// "The media type used for the JSON Resource Descriptor (JRD) is `application/jrd+json`"
+			{ "Content-Type": "application/jrd+json; charset=UTF=8" },
+		);
 	})
 
 	// ** Serve the /pages dir
