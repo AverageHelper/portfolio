@@ -1,3 +1,4 @@
+import { cors } from "hono/cors";
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-pages";
 
@@ -7,6 +8,7 @@ import { serveStatic } from "hono/cloudflare-pages";
 // Dynamic content is served here.
 
 const app = new Hono()
+	.use(cors())
 	.use("*", async (c, next) => {
 		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
 		await next();
