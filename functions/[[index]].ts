@@ -1,5 +1,6 @@
 import { cors } from "hono/cors";
 import { Hono } from "hono";
+import { secureHeaders } from "hono/secure-headers";
 import { serveStatic } from "hono/cloudflare-pages";
 
 // All requests to the average.name domain route here first.
@@ -9,6 +10,17 @@ import { serveStatic } from "hono/cloudflare-pages";
 
 const app = new Hono()
 	.use(cors())
+	.use(
+		secureHeaders({
+			contentSecurityPolicy: {
+				defaultSrc: ["'self'"],
+				baseUri: ["'self'"],
+				objectSrc: ["'none'"],
+				scriptSrcAttr: ["'none'"],
+				upgradeInsecureRequests: [],
+			},
+		}),
+	)
 	.use("*", async (c, next) => {
 		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
 		await next();
