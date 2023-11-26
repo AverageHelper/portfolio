@@ -1,6 +1,7 @@
 /*
 	# CORS
-	Access-Control-Allow-Origin: *
+	Access-Control-Allow-Origin: https://average.name
+	Very: *
 
 	# Security
 	Content-Security-Policy: default-src 'self'; img-src https://* 'self'; media-src https://* 'self'; script-src 'self'; style-src 'self'; child-src 'none'; object-src 'none'; worker-src 'none'; upgrade-insecure-requests
