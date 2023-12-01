@@ -101,6 +101,12 @@ code {
 	color: var(--label-code);
 }
 
+.emoji {
+	/* Copied from styles at https://unicode.org/emoji/charts/full-emoji-list.html#2764 */
+	font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus,
+		Code2000, Code2001, Code2002, Musica, serif, LastResort;
+}
+
 .float--right {
 	float: right;
 }

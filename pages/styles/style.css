@@ -16,10 +16,30 @@ main.content {
 	line-height: 2;
 }
 
+header {
+	margin: 0 auto;
+	padding: 1em;
+	max-width: 600pt;
+	line-height: 2;
+	border-bottom: 1pt solid var(--separator);
+}
+
+header ul {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0;
+}
+
+header ul li {
+	list-style-type: none;
+	margin-right: 16pt;
+}
+
 /** Visual hardbreaks */
 
 hr {
 	max-width: 75%;
+	color: var(--separator);
 }
 
 /** Navigation area */
