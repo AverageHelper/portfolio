@@ -1,5 +1,6 @@
 {% extends "_layout.njk" %}
 
+{% from "_emoji.njk" import emoji %}
 {% from "_link.njk" import link %}
 
 {% block content %}
@@ -7,7 +8,7 @@
 <p>Thanks for being here!</p>
 <p
 	>I write software for fun. If that software makes someone's life easier along the way, all
-	the better! <span class="emoji">&#10084;</span> I started writing software in 2014, began
+	the better! {{ emoji("10084") }}{# :heart: #} I started writing software in 2014, began
 	working on >open source in 2016, and finally figured git out in 2018. Nearly all of the
 	software I use in my day-to-day life is open source. I hope to work full time on open source
 	software one day, but my employer right now is entirely closed-source, servers aren't free,
@@ -48,6 +49,6 @@
 
 <p
 	>As always, I'm always happy to receive contributions to my open-source projects. Issues and
-	PRs are always welcome! <span class="emoji">&#128522;</span></p
+	PRs are always welcome! {{ emoji("128522") }}{# :blush: #}</p
 >
 {% endblock %}
