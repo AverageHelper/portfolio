@@ -1,0 +1,7 @@
+{% macro link(href, content, class="") %}<a href="{{ href }}" target="_blank" rel="noopener noreferrer">{{ content | safe }}</a>{% endmacro %}
+
+{% macro hint(href, content) %}<a href="{{ href }}" target="_blank" rel="noopener noreferrer" class="hint">{{ content | safe }}</a>{% endmacro %}
+
+{% macro relMe(href, content) %}<a href="{{ href }}" target="_blank" rel="me noopener noreferrer">{{ content | safe }}</a>{% endmacro %}
+
+{% macro mailto(addr) %}<a href="mailto:{{ addr }}">{{ addr }}</a>{% endmacro %}

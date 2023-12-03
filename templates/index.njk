@@ -1,0 +1,107 @@
+{% extends "_layout.njk" %}
+
+{% from "_link.njk" import link, hint, relMe, mailto %}
+
+{% block content %}
+<h1 id="about">About Myself</h1>
+<p>
+	I go by "Average Helper" online, partly because my name is super generic. An average name,
+	really. I've been doing software things since 2011. I try to be helpful where I can,
+	especially to write respectful software.
+</p>
+
+<hr />
+
+<h2 id="projects">Stuff I do for fun</h2>
+<p>
+	Here's just a few things I worked on myself that I'm proud of. (You can {{
+		link("https://github.com/AverageHelper", "check my GitHub") }} or {{ 
+		link("https://codeberg.org/AverageHelper", "Codeberg") }} for more.)
+</p>
+
+<ul>
+	<li>
+		{{ link("https://github.com/AverageHelper/Gamgee", "Gamgee") }}
+		&ndash; A fun little Discord bot to help manage a music queue for public DJ events.
+		Written in {{ hint("https://www.typescriptlang.org", "TypeScript") }}.
+	</li>
+	<li>
+		{{ link("https://codeberg.org/AverageHelper/meta-comments", "meta-comments") }}
+		&ndash; The first VS Code plugin I ever published! It decorates code based on
+		specially-formatted comments.
+	</li>
+	<li>
+		{{ link("https://github.com/AverageHelper/ItemEncryptor", "ItemEncryptor") }}
+		&ndash; A {{ hint("https://www.swift.org", "Swift") }} package to make
+		data encryption easy. I use this in some of my smaller projects to
+		facilitate end-to-end encryption of sensitive data.
+	</li>
+	<li>
+		{{ link("https://recorded.finance", "Recorded Finance") }}
+		&ndash; An {{ hint("https://en.wikipedia.org/wiki/End-to-end_encryption", "end-to-end encrypted") }}
+		finance app for keeping track of account balances. I had a version of this written for iOS
+		in Swift, but I've began to port that project to the web for better cross-platform
+		compatibility and accessibility. The project is still in its infant stages, with several
+		front-end glitches I want to fix before I "release" the project into the wild. The
+		front-end is written in {{ hint("https://svelte.dev", "Svelte") }}, with {{
+			hint("https://www.typescriptlang.org", "TypeScript")
+		}} on the front- and back-end.
+	</li>
+	<li>
+		{{ link("https://apps.apple.com/us/app/trump-donald/id1036041535", "Trump Donald") }}
+		&ndash; An iOS application based on the game {{ hint("https://en.wikipedia.org/wiki/Whac-A-Mole", "Whac-a-mole")
+		}}.
+	</li>
+	<li>
+		{{ link("https://averagehelper.github.io", "My blog") }}
+		&ndash; An experiment to see how GitHub Pages work. I post ramblings there from time to
+		time. The posts are written in {{ hint("https://www.markdownguide.org", "Markdown") }},
+		and the site is generated automagically using {{ hint("https://www.zola.com", "Zola") }}.
+	</li>
+</ul>
+
+<hr />
+
+<h2 id="experience">Stuff I get paid for</h2>
+<p>
+	My personal work is mainly with open-source projects and mobile applications. Since starting
+	at {{ link("https://inventoryshield.com", "Inventory Shield, LLC") }}
+	in 2018, I began working with web technologies. Inventory Shield's tech stack is {{
+		hint("https://www.typescriptlang.org", "TypeScript")
+	}} and {{
+		hint("https://vuejs.org", "Vue.js")
+	}} on the front-end, and {{
+		hint("https://nodejs.org", "Node.js")
+	}} (of course with TypeScript) on the back-end. The products are web apps, and we use {{
+		hint("https://cordova.apache.org", "Apache Cordova&trade;")
+	}} to wrap them in iOS and Android app shells for better device features.
+</p>
+<p
+	>Unfortunately, the company's code is closed-source. You can check out their
+	{{ link("https://inventoryshield.com", "inventory management") }}
+	and
+	{{ link("https://referralreactor.com", "referral management") }}
+	products at their respective sites.</p
+>
+
+<hr />
+
+<h2 id="contact">Contact</h2>
+<p>If you must reach me, I'm often found in these places:</p>
+
+<ul>
+	<li>
+		Codeberg: {{ relMe("https://codeberg.org/AverageHelper", "AverageHelper") }}
+	</li>
+	<li>
+		GitHub: {{ relMe("https://github.com/AverageHelper", "AverageHelper") }}
+	</li>
+	<li>
+		<!-- Eventually I want @avg@average.name... -->
+		Mastodon: {{ relMe("https://fosstodon.org/@avghelper", "@avghelper@fosstodon.org") }}
+	</li>
+	<li>
+		Personal Email: {{ mailto("avghelper.5fh6g@simplelogin.co") }}
+	</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% macro headerItem(slug, fileName, name = fileName) %}
+	<a href="/{{ fileName }}.html">{{ name | title }}</a>
+
+	{# {% if slug === name %}
+		<span>{{ name | title }}</span>
+	{% else %}
+		<a href="/{{ fileName }}.html">{{ name | title }}</a>
+	{% endif %} #}
+{% endmacro %}

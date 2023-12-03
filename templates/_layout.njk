@@ -1,0 +1,27 @@
+{% from "_headerItem.njk" import headerItem %}
+
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>An Average Developer</title>
+		<link rel="stylesheet" type="text/css" href="/styles/variables.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/styles/colors.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/styles/typography.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="/styles/style.css" media="screen" />
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li>{{ headerItem(template.slug, "index", "About") }}</li>
+				<li>{{ headerItem(template.slug, "support") }}</li>
+			</ul>
+		</header>
+		<main class="content">
+			{% block content %}
+			<h1 id="missing-content">Something Went Wrong</h1>
+			<p>This page generated without any content!</p>
+			{% endblock %}
+		</main>
+	</body>
+</html>
