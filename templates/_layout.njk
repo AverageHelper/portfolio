@@ -12,10 +12,12 @@
 	</head>
 	<body>
 		<header>
-			<ul>
-				<li>{{ headerItem(template.slug, "index", "About") }}</li>
-				<li>{{ headerItem(template.slug, "support") }}</li>
-			</ul>
+			<nav>
+				<ul>
+					<li>{{ headerItem(template.slug, "index", "About") }}</li>
+					<li>{{ headerItem(template.slug, "support") }}</li>
+				</ul>
+			</nav>
 		</header>
 		<main class="content">
 			{% block content %}
