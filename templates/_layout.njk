@@ -1,4 +1,5 @@
-{% from "_headerItem.njk" import headerItem %}
+{% from "_pageLink.njk" import pageLink %}
+{% from "_link.njk" import link %}
 
 <!doctype html>
 <html>
@@ -14,8 +15,9 @@
 		<header>
 			<nav>
 				<ul>
-					<li>{{ headerItem(template.slug, "index", "About") }}</li>
-					<li>{{ headerItem(template.slug, "support") }}</li>
+					<li>{{ pageLink(template.slug, "index", "About") }}</li>
+					<li>{{ link("https://averagehelper.github.io", "Blog") }}</li>
+					<li>{{ pageLink(template.slug, "support") }}</li>
 				</ul>
 			</nav>
 		</header>
