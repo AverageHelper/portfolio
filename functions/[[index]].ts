@@ -82,6 +82,9 @@ const app = new Hono()
 		);
 	})
 
+	// We have fun here
+	.get("/.well-known/pronouns", cors(), c => c.text("she/her\n"))
+
 	// ** Serve the /pages dir
 	.get("*", serveStatic());
 
