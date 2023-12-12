@@ -37,3 +37,7 @@ This command will build the site before starting a local Wrangler server to emul
 ```sh
 $ npm start
 ```
+
+## Contributing
+
+This project lives primarily at [git.average.name](https://git.average.name/AverageHelper/portfolio). Read-only mirrors also exist on [Codeberg](https://codeberg.org/AverageHelper/portfolio) and [GitHub](https://github.com/AverageHelper/portfolio). Issues or pull requests should be filed at [git.average.name](https://git.average.name/AverageHelper/portfolio). You may sign in or create an account directly, or use one of several OAuth 2.0 providers.

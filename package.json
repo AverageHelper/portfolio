@@ -6,19 +6,19 @@
 	"scripts": {
 		"build": "./node_modules/.bin/nunjucks ./*.njk -p templates -O nunjucks.json -o pages -s && npm run prettify",
 		"prettify": "./node_modules/.bin/prettier pages/**/*.html -w",
-		"start": "npm run build && ./node_modules/.bin/wrangler pages dev pages",
+		"start": "npm run build && ./node_modules/.bin/wrangler pages dev pages --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://codeberg.org/AverageHelper/portfolio.git"
+		"url": "https://git.average.name/AverageHelper/portfolio.git"
 	},
 	"keywords": [
 		"css",
 		"html"
 	],
-	"author": "Average Helper <https://codeberg.org/AverageHelper>",
+	"author": "Average Helper <https://git.average.name/AverageHelper>",
 	"license": "ISC",
 	"dependencies": {
 		"hono": "3.10.1"

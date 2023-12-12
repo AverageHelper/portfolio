@@ -19,3 +19,4 @@ tmp
 temp
 *.local
 /stats.html
+.wrangler
