@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "My personal website. Very basic.",
 	"private": true,
+
 	"scripts": {
 		"build": "./node_modules/.bin/nunjucks ./*.njk -p templates -O nunjucks.json -o pages -s && npm run prettify",
 		"prettify": "./node_modules/.bin/prettier pages/**/*.html -w",
