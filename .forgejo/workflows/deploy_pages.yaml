@@ -1,7 +1,7 @@
 on:
   push:
     branch: [main]
-    paths: [pages/**, templates/**, functions/**]
+    # paths: [pages/**, templates/**, functions/**]
   workflow_dispatch:
 
 jobs:
