@@ -84,10 +84,6 @@ ol ol {
 	margin-bottom: 0;
 }
 
-li > a:first-of-type {
-	font-weight: bold;
-}
-
 blockquote {
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;

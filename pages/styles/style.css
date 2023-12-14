@@ -98,6 +98,37 @@ nav a.disabled {
 	}
 }
 
+.svg {
+	fill: currentColor;
+}
+
+ul.contact {
+	padding-left: 0;
+}
+
+ul.contact li {
+	display: flex;
+	flex-flow: row nowrap;
+	list-style-type: none;
+	align-items: center;
+}
+
+ul.contact li .link {
+	transform: translateY(-4pt);
+}
+
+ul.contact li img,
+ul.contact li .svg {
+	width: 28pt;
+	height: 28pt;
+	margin: 12pt 12pt 12pt 0;
+	color: var(--label);
+}
+
+img.logo.fosstodon {
+	border-radius: 48%;
+}
+
 .visually-hidden {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
