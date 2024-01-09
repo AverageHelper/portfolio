@@ -1,0 +1,13 @@
+/* humans.txt file -- please visit https://humanstxt.org/ for details */
+
+/* TEAM */
+
+operator:   AverageHelper
+site:       https://average.name
+fediverse:  @avg@average.name
+location:   Utah, USA
+
+/* SITE */
+
+standards:  HTML5, CSS3
+software:   Node, NPM, ESLint, TypeScript, Nunjucks, Cloudflare Pages
