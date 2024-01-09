@@ -24,7 +24,8 @@ header {
 	border-bottom: 1pt solid var(--separator);
 }
 
-header ul {
+header ul,
+footer ul {
 	display: flex;
 	flex-flow: row wrap;
 	padding: 0;
@@ -33,6 +34,26 @@ header ul {
 header ul li {
 	list-style-type: none;
 	margin-right: 16pt;
+}
+
+footer {
+	border-top: 2px solid var(--separator);
+	width: fit-content;
+	margin: 0 auto;
+	padding: 0 16pt;
+	padding-top: 16pt;
+}
+
+footer ul li {
+	list-style-type: none;
+	width: fit-content;
+	font-weight: bold;
+}
+
+footer ul li:not(:last-of-type) {
+	margin-right: 16pt;
+	padding-right: 16pt;
+	border-right: 2px solid var(--separator);
 }
 
 /** Visual hardbreaks */
