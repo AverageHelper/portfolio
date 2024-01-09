@@ -1,7 +1,0 @@
-{% macro pageLink(slug, fileName, name = fileName) %}
-	{% if slug === fileName %}
-		<a href="/{{ fileName }}.html" class="disabled">{{ name | title }} <span class="visually-hidden">(current)</span></a>
-	{% else %}
-		<a href="/{{ fileName }}.html">{{ name | title }}</a>
-	{% endif %}
-{% endmacro %}

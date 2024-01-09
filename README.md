@@ -6,7 +6,7 @@ Feel free to poke around, I guess.
 
 # Usage
 
-We use [Nunjucks](https://mozilla.github.io/nunjucks) to generate static HTML from templates.
+We use [Astro](https://astro.build) to generate static HTML from templates.
 
 ## Install Dependencies
 

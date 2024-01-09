@@ -1,8 +1,11 @@
-{% from "_link.njk" import link %}
-{% from "_pageLink.njk" import pageLink %}
+---
+import Footer from "@/components/Footer.astro";
+import Link from "@/components/Link.astro";
+import LocalLink from "@/components/LocalLink.astro";
+---
 
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<title>An Average Developer</title>
@@ -16,21 +19,19 @@
 		<header>
 			<nav>
 				<ul>
-					<li>{{ pageLink(template.slug, "index", "About") }}</li>
-					<li>{{ link("https://blog.average.name", "Blog") }}</li>
-					<li>{{ link("https://git.average.name/AverageHelper", "Code") }}</li>
-					<li>{{ pageLink(template.slug, "support") }}</li>
+					<li><LocalLink fileName="index">About</LocalLink></li>
+					<li><Link href="https://blog.average.name">Blog</Link></li>
+					<li><Link href="https://git.average.name/AverageHelper">Code</Link></li>
+					<li><LocalLink fileName="support">Support</LocalLink></li>
 				</ul>
 			</nav>
 		</header>
 		<main class="content">
-			{% block content %}
-			<h1 id="missing-content">Something Went Wrong</h1>
-			<p>This page generated without any content!</p>
-			{% endblock %}
+			<slot>
+				<h1 id="missing-content">Something Went Wrong</h1>
+				<p>This page generated without any content!</p>
+			</slot>
 		</main>
-		<footer>
-			{% include "_footer.njk" %}
-		</footer>
+		<Footer />
 	</body>
 </html>

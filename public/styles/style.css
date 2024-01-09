@@ -1,0 +1,161 @@
+/** General style */
+body * {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	padding: 0;
+	margin: 0;
+}
+
+main.content {
+	margin: 0 auto;
+	padding: 1em;
+	max-width: 600pt;
+	line-height: 2;
+}
+
+header {
+	margin: 0 auto;
+	padding: 1em;
+	max-width: 600pt;
+	line-height: 2;
+	border-bottom: 1pt solid var(--separator);
+}
+
+header ul,
+footer ul {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0;
+}
+
+header ul li {
+	list-style-type: none;
+	margin-right: 16pt;
+}
+
+footer {
+	border-top: 2px solid var(--separator);
+	width: fit-content;
+	margin: 0 auto;
+	padding: 0 16pt;
+	padding-top: 16pt;
+}
+
+footer ul li {
+	list-style-type: none;
+	width: fit-content;
+	font-weight: bold;
+}
+
+footer ul li:not(:last-of-type) {
+	margin-right: 16pt;
+	padding-right: 16pt;
+	border-right: 2px solid var(--separator);
+}
+
+/** Visual hardbreaks */
+
+hr {
+	max-width: 75%;
+	color: var(--separator);
+}
+
+/** Navigation area */
+
+nav {
+	padding: 1em;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+nav li {
+	list-style-type: none;
+}
+
+nav a {
+	text-decoration: none;
+	padding: 16pt 12pt;
+	border-radius: 3pt;
+	overflow: hidden;
+}
+
+nav a.disabled {
+	text-decoration: none;
+	pointer-events: none;
+	background-color: var(--navbar-background);
+}
+
+@media (hover: hover) {
+	nav a:hover {
+		background-color: var(--navbar-button-highlight);
+	}
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 450px) {
+	main.content {
+		margin: 0 auto;
+		padding: 2em;
+	}
+
+	nav ul {
+		justify-content: center;
+	}
+}
+
+/* Tablet styles */
+@media only screen and (min-width: 451px) and (max-width: 960px) {
+	main.content {
+		margin: 0 auto;
+		padding: 2em;
+	}
+}
+
+.svg {
+	fill: currentColor;
+}
+
+ul.contact {
+	padding-left: 0;
+}
+
+ul.contact li {
+	display: flex;
+	flex-flow: row nowrap;
+	list-style-type: none;
+	align-items: center;
+}
+
+ul.contact li .link {
+	transform: translateY(-4pt);
+}
+
+ul.contact li img,
+ul.contact li .svg {
+	width: 28pt;
+	height: 28pt;
+	margin: 12pt 12pt 12pt 0;
+	color: var(--label);
+}
+
+img.logo.fosstodon {
+	border-radius: 48%;
+}
+
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}

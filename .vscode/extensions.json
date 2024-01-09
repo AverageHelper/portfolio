@@ -1,3 +1,8 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint", "gruntfuggly.todo-tree"]
+	"recommendations": [
+		"astro-build.astro-vscode",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"gruntfuggly.todo-tree"
+	]
 }

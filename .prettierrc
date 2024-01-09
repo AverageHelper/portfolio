@@ -5,5 +5,15 @@
 	"proseWrap": "preserve",
 	"semi": true,
 	"singleQuote": false,
-	"useTabs": true
+	"useTabs": true,
+	"plugins": ["prettier-plugin-astro"],
+	"overrides": [
+		{
+			"files": "*.astro",
+			"options": {
+				"parser": "astro",
+				"astroAllowShorthand": false
+			}
+		}
+	]
 }

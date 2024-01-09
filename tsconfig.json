@@ -1,4 +1,36 @@
 {
-	"files": [],
-	"references": [{ "path": "./tsconfig.prod.json" }, { "path": "./tsconfig.test.json" }]
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"lib": ["ESNext"],
+		"moduleResolution": "Bundler",
+		"allowImportingTsExtensions": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"verbatimModuleSyntax": true,
+		"isolatedModules": true,
+		"allowJs": false,
+		"declaration": false,
+		"removeComments": true,
+		"sourceMap": true,
+		"strict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"exactOptionalPropertyTypes": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"useUnknownInCatchVariables": true,
+		"noUncheckedIndexedAccess": true,
+		"types": ["@cloudflare/workers-types"],
+		"esModuleInterop": true,
+		"skipLibCheck": false,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true, // Astro runs TS directly
+		"plugins": [{ "name": "@astrojs/ts-plugin" }],
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		}
+	},
+	"include": ["./*.ts", "./functions/**/*.ts", "./src/**/*.ts", "./src/**/*.astro"]
 }

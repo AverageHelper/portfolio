@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+const emojiMap = {
+	heart: 10084,
+	blush: 128522,
+} as const;
+
+interface Props extends HTMLAttributes<"a"> {
+	name: keyof typeof emojiMap;
+}
+
+const { name, ...attrs } = Astro.props;
+const id = emojiMap[name];
+---
+
+<span class="emoji" {...attrs}>&#{id};</span>

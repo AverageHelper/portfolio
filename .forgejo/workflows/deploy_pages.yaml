@@ -2,12 +2,12 @@ on:
   push:
     branches: [main]
     paths:
-      - pages/**
-      - templates/**
-      - functions/**
       - .forgejo/workflows/**
-      - package.json
+      - functions/**
+      - public/**
+      - src/**
       - package-lock.json
+      - package.json
   workflow_dispatch:
 
 jobs:
