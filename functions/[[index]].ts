@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-pages";
 
 // All requests to the average.name domain route here first.
-// The last handler falls back to serving the contents of /pages.
+// The last handler falls back to serving the contents of /dist.
 // Static content should be served there primarily.
 // Dynamic content is served here.
 
@@ -85,7 +85,7 @@ const app = new Hono()
 	// We have fun here
 	.get("/.well-known/pronouns", cors(), c => c.text("she/her\n"))
 
-	// ** Serve the /pages dir
+	// ** Serve the /dist dir
 	.get("*", serveStatic());
 
 //#region Utilities

@@ -11,8 +11,6 @@ logs
 node_modules
 
 # Generated files
-dist
-dist-ssr
 ./config
 coverage
 tmp

@@ -13,29 +13,39 @@ We use [Astro](https://astro.build) to generate static HTML from templates.
 We'll need these for our build tools.
 
 ```sh
-$ npm ci
+npm ci
 ```
 
 ## Make changes
 
-The contents of the `/templates` directory get compiled into static HTML assets.
+The contents of the `/src` directory gets compiled into static HTML assets.
 
-The rest of the site lives in `/pages` verbatim.
+The contents of the `/public` directory get copied into the output folder as-is.
+
+The build result lives in `/dist`, and gets sent verbatim to the web host. Please do not modify these files directly.
+
+The `/functions` directory contains a Worker file that directs dynamic webserver activities, such as responding to WebFinger requests.
+
+Use the following command to run a live webserver:
+
+```sh
+npm start
+```
 
 ## Build the site
 
-Our output
+This command will build the site and update `/dist`:
 
 ```sh
-$ npm run build
+npm run build
 ```
 
 ## Preview the site
 
-This command will build the site before starting a local Wrangler server to emulate Cloudflare Pages:
+This command will build the site to `/dist` and start a local static webserver:
 
 ```sh
-$ npm start
+npm run preview
 ```
 
 ## Contributing
