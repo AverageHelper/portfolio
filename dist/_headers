@@ -4,7 +4,7 @@
 	Very: *
 
 	# Security
-	Content-Security-Policy: default-src 'self'; img-src https://* 'self'; media-src https://* 'self'; script-src 'self'; style-src 'self'; child-src 'none'; object-src 'none'; worker-src 'none'; upgrade-insecure-requests
+	Content-Security-Policy: default-src 'self'; img-src https://* 'self'; media-src https://* data: 'self'; script-src 'self'; style-src 'self'; child-src 'none'; object-src 'none'; worker-src 'none'; upgrade-insecure-requests
 	Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), clipboard-write=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, gamepad=(), geolocation=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=*, publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), sync-xhr=(), usb=(), web-share=*, xr-spatial-tracking=()
 	X-Frame-Options: SAMEORIGIN
 	Referrer-Policy: no-referrer
