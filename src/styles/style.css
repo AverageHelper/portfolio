@@ -37,7 +37,6 @@ header ul li {
 }
 
 footer {
-	border-top: 2px solid var(--separator);
 	width: fit-content;
 	margin: 0 auto;
 	padding: 0 16pt;
