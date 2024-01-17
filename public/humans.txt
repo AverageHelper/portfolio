@@ -3,6 +3,7 @@
 /* TEAM */
 
 operator:   AverageHelper
+pronouns:   she/her
 site:       https://average.name
 fediverse:  @avg@average.name
 location:   Utah, USA
