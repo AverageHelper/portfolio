@@ -2,6 +2,7 @@
 import HintLink from "@/components/HintLink.astro";
 import Layout from "@/layouts/Layout.astro";
 import Link from "@/components/Link.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
 ---
 
 <Layout>
@@ -24,47 +25,50 @@ import Link from "@/components/Link.astro";
 
 	<ul>
 		<li>
-			<strong><Link href="https://github.com/AverageHelper/Gamgee">Gamgee</Link></strong>
-			&ndash; A fun little Discord bot to help manage a music queue for public DJ events. Written in
-			<HintLink href="https://www.typescriptlang.org">TypeScript</HintLink>.
+			<ProjectShowcase href="https://github.com/AverageHelper/Gamgee" name="Gamgee">
+				A fun little Discord bot to help manage a music queue for public DJ events. Written in
+				<HintLink href="https://www.typescriptlang.org">TypeScript</HintLink>.
+			</ProjectShowcase>
 		</li>
 		<li>
-			<strong
-				><Link href="https://codeberg.org/AverageHelper/meta-comments">meta-comments</Link></strong
+			<ProjectShowcase href="https://codeberg.org/AverageHelper/meta-comments" name="meta-comments">
+				The first VS Code plugin I ever published! It decorates code based on specially-formatted
+				comments.
+			</ProjectShowcase>
+		</li>
+		<li>
+			<ProjectShowcase href="https://github.com/AverageHelper/ItemEncryptor" name="ItemEncryptor">
+				A <HintLink href="https://www.swift.org">Swift</HintLink> package to make data encryption easy.
+				I use this in some of my smaller projects to facilitate end-to-end encryption of sensitive data.
+			</ProjectShowcase>
+		</li>
+		<li>
+			<ProjectShowcase href="https://recorded.finance" name="Recorded Finance">
+				An end-to-end encrypted finance app for keeping track of account balances. I had a version
+				of this written for iOS in Swift, but I've began to port that project to the web for better
+				cross-platform compatibility and accessibility. The project is still in its infant stages,
+				with several front-end glitches I want to fix before I "release" the project into the wild.
+				The front-end is written in
+				<HintLink href="https://svelte.dev">Svelte</HintLink>, with TypeScript on the front- and
+				back-end.
+			</ProjectShowcase>
+		</li>
+		<li>
+			<ProjectShowcase
+				href="https://apps.apple.com/us/app/trump-donald/id1036041535"
+				name="Trump Donald"
 			>
-			&ndash; The first VS Code plugin I ever published! It decorates code based on specially-formatted
-			comments.
+				An iOS application based on the game
+				<HintLink href="https://en.wikipedia.org/wiki/Whac-A-Mole">Whac-a-mole</HintLink>.
+			</ProjectShowcase>
 		</li>
 		<li>
-			<strong
-				><Link href="https://github.com/AverageHelper/ItemEncryptor">ItemEncryptor</Link></strong
-			>
-			&ndash; A <HintLink href="https://www.swift.org">Swift</HintLink> package to make data encryption
-			easy. I use this in some of my smaller projects to facilitate end-to-end encryption of sensitive
-			data.
-		</li>
-		<li>
-			<strong><Link href="https://recorded.finance">Recorded Finance</Link></strong>
-			&ndash; An end-to-end encrypted finance app for keeping track of account balances. I had a version
-			of this written for iOS in Swift, but I've began to port that project to the web for better cross-platform
-			compatibility and accessibility. The project is still in its infant stages, with several front-end
-			glitches I want to fix before I "release" the project into the wild. The front-end is written in
-			<HintLink href="https://svelte.dev">Svelte</HintLink>, with TypeScript on the front- and
-			back-end.
-		</li>
-		<li>
-			<strong>
-				<Link href="https://apps.apple.com/us/app/trump-donald/id1036041535">Trump Donald</Link>
-			</strong>
-			&ndash; An iOS application based on the game
-			<HintLink href="https://en.wikipedia.org/wiki/Whac-A-Mole">Whac-a-mole</HintLink>.
-		</li>
-		<li>
-			<strong><Link href="https://blog.average.name">My blog</Link></strong>
-			&ndash; An experiment to see how GitHub Pages work. I post ramblings there from time to time. The
-			posts are written in <HintLink href="https://www.markdownguide.org">Markdown</HintLink>, and
-			the site is generated automagically using
-			<HintLink href="https://www.zola.com">Zola</HintLink>.
+			<ProjectShowcase href="https://blog.average.name" name="My blog">
+				An experiment to see how GitHub Pages work. I post ramblings there from time to time. The
+				posts are written in <HintLink href="https://www.markdownguide.org">Markdown</HintLink>, and
+				the site is generated automagically using
+				<HintLink href="https://www.zola.com">Zola</HintLink>.
+			</ProjectShowcase>
 		</li>
 	</ul>
 
