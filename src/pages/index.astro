@@ -23,7 +23,7 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 		<Link href="https://github.com/AverageHelper">GitHub</Link>.
 	</p>
 
-	<ul>
+	<ul class="showcase">
 		<li>
 			<ProjectShowcase href="https://github.com/AverageHelper/Gamgee" name="Gamgee">
 				A fun little Discord bot to help manage a music queue for public DJ events. Written in
@@ -77,7 +77,7 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 	<h2 id="experience">Stuff I get paid for</h2>
 	<p>
 		My personal work is mainly with open-source projects and mobile applications. Since starting at
-		<Link href="https://inventoryshield.com">Inventory Shield, LLC</Link>
+		<HintLink href="https://inventoryshield.com">Inventory Shield, LLC</HintLink>
 		in 2018, I began working with web technologies. Inventory Shield's tech stack is TypeScript and
 		<HintLink href="https://vuejs.org">Vue.js</HintLink>
 		on the front-end, and
@@ -87,10 +87,20 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 		and Android app shells for better device features.
 	</p>
 	<p
-		>Unfortunately, the company's code is closed-source. You can check out their
-		<Link href="https://inventoryshield.com">inventory management</Link>
-		and
-		<Link href="https://referralreactor.com">referral management</Link>
-		products at their respective sites.</p
+		>Unfortunately, the company's code is closed-source. You can check out their products at their
+		respective sites:</p
 	>
+	<ul class="showcase">
+		<li>
+			<ProjectShowcase href="https://inventoryshield.com" name="Inventory Shield">
+				An inventory management solution for businesses.
+			</ProjectShowcase>
+		</li>
+		<li>
+			<ProjectShowcase href="https://referralreactor.com" name="Referral Reactor">
+				A referral management platform. Anyone can use Referral Reactor for free, and get monetary
+				bonuses for sending referrals to participating businesses.
+			</ProjectShowcase>
+		</li>
+	</ul>
 </Layout>

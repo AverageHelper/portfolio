@@ -100,6 +100,12 @@ nav a.disabled {
 	}
 }
 
+/** Showcase **/
+
+ul.showcase {
+	padding-left: 0;
+}
+
 /** Mobile styles **/
 
 @media only screen and (max-width: 450px) {
