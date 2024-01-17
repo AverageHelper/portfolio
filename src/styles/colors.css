@@ -9,7 +9,7 @@
 	--secondary-background: #2b2b2c;
 	--secondary-overlay: rgba(33, 33, 34, 0.8);
 	--navbar-background: #212122;
-	--navbar-button-highlight: #373738;
+	--navbar-button-highlight: #252525;
 	--sidenav-background: #444444;
 	--unread-count: #fc3e3b;
 	--alert-success: rgba(10, 165, 103, 0.8);
@@ -82,7 +82,7 @@
 		--secondary-background: #f2f2f2;
 		--secondary-overlay: rgba(255, 255, 255, 0.8);
 		--navbar-background: #ececec;
-		--navbar-button-highlight: #dadada;
+		--navbar-button-highlight: #efefef;
 		--sidenav-background: #505050;
 		--unread-count: #ff6562;
 		--alert-info: rgba(37, 169, 224, 0.8);
@@ -111,7 +111,7 @@
 		--input-background: #eeeeee;
 		--inverse-label: #f8f8f8;
 		--search-field: #fff;
-		--link: #13a463;
+		--link: #00a3d5;
 
 		--separator: #ccc;
 		--medium-separator: #dfdfdf;

@@ -96,14 +96,28 @@ nav a.disabled {
 }
 
 nav a.current {
-	/* background-color: var(--navbar-background); */
 	color: var(--secondary-label);
 	text-decoration: none;
 }
 
 @media (hover: hover) {
+	/* Fancy overlapping hover background a la macOS status bar */
 	nav a:hover {
+		position: relative;
+	}
+
+	nav a:hover::after {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		top: 4pt;
+		right: -4pt;
+		left: -4pt;
+		bottom: 4pt;
 		background-color: var(--navbar-button-highlight);
+		border-radius: 4pt;
+		cursor: pointer;
+		pointer-events: none;
 	}
 }
 
