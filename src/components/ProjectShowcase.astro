@@ -6,6 +6,7 @@ interface Props extends HTMLAttributes<"div"> {
 	name: string;
 	href: string;
 }
+
 const { href, name, ...attrs } = Astro.props;
 ---
 
