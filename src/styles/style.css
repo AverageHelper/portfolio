@@ -169,6 +169,7 @@ ul.contact li {
 
 ul.contact li .link {
 	transform: translateY(-4pt);
+	font-weight: bold;
 }
 
 ul.contact li img,
