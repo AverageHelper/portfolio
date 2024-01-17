@@ -1,11 +1,14 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import Link from "@/components/Link.astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
 	name: string;
 	href: string;
 }
-const { href, name } = Astro.props;
+const { href, name, ...attrs } = Astro.props;
 ---
 
-<strong><Link href={href}>{name}</Link></strong> &ndash; <slot />
+<div {...attrs}>
+	<strong><Link href={href}>{name}</Link></strong> &ndash; <slot />
+</div>

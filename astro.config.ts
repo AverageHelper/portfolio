@@ -16,4 +16,7 @@ export default defineConfig({
 		format: "file", // Build HTML pages at root, not in subdirectories
 		assets: "assets", // Call the build assets folder "assets" instead of "_astro"
 	},
+	devToolbar: {
+		enabled: false, // Don't show dev controls in the webpage
+	},
 });

@@ -16,7 +16,7 @@ const current = slug === `${fileName}.${ext}`;
 {
 	current ? (
 		// prettier-ignore
-		<a href={href} class="disabled" {...attrs}><slot /> <span class="visually-hidden">(current)</span></a>
+		<a href={href} class="current" {...attrs}><slot /> <span class="visually-hidden">(current)</span></a>
 	) : (
 		// prettier-ignore
 		<a href={href} {...attrs}><slot /></a>

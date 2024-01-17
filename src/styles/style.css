@@ -34,7 +34,6 @@ footer ul {
 
 header ul li {
 	list-style-type: none;
-	margin-right: 16pt;
 }
 
 footer {
@@ -43,6 +42,7 @@ footer {
 	margin: 0 auto;
 	padding: 0 16pt;
 	padding-top: 16pt;
+	text-align: center;
 }
 
 footer ul li {
@@ -67,7 +67,7 @@ hr {
 /** Navigation area **/
 
 nav {
-	padding: 1em;
+	padding: 1em 0;
 }
 
 nav ul {
@@ -82,16 +82,23 @@ nav li {
 }
 
 nav a {
-	text-decoration: none;
 	padding: 16pt 12pt;
 	border-radius: 3pt;
 	overflow: hidden;
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 nav a.disabled {
 	text-decoration: none;
 	pointer-events: none;
-	background-color: var(--navbar-background);
+}
+
+nav a.current {
+	/* background-color: var(--navbar-background); */
+	color: var(--secondary-label);
+	text-decoration: none;
 }
 
 @media (hover: hover) {
@@ -103,7 +110,24 @@ nav a.disabled {
 /** Showcase **/
 
 ul.showcase {
-	padding-left: 0;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0;
+}
+
+ul.showcase li {
+	list-style: none;
+	display: block;
+	padding: 8pt;
+	width: 50%;
+}
+
+/* Return to list layout when small */
+@media (max-width: 768px) {
+	ul.showcase li {
+		padding: 8pt 4pt;
+		width: 100%;
+	}
 }
 
 /** Mobile styles **/

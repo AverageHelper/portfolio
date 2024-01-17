@@ -28,7 +28,7 @@
 	--input-background: rgba(0, 0, 0, 0.2);
 	--inverse-label: #333;
 	--search-field: #2b2b2c;
-	--link: #0aa567;
+	--link: #00abdf;
 	--separator: #3a3a3c;
 	--medium-separator: #3a3a3c;
 	--subtle-separator: #323233;
@@ -268,7 +268,6 @@ footer ul {
 }
 header ul li {
 	list-style-type: none;
-	margin-right: 16pt;
 }
 footer {
 	border-top: 2px solid var(--separator);
@@ -291,7 +290,7 @@ hr {
 	color: var(--separator);
 }
 nav {
-	padding: 1em;
+	padding: 1em 0;
 }
 nav ul {
 	margin: 0;
@@ -307,11 +306,14 @@ nav a {
 	padding: 16pt 12pt;
 	border-radius: 3pt;
 	overflow: hidden;
+	font-weight: 700;
 }
 nav a.disabled {
 	text-decoration: none;
 	pointer-events: none;
-	background-color: var(--navbar-background);
+}
+nav a.current {
+	text-decoration: underline;
 }
 @media (hover: hover) {
 	nav a:hover {
@@ -319,7 +321,21 @@ nav a.disabled {
 	}
 }
 ul.showcase {
-	padding-left: 0;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0;
+}
+ul.showcase li {
+	list-style: none;
+	display: block;
+	padding: 8pt;
+	width: 50%;
+}
+@media (max-width: 768px) {
+	ul.showcase li {
+		padding: 8pt 4pt;
+		width: 100%;
+	}
 }
 @media only screen and (max-width: 450px) {
 	main.content {

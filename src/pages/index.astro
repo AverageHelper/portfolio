@@ -6,11 +6,11 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 ---
 
 <Layout>
-	<h1 id="about">About Myself</h1>
+	<h1 id="about">Average</h1>
 	<p>
-		I go by "Average Helper" online, partly because my name is super generic. An average name,
-		really. I've been doing software things since 2011. I try to be helpful where I can, especially
-		to write respectful software.
+		I go by "Average Helper" online, partly because my name is super generic. An average name, if
+		you will. I've been doing software things since 2011. I try to be helpful where I can,
+		especially to write respectful software.
 	</p>
 
 	<hr />
@@ -44,13 +44,18 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 		</li>
 		<li>
 			<ProjectShowcase href="https://recorded.finance" name="Recorded Finance">
-				An end-to-end encrypted finance app for keeping track of account balances. I had a version
-				of this written for iOS in Swift, but I've began to port that project to the web for better
-				cross-platform compatibility and accessibility. The project is still in its infant stages,
-				with several front-end glitches I want to fix before I "release" the project into the wild.
-				The front-end is written in
+				An end-to-end encrypted finance app for keeping track of account balances. The front-end is
+				written in
 				<HintLink href="https://svelte.dev">Svelte</HintLink>, with TypeScript on the front- and
 				back-end.
+			</ProjectShowcase>
+		</li>
+		<li>
+			<ProjectShowcase href="https://blog.average.name" name="My blog">
+				An experiment to see how GitHub Pages work. I post ramblings there from time to time. The
+				posts are written in <HintLink href="https://www.markdownguide.org">Markdown</HintLink>, and
+				the site is generated automagically using
+				<HintLink href="https://www.zola.com">Zola</HintLink>.
 			</ProjectShowcase>
 		</li>
 		<li>
@@ -60,14 +65,6 @@ import ProjectShowcase from "@/components/ProjectShowcase.astro";
 			>
 				An iOS application based on the game
 				<HintLink href="https://en.wikipedia.org/wiki/Whac-A-Mole">Whac-a-mole</HintLink>.
-			</ProjectShowcase>
-		</li>
-		<li>
-			<ProjectShowcase href="https://blog.average.name" name="My blog">
-				An experiment to see how GitHub Pages work. I post ramblings there from time to time. The
-				posts are written in <HintLink href="https://www.markdownguide.org">Markdown</HintLink>, and
-				the site is generated automagically using
-				<HintLink href="https://www.zola.com">Zola</HintLink>.
 			</ProjectShowcase>
 		</li>
 	</ul>
