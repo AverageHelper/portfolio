@@ -14,5 +14,6 @@ export default defineConfig({
 	compressHTML: false, // Let Prettier do its thing
 	build: {
 		format: "file", // Build HTML pages at root, not in subdirectories
+		assets: "assets", // Call the build assets folder "assets" instead of "_astro"
 	},
 });

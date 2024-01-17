@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "./node_modules/.bin/astro dev",
 		"build": "npm run lint && ./node_modules/.bin/astro build && npm run prettify",
-		"prettify": "./node_modules/.bin/prettier dist/**/*.html -w",
+		"prettify": "./node_modules/.bin/prettier dist/**/*.html dist/**/*.css -w",
 		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts,.astro --fix"

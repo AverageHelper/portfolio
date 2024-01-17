@@ -1,4 +1,5 @@
-/** General style */
+/** General style **/
+
 body * {
 	box-sizing: border-box;
 }
@@ -56,14 +57,14 @@ footer ul li:not(:last-of-type) {
 	border-right: 2px solid var(--separator);
 }
 
-/** Visual hardbreaks */
+/** Visual hardbreaks **/
 
 hr {
 	max-width: 75%;
 	color: var(--separator);
 }
 
-/** Navigation area */
+/** Navigation area **/
 
 nav {
 	padding: 1em;
@@ -99,7 +100,8 @@ nav a.disabled {
 	}
 }
 
-/* Mobile styles */
+/** Mobile styles **/
+
 @media only screen and (max-width: 450px) {
 	main.content {
 		margin: 0 auto;
@@ -111,7 +113,8 @@ nav a.disabled {
 	}
 }
 
-/* Tablet styles */
+/** Tablet styles **/
+
 @media only screen and (min-width: 451px) and (max-width: 960px) {
 	main.content {
 		margin: 0 auto;
