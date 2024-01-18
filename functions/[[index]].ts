@@ -7,9 +7,12 @@ import { serveStatic } from "hono/cloudflare-pages";
 // Static content should be served there primarily.
 // Dynamic content is served here.
 
+const PRONOUNS_EN = "she/her";
+
 const app = new Hono()
 	.use("*", async (c, next) => {
 		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
+		c.header("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
 		await next();
 	})
 
@@ -83,7 +86,7 @@ const app = new Hono()
 	})
 
 	// We have fun here
-	.get("/.well-known/pronouns", cors(), c => c.text("she/her\n"))
+	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
 	// ** Serve the /dist dir
 	.get("*", serveStatic());
