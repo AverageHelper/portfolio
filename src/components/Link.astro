@@ -14,7 +14,7 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 
 const { href, relMe = false, ...attrs } = Astro.props;
 
-const rel = `noopener noreferrer${relMe ? " me" : ""}`;
+const rel = `noopener noreferrer${relMe ? " me" : ""}` as const;
 ---
 
 <a href={href} target="_blank" rel={rel} {...attrs}><slot /></a>

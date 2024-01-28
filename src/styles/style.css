@@ -193,8 +193,14 @@ ul.contact li .svg {
 	color: var(--label);
 }
 
-img.logo.fosstodon {
+img.logo.fedi {
 	border-radius: 48%;
+}
+
+@media (prefers-color-scheme: light) {
+	img.logo.fedi {
+		content: url("/images/fediverse-logo-light.svg");
+	}
 }
 
 .visually-hidden {
