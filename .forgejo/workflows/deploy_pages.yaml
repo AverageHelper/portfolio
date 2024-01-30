@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: CI=true npm run build
 
       - name: Publish
         run: ./node_modules/.bin/wrangler pages deploy ./dist --project-name=$CLOUDFLARE_PROJECT_NAME
