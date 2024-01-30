@@ -7,13 +7,13 @@ const alreadyOk = new Set<string>();
 /**
  * Resolves if the given URL is accessible. Throws a {@link TypeError} otherwise.
  *
- * Only runs when the `CI` environment variable is set to `true`.
+ * Only runs when the `MODE` environment variable is `production`.
  *
  * @param src The URL to check.
  */
 export async function checkUrl(src: URL): Promise<void> {
-	if (import.meta.env["CI"] !== "true") {
-		// Only run in CI environment
+	if (import.meta.env["MODE"] !== "production") {
+		// Only run in when building
 		return;
 	}
 
