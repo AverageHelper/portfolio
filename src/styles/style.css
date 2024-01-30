@@ -81,6 +81,7 @@ nav li {
 }
 
 nav a {
+	position: relative;
 	padding: 16pt 12pt;
 	border-radius: 3pt;
 	overflow: hidden;
@@ -101,18 +102,14 @@ nav a.current {
 
 @media (hover: hover) {
 	/* Fancy overlapping hover background a la macOS status bar */
-	nav a:hover {
-		position: relative;
-	}
-
 	nav a:hover::after {
 		content: "";
 		z-index: -1;
 		position: absolute;
-		top: 4pt;
-		right: -4pt;
-		left: -4pt;
-		bottom: 4pt;
+		top: 5%;
+		left: -5%;
+		width: 110%;
+		height: 90%;
 		background-color: var(--navbar-button-highlight);
 		border-radius: 4pt;
 		cursor: pointer;

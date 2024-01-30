@@ -2,24 +2,25 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends Omit<HTMLAttributes<"a">, "href" | "class"> {
-	fileName: string;
+	fileName?: string;
 }
 
-const { fileName, ...attrs } = Astro.props;
+const { fileName = "", ...attrs } = Astro.props;
 
-const ext = "html";
-
-const href = `/${fileName}.${ext}`;
-const slug = Astro.url.pathname.split("/").at(-1) || `index.${ext}`;
-const current = slug === `${fileName}.${ext}`;
+const href = `/${fileName}` as const;
+const slug = Astro.url.pathname.split("/").at(-1) ?? "";
+const current = slug === fileName;
 ---
 
-{
-	current ? (
-		// prettier-ignore
-		<a href={href} class="current" {...attrs}><slot /> <span class="visually-hidden">(current)</span></a>
-	) : (
-		// prettier-ignore
-		<a href={href} {...attrs}><slot /></a>
-	)
-}
+<!-- prettier-ignore -->
+<Fragment>
+	{
+		current ? (
+			// prettier-ignore
+			<a href={href} class="current" {...attrs}><slot /><span class="visually-hidden"> (current)</span></a>
+		) : (
+			// prettier-ignore
+			<a href={href} {...attrs}><slot /></a>
+		)
+	}
+</Fragment>
