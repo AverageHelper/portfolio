@@ -2,7 +2,9 @@
 
 import { FgBlue, FgCyan, FgGreen, FgRed, Reset } from "./consoleColors.js";
 
-const alreadyOk = new Set<string>();
+const alreadyOk = new Set<string>([
+	"https://ko-fi.com/avghelper", // answers 403 to the CI, so check this manually
+]);
 
 /**
  * Resolves if the given URL is accessible. Throws a {@link TypeError} otherwise.
