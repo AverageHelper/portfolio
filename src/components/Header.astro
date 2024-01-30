@@ -1,7 +1,15 @@
 ---
-import Nav from "@/components/Nav.astro";
+import Link from "@/components/Link.astro";
+import LocalLink from "@/components/LocalLink.astro";
 ---
 
 <header>
-	<Nav />
+	<nav>
+		<ul>
+			<li><LocalLink>About</LocalLink></li>
+			<li><LocalLink fileName="links">Links</LocalLink></li>
+			<li><Link href="https://git.average.name/AverageHelper">Code</Link></li>
+			<li><LocalLink fileName="support">Support</LocalLink></li>
+		</ul>
+	</nav>
 </header>

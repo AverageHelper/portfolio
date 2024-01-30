@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { checkUrl } from "@/helpers/checkUrl.js";
 
 interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 	href: string | URL;
@@ -15,6 +16,12 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 const { href, relMe = false, ...attrs } = Astro.props;
 
 const rel = `noopener noreferrer${relMe ? " me" : ""}` as const;
+
+// Ensure external links aren't broken
+if (URL.canParse(href)) {
+	const src = new URL(href);
+	await checkUrl(src);
+}
 ---
 
 <a href={href} target="_blank" rel={rel} {...attrs}><slot /></a>
