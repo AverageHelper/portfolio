@@ -8,7 +8,7 @@ interface Props extends Omit<HTMLAttributes<"a">, "href" | "class"> {
 const { fileName = "", ...attrs } = Astro.props;
 
 const href = `/${fileName}` as const;
-const slug = Astro.url.pathname.split("/").at(-1) ?? "";
+const slug = Astro.url.pathname.split("/").at(-1)?.split(".").at(0) ?? "";
 const current = slug === fileName;
 ---
 
