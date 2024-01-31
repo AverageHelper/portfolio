@@ -25,6 +25,10 @@ const app = new Hono()
 		return c.text(ip ?? "unknown");
 	})
 
+	// ** Redirect to current Fedi handle
+	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper"))
+	.get("/@avghelper", c => c.redirect("https://fosstodon.org/@avghelper"))
+
 	// ** Webfinger
 	// See https://www.rfc-editor.org/rfc/rfc7033.html
 	.get("/.well-known/webfinger", cors(), c => {
