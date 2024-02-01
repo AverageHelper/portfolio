@@ -192,13 +192,13 @@ ul#contact li svg {
 	cursor: pointer;
 }
 
-img.logo.fedi {
-	--light-url: url("/images/fediverse-logo-light.svg");
-}
-
 @media (prefers-color-scheme: light) {
+	img.logo.forgejo {
+		content: url("/images/forgejo-logo-light.svg");
+	}
+
 	img.logo.fedi {
-		content: var(--light-url);
+		content: url("/images/fediverse-logo-light.svg");
 	}
 }
 
