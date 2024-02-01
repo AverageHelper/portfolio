@@ -44,13 +44,13 @@ footer {
 	text-align: center;
 }
 
-footer ul li {
+footer ul.links li {
 	list-style-type: none;
 	width: fit-content;
 	font-weight: bold;
 }
 
-footer ul li:not(:last-of-type) {
+footer ul.links li:not(:last-of-type) {
 	margin-right: 16pt;
 	padding-right: 16pt;
 	border-right: 2px solid var(--separator);
@@ -166,28 +166,30 @@ ul.showcase li {
 	fill: currentColor;
 }
 
-ul.contact {
+ul#contact {
 	padding-left: 0;
-}
-
-ul.contact li {
 	display: flex;
 	flex-flow: row nowrap;
-	list-style-type: none;
+	justify-content: center;
 	align-items: center;
+	list-style-type: none;
 }
 
-ul.contact li .link {
-	transform: translateY(-4pt);
-	font-weight: bold;
+ul#contact li {
+	border: none;
 }
 
-ul.contact li img,
-ul.contact li .svg {
-	width: 28pt;
-	height: 28pt;
-	margin: 12pt 12pt 12pt 0;
+ul#contact li > a {
+	padding: 12pt;
+}
+
+ul#contact li img,
+ul#contact li svg {
+	width: 18pt;
+	height: 18pt;
+	margin: 16pt 6pt;
 	color: var(--label);
+	cursor: pointer;
 }
 
 img.logo.fedi {
@@ -208,4 +210,46 @@ img.logo.fedi {
 	position: absolute;
 	white-space: nowrap;
 	width: 1px;
+}
+
+/* Tooltip on hover */
+/* Based on https://stackoverflow.com/a/25813336 and https://stackoverflow.com/a/25797505 */
+
+[data-tooltip] {
+	position: relative;
+}
+
+[data-tooltip]::before {
+	content: attr(data-tooltip);
+
+	position: absolute;
+	top: -120%;
+	left: 50%;
+	width: max-content;
+	max-width: 220pt;
+	transform: translateX(-50%);
+
+	pointer-events: none;
+	opacity: 0;
+	-webkit-transition: opacity 0.15s ease-in-out;
+	-moz-transition: opacity 0.15s ease-in-out;
+	-ms-transition: opacity 0.15s ease-in-out;
+	-o-transition: opacity 0.15s ease-in-out;
+	transition: opacity 0.15s ease-in-out;
+
+	display: block;
+	font-size: 12pt;
+	line-height: 16pt;
+	background: var(--secondary-background);
+	padding: 2pt 4pt;
+	border: 1pt solid var(--separator);
+	box-shadow: 2pt 4pt 5pt var(--transparent-gray);
+	border-radius: 4pt;
+	z-index: 10;
+}
+
+@media (hover: hover) {
+	[data-tooltip]:hover::before {
+		opacity: 1;
+	}
 }

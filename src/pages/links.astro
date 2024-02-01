@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Link from "@/components/Link.astro";
-import LocalLink from "@/components/LocalLink.astro";
 ---
 
 <Layout>
@@ -93,6 +92,6 @@ import LocalLink from "@/components/LocalLink.astro";
 	<p
 		>You can add to this page by submitting issues or PRs <!-- prettier-ignore -->
 		<Link href="https://git.average.name/AverageHelper/portfolio/src/branch/main/src/pages/links.astro">on my Git forge</Link>,
-		or by <LocalLink fileName="contact">sending me a DM</LocalLink>.</p
+		or by <Link relMe href="https://fosstodon.org/@avghelper">sending me a DM</Link>.</p
 	>
 </Layout>
