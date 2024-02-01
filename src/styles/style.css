@@ -44,6 +44,11 @@ footer {
 	text-align: center;
 }
 
+footer ul.links {
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
 footer ul.links li {
 	list-style-type: none;
 	width: fit-content;
