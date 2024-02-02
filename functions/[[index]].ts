@@ -19,12 +19,7 @@ const app = new Hono()
 	})
 
 	// ** Fun
-	.get("/ip", cors(), c => c.redirect("https://ip.average.name"))
 	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
-
-	// ** Redirect to current Fedi handle
-	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper"))
-	.get("/@avghelper", c => c.redirect("https://fosstodon.org/@avghelper"))
 
 	// ** Webfinger
 	// See https://www.rfc-editor.org/rfc/rfc7033.html
