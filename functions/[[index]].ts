@@ -10,20 +10,17 @@ import { serveStatic } from "hono/cloudflare-pages";
 const PRONOUNS_EN = "she/her";
 
 const app = new Hono()
+	// ** Additional headers
 	.use("*", async (c, next) => {
+		// Remember to duplicate these in public/_headers:
 		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
 		c.header("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
 		await next();
 	})
 
 	// ** Fun
-	.get("/foo", cors(), c => {
-		return c.text("bar");
-	})
-	.get("/ip", cors(), c => {
-		const ip = c.req.header("CF-Connecting-IP");
-		return c.text(ip ?? "unknown");
-	})
+	.get("/ip", cors(), c => c.redirect("https://ip.average.name"))
+	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
 	// ** Redirect to current Fedi handle
 	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper"))
@@ -88,9 +85,6 @@ const app = new Hono()
 			{ "Content-Type": "application/jrd+json; charset=UTF=8" },
 		);
 	})
-
-	// We have fun here
-	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
 	// ** Serve the /dist dir
 	.get("*", serveStatic());
