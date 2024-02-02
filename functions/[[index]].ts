@@ -73,7 +73,7 @@ const app = new Hono()
 				// subject: "acct:avg@average.name",
 				subject: "acct:avghelper@fosstodon.org",
 				aliases: [
-					"https://average.name",
+					"https://average.name/@avg",
 					"https://fosstodon.org/@avghelper",
 					"https://fosstodon.org/users/avghelper",
 				],
