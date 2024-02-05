@@ -24,5 +24,6 @@
 		"coverage.xml",
 		"jacoco.xml",
 		"coverage.cobertura.xml"
-	]
+	],
+	"gutterpreview.sourceFolder": "public"
 }

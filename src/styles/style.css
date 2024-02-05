@@ -199,11 +199,11 @@ ul#contact li svg {
 
 @media (prefers-color-scheme: light) {
 	img.logo.forgejo {
-		content: url("/images/forgejo-logo-light.svg");
+		content: url("/images/logo-forgejo-light.svg");
 	}
 
 	img.logo.fedi {
-		content: url("/images/fediverse-logo-light.svg");
+		content: url("/images/logo-fediverse-light.svg");
 	}
 }
 

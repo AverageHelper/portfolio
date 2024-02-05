@@ -21,7 +21,7 @@ export async function checkUrl(src: URL): Promise<void> {
 
 	// Check cache, make sure we haven't already checked this URL
 	if (alreadyOk.has(src.href)) {
-		console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK (skipped)${Reset}`);
+		console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(skipped)${Reset}`);
 		return;
 	}
 
@@ -41,7 +41,7 @@ export async function checkUrl(src: URL): Promise<void> {
 		// Success! Remember this URL for later
 		alreadyOk.add(src.href);
 		if (didRedirect) {
-			console.info(`href ${FgBlue}'${src.href}'${FgCyan} OK (redirected)${Reset}`);
+			console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(redirected)${Reset}`);
 		} else {
 			console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK${Reset}`);
 		}
