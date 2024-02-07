@@ -1,7 +1,7 @@
 ---
 title: "How to use a Ways folder"
-date: "2024-02-06"
 description: "A convention for maintaining useful information online."
+date: "2024-02-06"
 ---
 
 A Ways folder is an online resource where an author or group can store documents for sharing useful ways of doing things. To use a Ways folder:

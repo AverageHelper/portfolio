@@ -11,11 +11,20 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 	 * @default false
 	 */
 	relMe?: boolean;
+
+	/**
+	 * Whether the `rel` attribute should include the special `"license"` value.
+	 *
+	 * @default false
+	 */
+	relLicense?: boolean;
 }
 
-const { href, relMe = false, ...attrs } = Astro.props;
+const { href, relMe = false, relLicense = false, ...attrs } = Astro.props;
 
-const rel = `noopener noreferrer${relMe ? " me" : ""}` as const;
+const rel = ["noopener", "noreferrer", relMe ? "me" : "", relLicense ? "license" : ""]
+	.filter(a => a)
+	.join(" ");
 
 // Ensure external links aren't broken
 if (URL.canParse(href)) {
