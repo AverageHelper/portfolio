@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"start": "./node_modules/.bin/astro dev --open",
-		"build": "npm run lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && npm run prettify",
+		"build": "npm run lint && ./node_modules/.bin/astro sync && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && npm run prettify",
 		"prettify": "./node_modules/.bin/prettier dist/**/*.html dist/**/*.css -w",
 		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
@@ -26,8 +26,10 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.4.1",
+		"@astrojs/rss": "4.0.5",
 		"@astrojs/ts-plugin": "1.4.0",
 		"@cloudflare/workers-types": "4.20231025.0",
+		"@types/sanitize-html": "2.11.0",
 		"@typescript-eslint/eslint-plugin": "6.11.0",
 		"@typescript-eslint/parser": "6.11.0",
 		"astro": "4.1.1",
@@ -44,6 +46,8 @@
 		"eslint-plugin-unicorn": "49.0.0",
 		"prettier": "3.1.0",
 		"prettier-plugin-astro": "0.12.3",
+		"rehype-external-links": "3.0.0",
+		"sanitize-html": "2.11.0",
 		"typescript": "5.2.2",
 		"wrangler": "3.22.3"
 	}

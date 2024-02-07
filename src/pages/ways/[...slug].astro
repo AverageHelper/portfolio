@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry, CollectionKey } from "astro:content";
+import { getCollection } from "astro:content";
+import LocalLink from "@/components/LocalLink.astro";
+import WaysLayout from "@/layouts/WaysLayout.astro";
+
+type AnyEntryMap = CollectionEntry<CollectionKey>;
+
+/**
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#valid_datetime_values
+ */
+function dateString(date: Date): string {
+	return date.toISOString().split("T")[0] ?? "";
+}
+
+// Generate a new path for every collection entry
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export async function getStaticPaths() {
+	const waysEntries = await getCollection("ways");
+	return waysEntries.map(entry => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+interface Props {
+	entry: AnyEntryMap;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<WaysLayout contentClass="ways content">
+	<header class="ways" slot="header">
+		<h1>{entry.data.title}</h1>
+		<h2
+			><time datetime={dateString(entry.data.date)}
+				>{entry.data.date.toLocaleDateString("en-US", { dateStyle: "full" })}</time
+			></h2
+		>
+	</header>
+
+	<Content />
+
+	<footer slot="footer">
+		<p>&copy; <LocalLink>Average Helper</LocalLink>, except where otherwise noted.</p>
+		<p>
+			<LocalLink fileName="ways">
+				<strong>Return to Ways</strong>
+			</LocalLink>
+		</p>
+	</footer>
+</WaysLayout>

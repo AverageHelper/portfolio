@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 
 import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,5 +19,12 @@ export default defineConfig({
 	},
 	devToolbar: {
 		enabled: false, // Don't show dev controls in the webpage
+	},
+	markdown: {
+		// Applies to .md and .mdx files
+		rehypePlugins: [
+			// Better anchor tags
+			[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+		],
 	},
 });

@@ -5,6 +5,12 @@ import "../styles/typography.css";
 import "../styles/style.css";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+
+interface Props {
+	contentClass?: string;
+}
+
+const { contentClass = "content" } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +21,12 @@ import Header from "@/components/Header.astro";
 		<title>An Average Developer</title>
 		<link rel="icon" type="image/png" href="data:image/png;base64," />
 		<link rel="author" href="humans.txt" />
+		<link
+			rel="alternate"
+			href="/ways/feed.xml"
+			type="application/rss+xml"
+			title="RSS feed for avg's Ways folder"
+		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en" />
 		<meta property="og:url" content="https://average.name" />
@@ -25,14 +37,20 @@ import Header from "@/components/Header.astro";
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
-		<Header />
-		<main class="content">
+		<slot name="header">
+			<Header />
+		</slot>
+
+		<main class={contentClass}>
 			<slot>
 				<h1 id="missing-content">Something Went Wrong</h1>
 				<p>This page generated without any content!</p>
 			</slot>
 			<hr />
 		</main>
-		<Footer />
+
+		<slot name="footer">
+			<Footer />
+		</slot>
 	</body>
 </html>

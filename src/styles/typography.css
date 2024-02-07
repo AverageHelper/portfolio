@@ -63,11 +63,25 @@ h6 {
 	font-weight: 800;
 }
 
+header.ways h2 {
+	font-size: large;
+}
+
 p {
 	margin-top: 0;
 	margin-bottom: 1.2rem;
 	line-height: 2;
 	color: var(--label);
+}
+
+hr {
+	width: 75%;
+	color: var(--separator);
+	margin-bottom: 1.2rem;
+}
+
+.ways hr {
+	width: 33%;
 }
 
 ul,
@@ -87,6 +101,9 @@ ol ol {
 blockquote {
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
+	border-left: 3pt solid var(--separator);
+	padding-left: 8pt;
+	font-style: italic;
 }
 
 code {

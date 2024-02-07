@@ -1,0 +1,22 @@
+---
+import WaysLayout from "@/layouts/WaysLayout.astro";
+import LocalLink from "@/components/LocalLink.astro";
+import { getCollection } from "astro:content";
+
+const waysEntries = await getCollection("ways");
+---
+
+<WaysLayout>
+	<h1>Ways</h1>
+	<ul>
+		{
+			waysEntries.map(w => (
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				<li>
+					<LocalLink fileName={`ways/${w.slug}`}>{w.data.title}</LocalLink>,
+					{w.data.date.toLocaleDateString(undefined, { dateStyle: "medium" })}
+				</li>
+			))
+		}
+	</ul>
+</WaysLayout>

@@ -17,12 +17,24 @@ main.content {
 	line-height: 2;
 }
 
+main.ways.content {
+	max-width: 500pt;
+	padding: 0;
+}
+
 header {
 	margin: 0 auto;
 	padding: 1em;
 	max-width: 600pt;
 	line-height: 2;
 	border-bottom: 1pt solid var(--separator);
+}
+
+header.ways {
+	border: none;
+	max-width: 500pt;
+	padding: 0;
+	margin-bottom: 32pt;
 }
 
 header ul,
@@ -59,13 +71,6 @@ footer ul.links li:not(:last-of-type) {
 	margin-right: 16pt;
 	padding-right: 16pt;
 	border-right: 2px solid var(--separator);
-}
-
-/** Visual hardbreaks **/
-
-hr {
-	max-width: 75%;
-	color: var(--separator);
 }
 
 /** Navigation area **/
@@ -155,6 +160,12 @@ ul.showcase li {
 
 	nav ul {
 		justify-content: center;
+	}
+}
+
+@media only screen and (max-width: 350px) {
+	nav a {
+		padding: 16pt 8pt;
 	}
 }
 

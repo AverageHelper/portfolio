@@ -1,0 +1,19 @@
+---
+import Layout from "./Layout.astro";
+import LocalLink from "@/components/LocalLink.astro";
+---
+
+<Layout contentClass="ways content">
+	<slot name="header" slot="header" />
+
+	<slot />
+
+	<slot name="footer" slot="footer">
+		<footer>
+			<ul class="links">
+				<li><LocalLink>Home</LocalLink></li>
+				<li><LocalLink fileName="ways/feed.xml">RSS</LocalLink></li>
+			</ul>
+		</footer>
+	</slot>
+</Layout>
