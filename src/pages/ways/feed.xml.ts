@@ -19,7 +19,11 @@ export async function GET(context: { site: URL }): Promise<Response> {
 		items: ways.map(way => ({
 			link: `/ways/${way.slug}/`,
 			title: way.data.title,
-			pubDate: new Date(Temporal.PlainDate.from(way.data.date).toString()),
+			pubDate: new Date(
+				Temporal.PlainDate.from(way.data.date)
+					.toZonedDateTime("America/Denver")
+					.toString({ timeZoneName: "never" }),
+			),
 			description: way.data.description,
 			content: sanitizeHtml(parser.render(way.body)),
 		})),
