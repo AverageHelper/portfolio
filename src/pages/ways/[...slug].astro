@@ -32,7 +32,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<WaysLayout contentClass="ways content">
+<WaysLayout title={entry.data.title} description={entry.data.description}>
 	<header class="ways" slot="header">
 		<h1>{entry.data.title}</h1>
 		<h2

@@ -8,10 +8,29 @@ import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 
 interface Props {
+	/**
+	 * The class that should be on the document's `<main>` tag.
+	 *
+	 * @default "content"
+	 */
 	contentClass?: string;
+
+	/**
+	 * The content title.
+	 */
+	title?: string;
+
+	/**
+	 * The content description.
+	 */
+	description?: string;
 }
 
-const { contentClass = "content" } = Astro.props;
+const {
+	contentClass = "content",
+	title = "An Average Developer",
+	description = "Helpful open-source software.",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -19,7 +38,7 @@ const { contentClass = "content" } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="robots" content="noai" />
-		<title>An Average Developer</title>
+		<title>{title}</title>
 		<link rel="icon" type="image/png" href="data:image/png;base64," />
 		<link rel="author" href="humans.txt" />
 		<link
@@ -30,10 +49,10 @@ const { contentClass = "content" } = Astro.props;
 		/>
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en" />
-		<meta property="og:url" content="https://average.name" />
-		<meta property="og:title" content="An Average Developer" />
-		<meta property="og:description" content="Helpful open-source software." />
-		<meta property="description" content="Helpful open-source software." />
+		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="description" content={description} />
 		<meta name="twitter:card" content="summary" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

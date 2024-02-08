@@ -1,9 +1,24 @@
 ---
 import Layout from "./Layout.astro";
 import LocalLink from "@/components/LocalLink.astro";
+
+interface Props {
+	/**
+	 * The content title.
+	 */
+	title?: string;
+
+	/**
+	 * The content description.
+	 */
+	description?: string;
+}
+
+const { title = "Average Ways Folder", description = "Helpful information on how to do things." } =
+	Astro.props;
 ---
 
-<Layout contentClass="ways content">
+<Layout contentClass="ways content" title={title} description={description}>
 	<slot name="header" slot="header" />
 
 	<slot />
