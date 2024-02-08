@@ -208,16 +208,6 @@ ul#contact li svg {
 	cursor: pointer;
 }
 
-@media (prefers-color-scheme: light) {
-	img.logo.forgejo {
-		content: url("/images/logo-forgejo-light.svg");
-	}
-
-	img.logo.fedi {
-		content: url("/images/logo-fediverse-light.svg");
-	}
-}
-
 .visually-hidden {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);

@@ -20,6 +20,7 @@ export async function GET(context: { site: URL }): Promise<Response> {
 			link: `/ways/${way.slug}/`,
 			title: way.data.title,
 			pubDate: new Date(
+				// TODO: Fork or PR @astrojs/rss to take a ZonedDateTime, to be more specific in the XML
 				Temporal.PlainDate.from(way.data.date)
 					.toZonedDateTime("America/Denver")
 					.toString({ timeZoneName: "never" }),
