@@ -51,6 +51,7 @@
 		"prettier-plugin-astro": "0.12.3",
 		"rehype-external-links": "3.0.0",
 		"sanitize-html": "2.11.0",
+		"temporal-polyfill": "0.2.1",
 		"typescript": "5.2.2",
 		"wrangler": "3.22.3"
 	}

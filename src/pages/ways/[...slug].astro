@@ -1,17 +1,15 @@
 ---
 import type { CollectionEntry, CollectionKey } from "astro:content";
 import { getCollection } from "astro:content";
+import { Temporal } from "temporal-polyfill";
 import Link from "@/components/Link.astro";
 import LocalLink from "@/components/LocalLink.astro";
 import WaysLayout from "@/layouts/WaysLayout.astro";
 
 type AnyEntryMap = CollectionEntry<CollectionKey>;
 
-/**
- * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time#valid_datetime_values
- */
-function dateString(date: Date): string {
-	return date.toISOString().split("T")[0] ?? "";
+function toDate(str: string): Temporal.PlainDate {
+	return Temporal.PlainDate.from(str);
 }
 
 // Generate a new path for every collection entry
@@ -36,8 +34,8 @@ const { Content } = await entry.render();
 	<header class="ways" slot="header">
 		<h1>{entry.data.title}</h1>
 		<h2
-			><time datetime={dateString(entry.data.date)}
-				>{entry.data.date.toLocaleDateString("en-US", { dateStyle: "full" })}</time
+			><time datetime={entry.data.date}
+				>{toDate(entry.data.date).toLocaleString("en-US", { dateStyle: "full" })}</time
 			></h2
 		>
 	</header>

@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { Temporal } from "temporal-polyfill";
 import MarkdownIt from "markdown-it";
 import rss from "@astrojs/rss";
 import sanitizeHtml from "sanitize-html";
@@ -18,7 +19,7 @@ export async function GET(context: { site: URL }): Promise<Response> {
 		items: ways.map(way => ({
 			link: `/ways/${way.slug}/`,
 			title: way.data.title,
-			pubDate: way.data.date,
+			pubDate: new Date(Temporal.PlainDate.from(way.data.date).toString()),
 			description: way.data.description,
 			content: sanitizeHtml(parser.render(way.body)),
 		})),

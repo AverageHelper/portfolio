@@ -1,13 +1,7 @@
 import { z, defineCollection } from "astro:content";
 
-/**
- * Returns a {@link Date} that follows the given date by one day.
- */
-function oneDayAfter(date: Date): Date {
-	const result = new Date(date);
-	result.setDate(date.getDate() + 1);
-	return result;
-}
+/** Mathes `YYYY-MM-DD` strings. */
+const dateString = /(\d{4})-(\d{2})-(\d{2})/gu;
 
 // Define collection schemas here:
 const ways = defineCollection({
@@ -15,7 +9,7 @@ const ways = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
-		date: z.coerce.date().transform(oneDayAfter), // `Date()` assumes UTC
+		date: z.string().regex(dateString),
 	}),
 });
 
