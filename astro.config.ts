@@ -26,5 +26,6 @@ export default defineConfig({
 			// Better anchor tags
 			[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
 		],
+		syntaxHighlight: "prism", // Use Prism instead of Shiki to render code blocks
 	},
 });

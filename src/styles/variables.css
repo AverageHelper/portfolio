@@ -1,3 +1,5 @@
 :root {
-	--fontFamily: Helvetica, Arial, sans-serif;
+	--font-family: Helvetica, Arial, sans-serif;
+	--code-font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New",
+		monospace;
 }

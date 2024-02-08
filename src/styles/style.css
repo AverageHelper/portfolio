@@ -13,28 +13,28 @@ body {
 main.content {
 	margin: 0 auto;
 	padding: 1em;
-	max-width: 600pt;
+	max-width: 800px;
 	line-height: 2;
 }
 
 main.ways.content {
-	max-width: 500pt;
+	max-width: 680px;
 	padding: 0;
 }
 
 header {
 	margin: 0 auto;
 	padding: 1em;
-	max-width: 600pt;
+	max-width: 800px;
 	line-height: 2;
-	border-bottom: 1pt solid var(--separator);
+	border-bottom: 2px solid var(--separator);
 }
 
 header.ways {
 	border: none;
-	max-width: 500pt;
+	max-width: 680px;
 	padding: 0;
-	margin-bottom: 32pt;
+	margin-bottom: 42px;
 }
 
 header ul,
@@ -51,8 +51,8 @@ header ul li {
 footer {
 	width: fit-content;
 	margin: 0 auto;
-	padding: 0 16pt;
-	padding-top: 16pt;
+	padding: 0 21px;
+	padding-top: 21px;
 	text-align: center;
 }
 
@@ -68,8 +68,8 @@ footer ul.links li {
 }
 
 footer ul.links li:not(:last-of-type) {
-	margin-right: 16pt;
-	padding-right: 16pt;
+	margin-right: 21px;
+	padding-right: 21px;
 	border-right: 2px solid var(--separator);
 }
 
@@ -92,8 +92,8 @@ nav li {
 
 nav a {
 	position: relative;
-	padding: 16pt 12pt;
-	border-radius: 3pt;
+	padding: 21px 16px;
+	border-radius: 6px;
 	overflow: hidden;
 	font-weight: bold;
 	text-decoration: underline;
@@ -121,7 +121,7 @@ nav a.current {
 		width: 110%;
 		height: 90%;
 		background-color: var(--navbar-button-highlight);
-		border-radius: 4pt;
+		border-radius: 8px;
 		cursor: pointer;
 		pointer-events: none;
 	}
@@ -138,14 +138,14 @@ ul.showcase {
 ul.showcase li {
 	list-style: none;
 	display: block;
-	padding: 8pt;
+	padding: 12px;
 	width: 50%;
 }
 
 /* Return to list layout when small */
 @media (max-width: 768px) {
 	ul.showcase li {
-		padding: 8pt 4pt;
+		padding: 12px 6px;
 		width: 100%;
 	}
 }
@@ -165,7 +165,7 @@ ul.showcase li {
 
 @media only screen and (max-width: 350px) {
 	nav a {
-		padding: 16pt 8pt;
+		padding: 21px 12px;
 	}
 }
 
@@ -196,14 +196,14 @@ ul#contact li {
 }
 
 ul#contact li > a {
-	padding: 12pt;
+	padding: 16px;
 }
 
 ul#contact li img,
 ul#contact li svg {
-	width: 18pt;
-	height: 18pt;
-	margin: 16pt 6pt;
+	width: 24px;
+	height: 24px;
+	margin: 21px 8px;
 	color: var(--label);
 	cursor: pointer;
 }
@@ -242,7 +242,7 @@ ul#contact li svg {
 	top: -120%;
 	left: 50%;
 	width: max-content;
-	max-width: 220pt;
+	max-width: 300px;
 	transform: translateX(-50%);
 
 	pointer-events: none;
@@ -254,13 +254,13 @@ ul#contact li svg {
 	transition: opacity 0.15s ease-in-out;
 
 	display: block;
-	font-size: 12pt;
-	line-height: 16pt;
+	font-size: 16px;
+	line-height: 21px;
 	background: var(--secondary-background);
-	padding: 2pt 4pt;
-	border: 1pt solid var(--separator);
-	box-shadow: 2pt 4pt 5pt var(--transparent-gray);
-	border-radius: 4pt;
+	padding: 3px 5px;
+	border: 1px solid var(--separator);
+	box-shadow: 3px 5px 7px var(--transparent-gray);
+	border-radius: 6px;
 	z-index: 10;
 }
 

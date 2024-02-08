@@ -1,0 +1,282 @@
+/*
+ * Based on VS Code Dark+ theme by tabuckner: https://github.com/PrismJS/prism-themes/blob/447479fc7b2be2051fe27e561aceed7cc87a589f/themes/prism-vsc-dark-plus.css
+ */
+
+pre[class*="language-"],
+code[class*="language-"] {
+	color: var(--label-code);
+	font-size: 13px;
+	text-shadow: none;
+	font-family: var(--code-font-family);
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"] *::selection,
+code[class*="language-"] *::selection {
+	text-shadow: none;
+	background: var(--background-code-selection);
+}
+
+@media print {
+	pre[class*="language-"],
+	code[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+pre[class*="language-"] {
+	padding: 1em;
+	margin: 0.5em 0;
+	overflow: auto;
+	background: var(--background-code);
+}
+
+:not(pre) > code[class*="language-"] {
+	padding: 0.1em 0.3em;
+	border-radius: 0.3em;
+	color: #db4c69; /* not sure where this gets used */
+	background: var(--background-code);
+}
+
+/*********************************************************
+* Tokens
+*/
+.namespace {
+	opacity: 0.7;
+}
+
+.token.doctype .token.doctype-tag {
+	color: var(--label-code-keyword);
+}
+
+.token.doctype .token.name {
+	color: var(--label-code-constant);
+}
+
+.token.comment,
+.token.prolog {
+	color: var(--label-code-comment);
+}
+
+.token.punctuation,
+.language-html .language-css .token.punctuation,
+.language-html .language-javascript .token.punctuation {
+	color: var(--label-code);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.inserted,
+.token.unit {
+	color: var(--label-code-unit);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.deleted {
+	color: var(--label-code-type);
+}
+
+.language-css .token.string.url {
+	text-decoration: underline;
+}
+
+.token.operator,
+.token.entity {
+	color: var(--label-code);
+}
+
+.token.operator.arrow {
+	color: var(--label-code-keyword);
+}
+
+.token.atrule {
+	color: var(--label-code-type);
+}
+
+.token.atrule .token.rule {
+	color: var(--label-code-control-flow);
+}
+
+.token.atrule .token.url {
+	color: var(--label-code-constant);
+}
+
+.token.atrule .token.url .token.function {
+	color: var(--label-code-function);
+}
+
+.token.atrule .token.url .token.punctuation {
+	color: var(--label-code);
+}
+
+.token.keyword {
+	color: var(--label-code-keyword);
+}
+
+.token.keyword.module,
+.token.keyword.control-flow {
+	color: var(--label-code-control-flow);
+}
+
+.token.function,
+.token.function .token.maybe-class-name {
+	color: var(--label-code-function);
+}
+
+.token.regex {
+	color: var(--label-code-regex);
+}
+
+.token.important {
+	color: var(--label-code-keyword);
+}
+
+.token.italic {
+	font-style: italic;
+}
+
+.token.constant {
+	color: var(--label-code-constant);
+}
+
+.token.class-name,
+.token.maybe-class-name {
+	color: var(--label-code-namespace);
+}
+
+.token.console {
+	color: var(--label-code-constant);
+}
+
+.token.parameter {
+	color: var(--label-code-constant);
+}
+
+.token.interpolation {
+	color: var(--label-code-constant);
+}
+
+.token.punctuation.interpolation-punctuation {
+	color: var(--label-code-keyword);
+}
+
+.token.boolean {
+	color: var(--label-code-keyword);
+}
+
+.token.property,
+.token.variable,
+.token.imports .token.maybe-class-name,
+.token.exports .token.maybe-class-name {
+	color: var(--label-code-constant);
+}
+
+.token.selector {
+	color: var(--label-code-selector);
+}
+
+.token.escape {
+	color: var(--label-code-selector);
+}
+
+.token.tag {
+	color: var(--label-code-keyword);
+}
+
+.token.tag .token.punctuation {
+	color: var(--label-code-cdata);
+}
+
+.token.cdata {
+	color: var(--label-code-cdata);
+}
+
+.token.attr-name {
+	color: var(--label-code-constant);
+}
+
+.token.attr-value,
+.token.attr-value .token.punctuation {
+	color: var(--label-code-type);
+}
+
+.token.attr-value .token.punctuation.attr-equals {
+	color: var(--label-code);
+}
+
+.token.entity {
+	color: var(--label-code-keyword);
+}
+
+.token.namespace {
+	color: var(--label-code-namespace);
+}
+
+/*********************************************************
+* Language Specific
+*/
+
+pre[class*="language-javascript"],
+code[class*="language-javascript"],
+pre[class*="language-jsx"],
+code[class*="language-jsx"],
+pre[class*="language-typescript"],
+code[class*="language-typescript"],
+pre[class*="language-tsx"],
+code[class*="language-tsx"] {
+	color: var(--label-code-constant);
+}
+
+pre[class*="language-css"],
+code[class*="language-css"] {
+	color: var(--label-code-type);
+}
+
+pre[class*="language-html"],
+code[class*="language-html"] {
+	color: var(--label-code);
+}
+
+.language-regex .token.anchor {
+	color: var(--label-code-function);
+}
+
+.language-html .token.punctuation {
+	color: var(--label-code-cdata);
+}
+
+/*********************************************************
+* Line highlighting
+*/
+pre[class*="language-"] > code[class*="language-"] {
+	position: relative;
+	z-index: 1;
+}
+
+.line-highlight.line-highlight {
+	background: var(--background-code-highlight-nested);
+	box-shadow: inset 5px 0 0 var(--code-highlight-shadow);
+	z-index: 0;
+}

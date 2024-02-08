@@ -1,5 +1,5 @@
 html {
-	font-family: var(--fontFamily);
+	font-family: var(--font-family);
 	color: var(--label);
 	background-color: var(--background);
 	-webkit-font-smoothing: antialiased;
@@ -101,17 +101,22 @@ ol ol {
 blockquote {
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
-	border-left: 3pt solid var(--separator);
-	padding-left: 8pt;
+	border-left: 4px solid var(--separator);
+	padding-left: 10px;
 	font-style: italic;
 }
 
-code {
-	background-color: var(--cloud);
-	vertical-align: bottom;
+code:not([class*="language-"]) {
 	padding: 2px 4px;
 	border-radius: 4px;
+	font-family: var(--code-font-family);
+	font-size: 13px;
+	background-color: var(--background-code);
 	color: var(--label-code);
+}
+
+pre[class*="language-"] {
+	border-radius: 6px;
 }
 
 img.cc {
