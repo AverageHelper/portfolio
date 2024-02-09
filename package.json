@@ -23,7 +23,7 @@
 	"author": "Average Helper <https://git.average.name/AverageHelper>",
 	"license": "ISC",
 	"dependencies": {
-		"hono": "3.12.0"
+		"hono": "4.0.0"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.4.1",
