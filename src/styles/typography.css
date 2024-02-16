@@ -23,7 +23,7 @@ a.hint {
 
 @media print {
 	/* Links should postfix their href in print */
-	a[href]:after {
+	a[href^="http"]:after {
 		content: " (" attr(href) ")";
 		color: var(--secondary-label);
 	}
