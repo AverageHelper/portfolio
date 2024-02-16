@@ -1,5 +1,5 @@
 /ip https://ip.average.name 302
-/pronouns https://pronouns.cc/@avg 302
+/pronouns /.well-known/pronouns 302
 /@avg /@avghelper 302
 /@avghelper https://fosstodon.org/@avghelper 302
 /how /ways 302
