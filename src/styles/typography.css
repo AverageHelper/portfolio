@@ -21,6 +21,20 @@ a.hint {
 	color: var(--label);
 }
 
+@media print {
+	/* Links should postfix their href in print */
+	a[href]:after {
+		content: " (" attr(href) ")";
+		color: var(--secondary-label);
+	}
+
+	/* Links should look like normal text in print */
+	a {
+		color: var(--label);
+		text-decoration: none;
+	}
+}
+
 h1,
 h2,
 h3,
