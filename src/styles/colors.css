@@ -86,7 +86,7 @@
 
 /* Applying Colors Dynamically */
 
-@media only screen and (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) {
 	:root {
 		/** Light Colors */
 
