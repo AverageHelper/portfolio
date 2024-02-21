@@ -4,98 +4,35 @@ import Link from "@/components/Link.astro";
 ---
 
 <Layout>
-	<h1 id="lgbtq-resources">LGBTQ&plus; Resources</h1>
-	<p
-		>Lots of crap happening in the world these days, and certain people can't stand to let certain
-		other people live their own lives, even though we aren't hurting anyone. The following are a set
-		of resources that I've found useful. Nothing here is absolute, and you should do your own due
-		dilligence for your own safety. This page is only a guide.</p
-	>
-	<p
-		>If you need help, visit <!-- prettier-ignore -->
-		<Link href="https://www.rainbowrailroad.org/">Rainbow Railroad</Link>.</p
-	>
+	<h1 id="links">Links</h1>
+	<p>A pile of useful pages.</p>
 
-	<h2 id="internet-tools">Internet Tools</h2>
-	<p
-		>There may be times when your basic rights to bodily autonomy may be in jeopardy. <!-- prettier-ignore -->
-		<Link href="https://www.npr.org/2022/06/24/1102305878/supreme-court-abortion-roe-v-wade-decision-overturn">The
-		overturning of Roe v. Wade</Link> led to many people <!-- prettier-ignore -->
-		<Link href="https://www.businessinsider.com/police-getting-help-social-media-to-prosecute-people-seeking-abortions-2023-2?r=US&IR=T">discovering this the hard way</Link>.
-		While there is no foolproof way to keep your government off your back, you don't have to make it
-		easy on them:</p
-	>
+	<h2 id="lgbtq-resources">LGBTQ&plus; Resources</h2>
 	<ul>
+		<li><Link href="https://www.rainbowrailroad.org">Rainbow Railroad</Link></li>
+		<li><Link href="https://strandsfortrans.org">Strands For Trans</Link></li>
+		<li><Link href="https://www.erininthemorning.com">Erin In The Morning</Link></li>
 		<li
-			>Avoid centralized platforms where possible. Facebook, Instagram, Google, and the rest all can
-			and do answer request from law enforcement.</li
-		>
-		<li
-			>Use <Link href="https://www.torproject.org/download/">the Tor browser</Link> when researching
-			things like abortion or gender-affirming healthcare. (Remember, <em
-				>DO NOT SIGN IN TO ANY ACCOUNTS OVER TOR!</em
-			> That defeats the whole point.)</li
-		>
-		<li
-			>Use <Link href="https://signal.org/">Signal</Link> or
-			<Link href="https://briarproject.org/download-briar/">Briar</Link> for messaging.</li
+			><!-- prettier-ignore -->
+			<Link href="https://www.google.com/maps/d/viewer?mid=1DxyOTw8dI8n96BHFF2JVUMK7bXsRKtzA&ll=42.47025816653199%2C-97.03854516744877&z=4">Erin's Informed Consent HRT map of the US</Link></li
 		>
 	</ul>
 
-	<h2 id="trans-resources">Trans Resources</h2>
-	<p>These are some helpful resources for trans&ast; peeps of all kinds:</p>
+	<h2 id="internet-tools">Internet Privacy Tools</h2>
 	<ul>
-		<li
-			><Link href="https://strandsfortrans.org/">Strands For Trans</Link>, a global network of
-			trans-affirming hair, beauty, and wellness industries and organizations.</li
-		>
-		<li
-			><Link href="https://www.erininthemorning.com/">Erin In The Morning</Link> for trans news across
-			the United States. (Warning: somewhat depressing usually)</li
-		>
-		<li
-			><!-- prettier-ignore -->
-			<Link href="https://www.google.com/maps/d/viewer?mid=1DxyOTw8dI8n96BHFF2JVUMK7bXsRKtzA&ll=42.47025816653199%2C-97.03854516744877&z=4">Erin's Informed Consent HRT map of the US</Link>,
-			in case your doctor can't help you with gender-affirming care.</li
-		>
+		<li><Link href="https://www.torproject.org/download">The Tor browser</Link></li>
+		<li><Link href="https://signal.org">Signal Messenger</Link></li>
+		<li><Link href="https://briarproject.org/download-briar">Briar Messenger</Link></li>
+		<li><Link href="https://simplelogin.io">SimpleLogin.io aliases</Link></li>
 	</ul>
 
 	<h2 id="sustainable-computing">Sustainable Computing</h2>
-	<p
-		>Thinking of setting up your own website or app? Great! The world needs more people like you! :3
-		Some things to keep in mind:</p
-	>
-	<p
-		>Not every computer has the juice to run a massive JavaScript bundle in a web browser or an
-		Electron app. We shouldn't assume people's machines work that way, or that users have the
-		eyesight or dexterity to use such a program.</p
-	>
-	<p
-		>See <!-- prettier-ignore -->
-		<Link href="https://100r.co/site/computing_and_sustainability.html">Computing and Sustainability</Link>,
-		Saint-Louis, 21 Sep 2023 for more.</p
-	>
-	<p>In general, an accessible and sustainable and informative website should:</p>
 	<ul>
-		<li>avoid JavaScript and WebAssembly wherever possible.</li>
 		<li
-			>where dynamic elements are required, dependencies and external packages should be minimized,
-			and hosted locally with the rest of the site.</li
+			><!-- prettier-ignore -->
+			<Link href="https://100r.co/site/computing_and_sustainability.html">Computing and Sustainability, Saint-Louis, 21 Sep 2023</Link></li
 		>
-		<li
-			>prefer widely-used browser APIs, as reported on
-			<Link href="https://caniuse.com">Can I use</Link>, across Firefox and Chromium-based options.</li
-		>
-		<li><Link href="https://doesmysiteneedhttps.com">always use HTTPS.</Link></li>
-		<li>be accessible to Tor users.</li>
+		<li><Link href="https://caniuse.com">Can I use (web APIs)?</Link></li>
+		<li><Link href="https://doesmysiteneedhttps.com">Does my site need HTTPS?</Link></li>
 	</ul>
-
-	<hr />
-
-	<h1 id="contribute">Contribute</h1>
-	<p
-		>You can add to this page by submitting issues or PRs <!-- prettier-ignore -->
-		<Link href="https://git.average.name/AverageHelper/portfolio/src/branch/main/src/pages/links.astro">on my Git forge</Link>,
-		or by <Link relMe href="https://average.name/@avg">sending me a DM</Link>.</p
-	>
 </Layout>
