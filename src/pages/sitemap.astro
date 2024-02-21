@@ -35,7 +35,7 @@ const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	});
 
 function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
-	return coll.slice().sort((a, b) => {
+	return coll.toSorted((a, b) => {
 		const aDate = Temporal.PlainDate.from(a.data.date);
 		const bDate = Temporal.PlainDate.from(b.data.date);
 		return Temporal.PlainDate.compare(aDate, bDate); // ascending order
