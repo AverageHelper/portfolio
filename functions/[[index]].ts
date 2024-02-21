@@ -82,7 +82,9 @@ const app = new Hono()
 	})
 
 	// ** Serve the /dist dir
-	.get("*", serveStatic());
+	.get("*", serveStatic())
+
+	.notFound(c => c.redirect("/404.html"));
 
 //#region Utilities
 function url(str: string): URL | null {
