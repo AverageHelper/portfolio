@@ -1,38 +1,8 @@
 ---
+import { Content } from "./links.md";
 import Layout from "@/layouts/Layout.astro";
-import Link from "@/components/Link.astro";
 ---
 
 <Layout>
-	<h1 id="links">Links</h1>
-	<p>A pile of useful pages.</p>
-
-	<h2 id="lgbtq-resources">LGBTQ&plus; Resources</h2>
-	<ul>
-		<li><Link href="https://www.rainbowrailroad.org">Rainbow Railroad</Link></li>
-		<li><Link href="https://strandsfortrans.org">Strands For Trans</Link></li>
-		<li><Link href="https://www.erininthemorning.com">Erin In The Morning</Link></li>
-		<li
-			><!-- prettier-ignore -->
-			<Link href="https://www.google.com/maps/d/viewer?mid=1DxyOTw8dI8n96BHFF2JVUMK7bXsRKtzA&ll=42.47025816653199%2C-97.03854516744877&z=4">Erin's Informed Consent HRT map of the US</Link></li
-		>
-	</ul>
-
-	<h2 id="internet-tools">Internet Privacy Tools</h2>
-	<ul>
-		<li><Link href="https://www.torproject.org/download">The Tor browser</Link></li>
-		<li><Link href="https://signal.org">Signal Messenger</Link></li>
-		<li><Link href="https://briarproject.org/download-briar">Briar Messenger</Link></li>
-		<li><Link href="https://simplelogin.io">SimpleLogin.io aliases</Link></li>
-	</ul>
-
-	<h2 id="sustainable-computing">Sustainable Computing</h2>
-	<ul>
-		<li
-			><!-- prettier-ignore -->
-			<Link href="https://100r.co/site/computing_and_sustainability.html">Computing and Sustainability, Saint-Louis, 21 Sep 2023</Link></li
-		>
-		<li><Link href="https://caniuse.com">Can I use (web APIs)?</Link></li>
-		<li><Link href="https://doesmysiteneedhttps.com">Does my site need HTTPS?</Link></li>
-	</ul>
+	<Content />
 </Layout>
