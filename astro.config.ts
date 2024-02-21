@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 
 import { defineConfig } from "astro/config";
+import a11yEmoji from "@fec/remark-a11y-emoji";
 import rehypeExternalLinks from "rehype-external-links";
 import sitemap from "@astrojs/sitemap";
 
@@ -21,8 +22,12 @@ export default defineConfig({
 	devToolbar: {
 		enabled: false, // Don't show dev controls in the webpage
 	},
+	// Applies to .md and .mdx files
 	markdown: {
-		// Applies to .md and .mdx files
+		remarkPlugins: [
+			// Wrap emoji characters in `span` with accessible labels
+			a11yEmoji,
+		],
 		rehypePlugins: [
 			// Better anchor tags
 			[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],

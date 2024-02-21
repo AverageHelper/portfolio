@@ -1,9 +1,14 @@
 ---
+/**
+ * Similar to https://github.com/florianeckerstorfer/remark-a11y-emoji
+ */
+
 import type { HTMLAttributes } from "astro/types";
 
+// Get labels from https://github.com/wooorm/gemoji/blob/main/index.js
 const emojiMap = {
-	heart: 10084,
-	blush: 128522,
+	heart: { id: 10084, label: "red heart" },
+	blush: { id: 128522, label: "smiling face with smiling eyes" },
 } as const;
 
 interface Props extends Omit<HTMLAttributes<"a">, "class"> {
@@ -11,7 +16,7 @@ interface Props extends Omit<HTMLAttributes<"a">, "class"> {
 }
 
 const { name, ...attrs } = Astro.props;
-const id = emojiMap[name];
+const { id, label } = emojiMap[name];
 ---
 
-<span class="emoji" {...attrs}>&#{id};</span>
+<span class="emoji" role="img" aria-label={label} {...attrs}>&#{id};</span>
