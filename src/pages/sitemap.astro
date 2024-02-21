@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import { Temporal } from "temporal-polyfill";
+import Layout from "@/layouts/Layout.astro";
+import LocalLink from "@/components/LocalLink.astro";
+
+function titleCase(str: string): string {
+	if (!str) return str;
+	const first = str[0]?.toLocaleUpperCase() ?? "";
+	return first.concat(str.slice(1));
+}
+
+function title(url: string): string {
+	if (url.length === 0) return "About";
+	if (url.startsWith("/")) return titleCase(url);
+	return titleCase(url);
+}
+
+function isDefined<T>(tbd: T | undefined): tbd is T {
+	return tbd !== undefined;
+}
+
+const waysEntries = await getCollection("ways");
+
+const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
+	.map(res => res.url)
+	.filter(isDefined)
+	.map(url => {
+		// Break off the slash and the file extension
+		return url.split(".").slice(0, -1).join("").slice(1);
+	})
+	.filter(url => {
+		// Ignore collection slug files
+		return !url.includes("[slug]");
+	});
+
+function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
+	return coll.toSorted((a, b) => {
+		const aDate = Temporal.PlainDate.from(a.data.date);
+		const bDate = Temporal.PlainDate.from(b.data.date);
+		return Temporal.PlainDate.compare(aDate, bDate); // ascending order
+	});
+}
+---
+
+<Layout>
+	<h1 id="site-map">Site Map</h1>
+	<ul>
+		{
+			pages.map(p =>
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				p !== "ways" ? (
+					<li>
+						<LocalLink fileName={p}>{title(p)}</LocalLink>
+					</li>
+				) : (
+					<li>
+						<LocalLink fileName="ways">Ways</LocalLink>
+						<ul>
+							{sortedByDate(waysEntries).map(w => (
+								// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+								<li>
+									<LocalLink fileName={`ways/${w.slug}`}>{w.data.title}</LocalLink>
+								</li>
+							))}
+						</ul>
+					</li>
+				),
+			)
+		}
+		<li><LocalLink fileName="humans.txt">humans.txt</LocalLink></li>
+	</ul>
+</Layout>
