@@ -32,6 +32,9 @@ const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	.filter(url => {
 		// Ignore collection slug files
 		return !url.includes("[slug]");
+	})
+	.filter(url => {
+		return url !== "404";
 	});
 
 function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
