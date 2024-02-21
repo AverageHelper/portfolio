@@ -22,6 +22,8 @@ function isDefined<T>(tbd: T | undefined): tbd is T {
 
 const waysEntries = await getCollection("ways");
 
+const markdownEntries = ["links"];
+
 const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	.map(res => res.url)
 	.filter(isDefined)
@@ -35,7 +37,9 @@ const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	})
 	.filter(url => {
 		return url !== "404";
-	});
+	})
+	.concat(markdownEntries)
+	.sort();
 
 function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
 	return coll.toSorted((a, b) => {
@@ -71,6 +75,5 @@ function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
 				),
 			)
 		}
-		<li><LocalLink fileName="humans.txt">humans.txt</LocalLink></li>
 	</ul>
 </Layout>
