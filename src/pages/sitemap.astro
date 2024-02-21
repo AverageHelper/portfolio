@@ -22,9 +22,10 @@ function isDefined<T>(tbd: T | undefined): tbd is T {
 
 const waysEntries = await getCollection("ways");
 
-const markdownEntries = ["links"];
+const markdownEntries = await Astro.glob("/src/pages/*.md");
 
 const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
+	.concat(Object.values(markdownEntries))
 	.map(res => res.url)
 	.filter(isDefined)
 	.map(url => {
@@ -38,7 +39,6 @@ const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	.filter(url => {
 		return url !== "404";
 	})
-	.concat(markdownEntries)
 	.sort();
 
 function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
