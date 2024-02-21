@@ -1,2 +1,31 @@
+# Disallow ChatGPT "analysis"
 User-agent: ChatGPT-User
 Disallow: /
+
+# Disallow OpenAI crawling
+User-agent: GPTBot
+Disallow: /
+
+# Facebook's crawler
+User-agent: FacebookBot
+Disallow: /
+
+# Google Bard's crawler
+User-agent: Google-Extended
+Disallow: /
+
+# webz.io's crawler
+User-agent: omgili
+Disallow: /
+
+# webz.io's crawler
+User-agent: omgilibot
+Disallow: /
+
+# Amazon's crawler
+User-agent: Amazonbot
+Disallow: /
+
+# Every bot that might possibly read and respect this file.
+User-agent: *
+Sitemap: https://average.name/sitemap-index.xml

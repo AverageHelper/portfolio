@@ -2,6 +2,7 @@
 
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -28,4 +29,10 @@ export default defineConfig({
 		],
 		syntaxHighlight: "prism", // Use Prism instead of Shiki to render code blocks
 	},
+	integrations: [
+		sitemap({
+			changefreq: "weekly",
+			lastmod: new Date(), // Last modified on [today]
+		}),
+	],
 });
