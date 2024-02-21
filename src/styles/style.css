@@ -225,36 +225,36 @@ ul#contact li svg {
 	position: relative;
 }
 
-[data-tooltip]::before {
-	content: attr(data-tooltip);
-
-	position: absolute;
-	top: -120%;
-	left: 50%;
-	width: max-content;
-	max-width: 300px;
-	transform: translateX(-50%);
-
-	pointer-events: none;
-	opacity: 0;
-	-webkit-transition: opacity 0.15s ease-in-out;
-	-moz-transition: opacity 0.15s ease-in-out;
-	-ms-transition: opacity 0.15s ease-in-out;
-	-o-transition: opacity 0.15s ease-in-out;
-	transition: opacity 0.15s ease-in-out;
-
-	display: block;
-	font-size: 16px;
-	line-height: 21px;
-	background: var(--secondary-background);
-	padding: 3px 5px;
-	border: 1px solid var(--separator);
-	box-shadow: 3px 5px 7px var(--transparent-gray);
-	border-radius: 6px;
-	z-index: 10;
-}
-
 @media (hover: hover) {
+	[data-tooltip]::before {
+		content: attr(data-tooltip);
+
+		position: absolute;
+		top: -120%;
+		left: 50%;
+		width: max-content;
+		max-width: 300px;
+		transform: translateX(-50%);
+
+		pointer-events: none;
+		opacity: 0;
+		-webkit-transition: opacity 0.15s ease-in-out;
+		-moz-transition: opacity 0.15s ease-in-out;
+		-ms-transition: opacity 0.15s ease-in-out;
+		-o-transition: opacity 0.15s ease-in-out;
+		transition: opacity 0.15s ease-in-out;
+
+		display: block;
+		font-size: 16px;
+		line-height: 21px;
+		background: var(--secondary-background);
+		padding: 3px 5px;
+		border: 1px solid var(--separator);
+		box-shadow: 3px 5px 7px var(--transparent-gray);
+		border-radius: 6px;
+		z-index: 10;
+	}
+
 	[data-tooltip]:hover::before {
 		opacity: 1;
 	}
