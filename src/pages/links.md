@@ -1,3 +1,7 @@
+---
+layout: "@/layouts/Layout.astro"
+---
+
 # Links
 
 A pile of useful pages.
