@@ -11,7 +11,8 @@ A pile of useful pages.
 - [Rainbow Railroad](https://www.rainbowrailroad.org)
 - [Strands For Trans](https://strandsfortrans.org)
 - [Erin In The Morning](https://www.erininthemorning.com)
-- [Erin's Informed Consent HRT map of the US](https://www.google.com/maps/d/viewer?mid=1DxyOTw8dI8n96BHFF2JVUMK7bXsRKtzA&ll=42.47025816653199%2C-97.03854516744877&z=4)
+- [Erin's Informed Consent HRT map of the USA](https://www.google.com/maps/d/viewer?mid=1DxyOTw8dI8n96BHFF2JVUMK7bXsRKtzA&ll=42.47025816653199%2C-97.03854516744877&z=4)
+- [Map of Transgender Healthcare "Shield" Laws in the USA](https://www.mapresearch.org/equality-maps/healthcare/trans_shield_laws)
 
 ## Internet Privacy Tools
 
