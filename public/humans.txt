@@ -5,8 +5,8 @@
 operator:   AverageHelper
 pronouns:   she/her
 site:       https://average.name
-fediverse:  @avg@average.name
-location:   Utah, USA
+fediverse:  https://average.name/@avg
+location:   USA
 
 /* SITE */
 

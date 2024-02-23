@@ -9,7 +9,7 @@
 		"prettify": "./node_modules/.bin/prettier dist/**/*.{html,css,xml} -w",
 		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
-		"lint:fix": "./node_modules/.bin/eslint . --ext .ts,.astro --fix"
+		"lint:fix": "npm run lint -- --fix"
 	},
 	"repository": {
 		"type": "git",
