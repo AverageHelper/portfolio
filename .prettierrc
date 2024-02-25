@@ -6,7 +6,8 @@
 	"semi": true,
 	"singleQuote": false,
 	"useTabs": true,
-	"plugins": ["prettier-plugin-astro"],
+	"tabWidth": 2,
+	"plugins": ["prettier-plugin-astro", "@prettier/plugin-xml"],
 	"overrides": [
 		{
 			"files": "*.astro",
