@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "./node_modules/.bin/astro dev --open",
 		"build": "./node_modules/.bin/astro sync && npm run lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && npm run prettify",
-		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css,xml}' -w --ignore-path .prettierignore",
+		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css}' -w --ignore-path .prettierignore",
 		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
 		"lint:fix": "npm run lint -- --fix"
@@ -32,7 +32,6 @@
 		"@astrojs/ts-plugin": "1.4.0",
 		"@cloudflare/workers-types": "4.20231025.0",
 		"@fec/remark-a11y-emoji": "4.0.2",
-		"@prettier/plugin-xml": "3.3.1",
 		"@types/markdown-it": "13.0.7",
 		"@types/sanitize-html": "2.11.0",
 		"@typescript-eslint/eslint-plugin": "6.11.0",
