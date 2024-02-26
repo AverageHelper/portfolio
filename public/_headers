@@ -14,3 +14,7 @@
 
 	# See https://www.andrewyu.org/article/x-pronouns.html
 	X-Pronouns-Acceptable: en:she/her
+
+# Don't show pages.dev deployment in search results
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
