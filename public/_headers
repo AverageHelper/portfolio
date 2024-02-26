@@ -1,7 +1,7 @@
 /*
 	# CORS
 	Access-Control-Allow-Origin: https://average.name
-	Very: *
+	Vary: *
 
 	# Security (also specifically allow pretty-feed-v3.xsl's inline styles)
 	Content-Security-Policy: default-src 'self'; img-src 'self' https://* data:; media-src 'self' https://* data:; script-src 'self'; style-src 'self' 'sha256-KFULEGQ3PRjjS0AcDB8xCQ8PtJXiZq7QbgsrjOg5+QI=' 'sha256-cobsKDbYrEjqQTe2lKte84CvnWR1PMmINaHT7tl8QaU=' 'sha256-NbXVcoMPA5bdsagW/nAvz5afqQMLm/oznfLqdveC2vY=' 'sha256-TH1YO7Owtg52rPfkQs+Us6yN6exn7w99CdIBBm9BmMQ='; child-src 'none'; object-src 'none'; worker-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
