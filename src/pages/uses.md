@@ -34,6 +34,7 @@ A non-exhaustive list of things that I use every day.
 
 - **OS:** [CalyxOS](https://calyxos.org) - Consider also [GrapheneOS](https://grapheneos.org).
 - **Reminders:** [Tasks.org](https://tasks.org)
+- **Weather:** [Breezy Weather](https://github.com/breezy-weather/breezy-weather)
 
 ### Self-host
 
