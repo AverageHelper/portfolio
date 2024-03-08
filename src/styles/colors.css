@@ -40,7 +40,7 @@
 	--label-code-selector: #d7ba7d;
 	--label-code-type: #ce9178;
 	--label-code-unit: #b5cea8;
-	--secondary-label: #9999a0;
+	--secondary-label: #9999a0; /* FIXME: Potentially not WCAG compliant */
 	--control-label: #eee;
 	--text-field: #212122;
 	--input-background: rgba(0, 0, 0, 0.2);
@@ -133,8 +133,8 @@
 		--label-code-unit: #127b4f;
 		--label-light: #333;
 		--label-dark: #f8f8f8;
-		--secondary-label: #79797c;
-		--secondary-label-dark: #9999a0;
+		--secondary-label: #79797c; /* FIXME: Potentially not WCAG compliant */
+		--secondary-label-dark: #9999a0; /* FIXME: Potentially not WCAG compliant */
 		--control-label: #444;
 		--text-field: #fff;
 		--input-background: #eeeeee;
