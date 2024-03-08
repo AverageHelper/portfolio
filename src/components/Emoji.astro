@@ -7,11 +7,29 @@ import type { HTMLAttributes } from "astro/types";
 
 // Get labels from https://github.com/wooorm/gemoji/blob/main/index.js
 const emojiMap = {
-	heart: { id: 10084, label: "red heart" },
-	blush: { id: 128522, label: "smiling face with smiling eyes" },
+	blush: { id: 128522, label: "smiling face with smiling eyes" }, // 😊
+	brain: { id: 129504, label: "brain" }, // 🧠
+	fire: { id: 128293, label: "fire" }, // 🔥
+	fist: { id: 9994, label: "raised fist" }, // ✊
+	heart: { id: 10084, label: "red heart" }, // ❤️
+	microphone: { id: 127908, label: "microphone" }, // 🎤
+	muscle: { id: 128170, label: "flexed biceps" }, // 💪
+	partying_face: { id: 129395, label: "partying face" }, // 🥳
+	revolving_hearts: { id: 128158, label: "revolving hearts" }, // 💞
+	sick: { id: 129298, label: "face with thermometer" }, // 🤒
+	smile: { id: 128516, label: "grinning face with smiling eyes" }, // 😄
+	smiling_face_with_3_hearts: { id: 129392, label: "smiling face with hearts" }, // 🥰
+	star_struck: { id: 129321, label: "star-struck" }, // 🤩
+	sunglasses: { id: 128526, label: "smiling face with sunglasses" }, // 😎
+	superhero: { id: 129464, label: "superhero" }, // 🦸
+	thought_balloon: { id: 128173, label: "thought balloon" }, // 💭
+	thumbsup: { id: 128077, label: "thumbs up" }, // 👍
 } as const;
 
 interface Props extends Omit<HTMLAttributes<"a">, "class"> {
+	/**
+	 * The name of an emoji.
+	 */
 	name: keyof typeof emojiMap;
 }
 
