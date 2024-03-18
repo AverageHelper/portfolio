@@ -59,6 +59,11 @@
 	--new-item-border: #fed634;
 	--tab-item: #949494;
 	--code-highlight-shadow: #f7d87c;
+	--github-alert-default-color: #afb8c1;
+	--github-alert-note-color: #58a6ff;
+	--github-alert-important-color: #a371f7;
+	--github-alert-warning-color: #d29922;
+	--github-alert-caution-color: #ee301b;
 
 	--white: #fff;
 	--gray6: #1c1c1e;
@@ -154,6 +159,11 @@
 		--new-item-border: #ffd301;
 		--tab-item: #666666;
 		--code-highlight-shadow: #f7d87c;
+		--github-alert-default-color: #afb8c1;
+		--github-alert-note-color: #0969da;
+		--github-alert-important-color: #8250df;
+		--github-alert-warning-color: #a5b000;
+		--github-alert-caution-color: #c71b00;
 
 		--white: #fff;
 		--gray6: #f2f2f2;

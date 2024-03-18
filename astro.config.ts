@@ -3,6 +3,7 @@
 import { defineConfig } from "astro/config";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import rehypeExternalLinks from "rehype-external-links";
+import { rehypeGithubAlerts } from "rehype-github-alerts";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -31,6 +32,8 @@ export default defineConfig({
 		rehypePlugins: [
 			// Better anchor tags
 			[rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+			// Emulate GitHub's fancy Blockquote Alerts
+			rehypeGithubAlerts,
 		],
 		syntaxHighlight: "prism", // Use Prism instead of Shiki to render code blocks
 	},

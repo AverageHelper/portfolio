@@ -120,6 +120,61 @@ blockquote {
 	font-style: italic;
 }
 
+.markdown-alert {
+	padding: 0 1em;
+	margin: 16px 0;
+	border-left: 4px solid var(--github-alert-default-color);
+}
+
+.markdown-alert .markdown-alert-title {
+	color: var(--github-alert-default-color);
+}
+
+.markdown-alert-note,
+.markdown-alert-tip {
+	border-left-color: var(--github-alert-note-color);
+}
+
+.markdown-alert-note .markdown-alert-title,
+.markdown-alert-tip .markdown-alert-title {
+	color: var(--github-alert-note-color);
+}
+
+.markdown-alert-important {
+	border-left-color: var(--github-alert-important-color);
+}
+
+.markdown-alert-important .markdown-alert-title {
+	color: var(--github-alert-important-color);
+}
+
+.markdown-alert-warning {
+	border-left-color: var(--github-alert-warning-color);
+}
+
+.markdown-alert-warning .markdown-alert-title {
+	color: var(--github-alert-warning-color);
+}
+
+.markdown-alert-caution {
+	border-left-color: var(--github-alert-caution-color);
+}
+
+.markdown-alert-caution .markdown-alert-title {
+	color: var(--github-alert-caution-color);
+}
+
+.markdown-alert-title {
+	display: inline-flex;
+	margin-bottom: 4px;
+	align-items: center;
+	font-weight: bold;
+}
+
+.markdown-alert-title > svg {
+	margin-right: 8px;
+}
+
 code:not([class*="language-"]) {
 	padding: 2px 4px;
 	border-radius: 4px;
