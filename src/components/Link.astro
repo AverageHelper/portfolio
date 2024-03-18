@@ -7,22 +7,28 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 
 	/**
 	 * Whether the `rel` attribute should include the special `"me"` value.
-	 *
 	 * @default false
 	 */
 	relMe?: boolean;
 
 	/**
 	 * Whether the `rel` attribute should include the special `"license"` value.
-	 *
 	 * @default false
 	 */
 	relLicense?: boolean;
+
+	/**
+	 * Whether the link's target should be this tab or open a new one.
+	 * @default false
+	 */
+	sameTab?: boolean;
 }
 
-const { href, relMe = false, relLicense = false, ...attrs } = Astro.props;
+const { href, relMe = false, relLicense = false, sameTab = false, ...attrs } = Astro.props;
 
-const rel = ["noopener", "noreferrer", relMe ? "me" : "", relLicense ? "license" : ""]
+const target = sameTab ? undefined : "_blank";
+
+const rel = ["external", "noopener", "noreferrer", relMe ? "me" : "", relLicense ? "license" : ""]
 	.filter(a => a)
 	.join(" ");
 
@@ -33,4 +39,4 @@ if (URL.canParse(href)) {
 }
 ---
 
-<a href={href} target="_blank" rel={rel} {...attrs}><slot /></a>
+<a href={href} target={target} rel={rel} {...attrs}><slot /></a>
