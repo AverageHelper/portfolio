@@ -4,7 +4,7 @@ layout: "@/layouts/Layout.astro"
 
 # Average Uses
 
-A non-exhaustive list of things that I use every day.
+A non-exhaustive list of things that I use every day. For miscellaneous useful things I find interesting, see my [Links](/links) page.
 
 ---
 

@@ -4,7 +4,9 @@ layout: "@/layouts/Layout.astro"
 
 # Links
 
-A pile of useful and favorite pages.
+A pile of useful and favorite webpages. For tools that I use frequently, see my [Uses](/uses) page.
+
+---
 
 ## Webcomics
 
