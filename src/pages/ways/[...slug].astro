@@ -2,7 +2,7 @@
 import type { CollectionEntry, CollectionKey } from "astro:content";
 import { getCollection } from "astro:content";
 import { Temporal } from "temporal-polyfill";
-import Link from "@/components/Link.astro";
+import ExternalLink from "@/components/ExternalLink.astro";
 import LocalLink from "@/components/LocalLink.astro";
 import WaysLayout from "@/layouts/WaysLayout.astro";
 
@@ -51,7 +51,7 @@ const { Content } = await entry.render();
 				rel="cc:attributionURL dct:creator"
 				property="cc:attributionName">Average Helper</LocalLink>
 			is marked with <!-- prettier-ignore -->
-			<Link
+			<ExternalLink
 				href="http://creativecommons.org/publicdomain/zero/1.0"
 				relLicense
 				style="display:inline-block;"
@@ -60,7 +60,7 @@ const { Content } = await entry.render();
 					src="/images/zero.svg"
 					alt=""
 				/>
-			</Link>
+			</ExternalLink>
 		</p>
 
 		<p>
