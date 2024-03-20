@@ -8,6 +8,4 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel" | "class"> {
 const { href, ...attrs } = Astro.props;
 ---
 
-<a href={href} target="_blank" rel="external noopener noreferrer" class="hint" {...attrs}
-	><slot /></a
->
+<a href={href} rel="external noopener noreferrer" class="hint" {...attrs}><slot /></a>

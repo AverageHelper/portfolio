@@ -4,8 +4,9 @@ import "../styles/colors.css";
 import "../styles/code.css";
 import "../styles/typography.css";
 import "../styles/style.css";
+import Emoji from "@/components/Emoji.astro";
 import Footer from "@/components/Footer.astro";
-import Header from "@/components/Header.astro";
+import Nav from "@/components/Nav.astro";
 
 interface Props {
 	/**
@@ -60,18 +61,21 @@ const {
 	</head>
 	<body>
 		<slot name="header">
-			<Header />
+			<header>
+				<Nav />
+			</header>
 		</slot>
 
 		<main class={contentClass}>
 			<slot>
+				<Emoji name="sick" />
 				<h1 id="missing-content">Something Went Wrong</h1>
 				<p>This page generated without any content!</p>
 			</slot>
-			<hr />
 		</main>
 
 		<slot name="footer">
+			<hr />
 			<Footer />
 		</slot>
 	</body>

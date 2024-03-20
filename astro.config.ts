@@ -31,7 +31,7 @@ export default defineConfig({
 		],
 		rehypePlugins: [
 			// Better anchor tags
-			[rehypeExternalLinks, { target: "_blank", rel: ["external", "noopener", "noreferrer"] }],
+			[rehypeExternalLinks, { rel: ["external", "noopener", "noreferrer"] }],
 			// Emulate GitHub's fancy Blockquote Alerts
 			rehypeGithubAlerts,
 		],

@@ -122,7 +122,7 @@ This file is in BETA. Please test and contribute to the discussion:
 						<p>
 							<xsl:value-of select="/rss/channel/description"/>
 						</p>
-						<a class="head_link" target="_blank">
+						<a class="head_link">
 							<xsl:attribute name="href">
 								<xsl:value-of select="/rss/channel/link"/>
 							</xsl:attribute>
@@ -133,7 +133,7 @@ This file is in BETA. Please test and contribute to the discussion:
 					<xsl:for-each select="/rss/channel/item">
 						<div class="pb-5">
 							<h3 class="mb-0">
-								<a target="_blank">
+								<a>
 									<xsl:attribute name="href">
 										<xsl:value-of select="link"/>
 									</xsl:attribute>
