@@ -4,7 +4,8 @@
 	Vary: *
 
 	# Security (also specifically allow pretty-feed-v3.xsl's inline styles)
-	Content-Security-Policy: default-src 'self'; img-src 'self' https://* data:; media-src 'self' https://* data:; script-src 'self'; style-src 'self' 'sha256-KFULEGQ3PRjjS0AcDB8xCQ8PtJXiZq7QbgsrjOg5+QI=' 'sha256-cobsKDbYrEjqQTe2lKte84CvnWR1PMmINaHT7tl8QaU=' 'sha256-NbXVcoMPA5bdsagW/nAvz5afqQMLm/oznfLqdveC2vY=' 'sha256-TH1YO7Owtg52rPfkQs+Us6yN6exn7w99CdIBBm9BmMQ='; child-src 'none'; object-src 'none'; worker-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
+	# TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
+	Content-Security-Policy: default-src 'self'; img-src 'self' https://* data:; media-src 'self' https://* data:; script-src 'self'; style-src 'self' 'unsafe-inline'; child-src 'none'; object-src 'none'; worker-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
 	Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), clipboard-write=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, gamepad=(), geolocation=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=*, publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), sync-xhr=(), usb=(), web-share=*, xr-spatial-tracking=()
 	X-Frame-Options: SAMEORIGIN
 	Referrer-Policy: no-referrer
