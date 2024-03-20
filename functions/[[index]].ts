@@ -84,7 +84,7 @@ const app = new Hono()
 	// ** Serve the /dist dir
 	.get("*", serveStatic())
 
-	.notFound(c => c.redirect("/404.html"));
+	.notFound(c => c.redirect("/404.html")); // FIXME: This does a redirect loop on local dev
 
 //#region Utilities
 function url(str: string): URL | null {
