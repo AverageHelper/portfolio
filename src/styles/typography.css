@@ -17,10 +17,6 @@ a {
 	color: var(--link);
 }
 
-a.hint {
-	color: var(--label);
-}
-
 @media print {
 	/* Links should postfix their href in print */
 	a[href^="http"]:after {
