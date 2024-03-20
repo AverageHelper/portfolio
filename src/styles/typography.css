@@ -210,3 +210,24 @@ img.cc {
 .float--left {
 	float: left;
 }
+
+/* Announce strikethrough to screen readers */
+/* See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del#accessibility_concerns */
+del::before,
+del::after {
+	clip-path: inset(100%);
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+del::before {
+	content: " [strikethrough start] ";
+}
+
+del::after {
+	content: " [strikethrough end] ";
+}
