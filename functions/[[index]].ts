@@ -18,7 +18,7 @@ const app = new Hono()
 		await next();
 	})
 
-	// ** Fun
+	// ** Pronouns
 	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
 	// ** Webfinger
@@ -84,7 +84,7 @@ const app = new Hono()
 	// ** Serve the /dist dir
 	.get("*", serveStatic())
 
-	.notFound(c => c.redirect("/404.html")); // FIXME: This does a redirect loop on local dev
+	.notFound(c => c.redirect("/404.html"));
 
 //#region Utilities
 function url(str: string): URL | null {

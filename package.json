@@ -4,9 +4,10 @@
 	"description": "My personal website. Very basic.",
 	"private": true,
 	"scripts": {
-		"start": "./node_modules/.bin/wrangler pages dev --compatibility-date=2023-10-30 --local --proxy 4321 -- ./node_modules/.bin/astro dev",
+		"start": "./node_modules/.bin/astro dev --open",
 		"build": "./node_modules/.bin/astro sync && npm run lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && npm run prettify",
 		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css}' -w --ignore-path .prettierignore",
+		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
 		"lint:fix": "npm run lint -- --fix"
 	},
