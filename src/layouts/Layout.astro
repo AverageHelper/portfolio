@@ -25,12 +25,25 @@ interface Props {
 	 * The content description.
 	 */
 	description?: string;
+
+	/**
+	 * A URL for an image to use in OpenGraph metadata.
+	 */
+	image?: URL | null;
+
+	/**
+	 * Alt text for the image used in OpenGraph metadata. Ignored if
+	 * no `image` was specified.
+	 */
+	imageAlt?: string | null;
 }
 
 const {
 	contentClass = "content",
 	title = "An Average Developer",
 	description = "Helpful open-source software.",
+	image,
+	imageAlt,
 } = Astro.props;
 ---
 
@@ -39,6 +52,7 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="robots" content="noai" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
 		<link rel="icon" type="image/png" href="data:image/png;base64," />
 		<link rel="author" href="/humans.txt" />
@@ -55,9 +69,17 @@ const {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="description" content={description} />
+		{
+			image && (
+				<>
+					<meta property="og:image" content={image.href} />
+					<meta property="og:image:secure_url" content={image.href} />
+				</>
+			)
+		}
+		{image && (imageAlt || imageAlt === "") && <meta property="og:image:alt" content={imageAlt} />}
 		<meta name="twitter:card" content="summary" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
 		<slot name="header">
