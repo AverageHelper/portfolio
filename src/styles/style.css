@@ -10,11 +10,19 @@ body {
 	margin: 0;
 }
 
+body {
+	/* Keep the footer on the bottom of the window */
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
 main.content {
 	margin: 0 auto;
 	padding: 1em;
 	max-width: 800px;
 	line-height: 2;
+	flex-grow: 1;
 }
 
 main.ways.content {
@@ -25,6 +33,7 @@ main.ways.content {
 header {
 	margin: 0 auto;
 	padding: 1em;
+	width: 100%;
 	max-width: 800px;
 	line-height: 2;
 	border-bottom: 2px solid var(--separator);
