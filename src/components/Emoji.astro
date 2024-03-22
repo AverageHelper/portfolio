@@ -7,6 +7,7 @@ import type { HTMLAttributes } from "astro/types";
 
 // Get labels from https://github.com/wooorm/gemoji/blob/main/index.js
 const emojiMap = {
+	birthday: { id: 127874, label: "birthday cake" }, // 🎂
 	blush: { id: 128522, label: "smiling face with smiling eyes" }, // 😊
 	brain: { id: 129504, label: "brain" }, // 🧠
 	fire: { id: 128293, label: "fire" }, // 🔥
@@ -37,4 +38,4 @@ const { name, ...attrs } = Astro.props;
 const { id, label } = emojiMap[name];
 ---
 
-<span class="emoji" role="img" aria-label={label} {...attrs}>&#{id};</span>
+<span class="emoji" role="img" aria-label={attrs["aria-label"] ?? label} {...attrs}>&#{id};</span>
