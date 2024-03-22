@@ -9,13 +9,30 @@ import { serveStatic } from "hono/cloudflare-pages";
 
 const PRONOUNS_EN = "she/her";
 
+const clacks = ["Terry Pratchett", "Nex Benedict"] as const;
+
+function randomElementOfArray<T>(array: readonly [T, ...ReadonlyArray<T>]): T {
+	const index = Math.floor(Math.random() * array.length);
+	return array[index] ?? array[0];
+}
+
+function randomClacks(): `GNU ${string}` {
+	const name = randomElementOfArray(clacks);
+	return `GNU ${name}`;
+}
+
 const app = new Hono()
 	// ** Additional headers
-	.use("*", async (c, next) => {
-		// Remember to duplicate these in public/_headers:
-		c.header("X-Clacks-Overhead", "GNU Terry Pratchett");
-		c.header("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
+	.use(async (c, next) => {
 		await next();
+		const res = new Response(c.res.body, c.res);
+
+		// See https://www.andrewyu.org/article/x-pronouns.html
+		res.headers.set("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
+		res.headers.set("X-Clacks-Overhead", randomClacks());
+
+		c.res = undefined;
+		c.res = res;
 	})
 
 	// ** Pronouns
