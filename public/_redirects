@@ -2,7 +2,7 @@
 
 /pronouns /.well-known/pronouns 302
 
-/@avg /@avghelper 302
+/@avg https://fosstodon.org/@avghelper 302
 /@avghelper https://fosstodon.org/@avghelper 302
 
 /how /ways 302
