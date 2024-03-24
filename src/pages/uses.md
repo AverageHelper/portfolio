@@ -29,6 +29,7 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 - **OS:** MacOS - I'm pretty much stuck on this for my main hardware until I either migrate onto another system or [Asahi Linux](https://asahilinux.org) gets stable.
 - **OS:** [Fedora Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/) - Like Fedora, but... silver? Idk, I like having a read-only system partition. I use this for my secondary machine. Might try NixOS later, idk.
 - **Notes:** [Obsidian](https://obsidian.md) - Portable notes files in Markdown!
+- **Email:** [Thunderbird](https://www.thunderbird.net) - Widely-available FOSS email client that works just as well as Apple's default one.
 - **Browser:** [Firefox](https://www.mozilla.org/firefox/download/thanks/) - I [harden](https://web.archive.org/web/20221013104259/https://chrisx.xyz/blog/yet-another-firefox-hardening-guide/) mine. Better than Chr\*me, don't @ me
 - **Epub reader:** [Thorium Reader](https://thorium.edrlab.org) - Trying this one out as a FOSS alternative to Apple's default offering. <!-- TODO: Try https://github.com/johnfactotum/foliate on Linux, and maybe try building for macOS? -->
 
