@@ -60,8 +60,7 @@ header ul li {
 footer {
 	width: fit-content;
 	margin: 0 auto;
-	padding: 0 21px;
-	padding-top: 21px;
+	padding: 21px;
 	text-align: center;
 }
 
@@ -80,6 +79,26 @@ footer ul.links li:not(:last-of-type) {
 	margin-right: 21px;
 	padding-right: 21px;
 	border-right: 2px solid var(--separator);
+}
+
+@media only screen and (max-width: 330px) {
+	footer {
+		margin: 0 16px;
+		padding: 0;
+	}
+
+	footer ul.links {
+		flex-flow: column wrap;
+	}
+
+	footer ul.links li {
+		margin: 21px;
+		padding: initial;
+	}
+
+	footer ul.links li:not(:last-of-type) {
+		border: none;
+	}
 }
 
 /** Navigation area **/
