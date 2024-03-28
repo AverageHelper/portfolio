@@ -82,10 +82,12 @@ const app = new Hono()
 
 		return c.json(
 			{
-				// subject: "acct:avg@average.name",
+				// subject: "acct:average@average.name",
 				subject: "acct:avghelper@fosstodon.org",
 				aliases: [
+					"https://average.name/@average",
 					"https://average.name/@avg",
+					"https://average.name/@avghelper",
 					"https://fosstodon.org/@avghelper",
 					"https://fosstodon.org/users/avghelper",
 				],
