@@ -38,6 +38,16 @@ const app = new Hono()
 	// ** Pronouns
 	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
+	// ** Tell GitHub about our WebFinger proxy coolness
+	.get("/.well-known/nodeinfo", cors(), c => {
+		// Who's asking?
+		const userAgent = c.req.header("User-Agent");
+		if (!userAgent || !userAgent.startsWith("GitHub-NodeinfoQuery")) return c.notFound();
+
+		// GitHub is asking. Pretend we're Mastodon:
+		return c.redirect("https://fosstodon.org/.well-known/nodeinfo", 302);
+	})
+
 	// ** Webfinger
 	// See https://www.rfc-editor.org/rfc/rfc7033.html
 	.get("/.well-known/webfinger", cors(), c => {
