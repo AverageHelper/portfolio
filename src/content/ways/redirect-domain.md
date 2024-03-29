@@ -1,10 +1,10 @@
 ---
-title: "How to redirect to a new domain on Cloudflare"
-description: "If you own two domains, and want one to redirect cleanly to the other while using Cloudflare, the configuration is complex."
+title: "How to rename a domain using a redirect on Cloudflare"
+description: "If you own two domains, and want one to redirect cleanly to the other while stuck on Cloudflare, the configuration is complex."
 date: "2024-02-07"
 ---
 
-If you own two domains, and want one to redirect cleanly to the other while using Cloudflare, the configuration is complex.
+If you own two domains, and want one to redirect cleanly to the other while stuck on Cloudflare, the configuration is complex.
 
 Say, for example, you want requests to redirect as follows:
 
