@@ -11,6 +11,20 @@ const PRONOUNS_EN = "she/her";
 
 const clacks = ["Terry Pratchett", "Nex Benedict"] as const;
 
+const wellKnownSubdomains = [
+	// Subdomains that I want to give a *.avg.name alias:
+	"blog",
+	"flashcards",
+	"git",
+	"ip",
+	"ipv4",
+	"www",
+] as const;
+
+const wellKnownAliasDomains: ReadonlySet<string> = new Set(
+	wellKnownSubdomains.map(s => `${s}.avg.name`),
+);
+
 function randomElementOfArray<T>(array: readonly [T, ...ReadonlyArray<T>]): T {
 	const index = Math.floor(Math.random() * array.length);
 	return array[index] ?? array[0];
@@ -108,6 +122,17 @@ const app = new Hono()
 			// "The media type used for the JSON Resource Descriptor (JRD) is `application/jrd+json`"
 			{ "Content-Type": "application/jrd+json; charset=UTF=8" },
 		);
+	})
+
+	// ** Caddy On-Demand TLS
+	.get(".well-known/domains", c => {
+		// See https://caddyserver.com/docs/automatic-https#on-demand-tls
+		const domain = c.req.query("domain");
+		if (!domain) return badRequest();
+
+		if (domain === "avg.name") return new Response(null, { status: 204 });
+		if (wellKnownAliasDomains.has(domain)) return new Response(null, { status: 204 });
+		return new Response(null, { status: 404 }); // not found
 	})
 
 	// ** Serve the /dist dir
