@@ -79,4 +79,4 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 
 - **Pronouns:** she / her 🏳️‍⚧️
 - **Aliases:** Average Helper, AvgHelper, Avg
-- **Social Media:** [Fedi](https://average.name/@avghelper)
+- **Social Media:** [Fedi](https://average.name/@average)
