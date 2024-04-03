@@ -1,5 +1,12 @@
+import type { MiddlewareHandler } from "hono/mod.ts";
 import { badRequest, notFound } from "./utils/responses.ts";
-import { compress, cors, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
+import {
+	compress,
+	cors as _cors,
+	secureHeaders,
+	serveStatic,
+	trimTrailingSlash,
+} from "hono/middleware.ts";
 import { Hono } from "hono/mod.ts";
 
 // All requests to the average.name domain route here first.
@@ -35,11 +42,47 @@ function randomClacks(): `GNU ${string}` {
 	return `GNU ${name}`;
 }
 
+const PORT = 8787;
+
+function cors(): MiddlewareHandler {
+	return _cors({
+		origin: [`http://localhost:${PORT}`, "https://average.name"],
+	});
+}
+
 const app = new Hono({ strict: true })
 	.use(compress())
 	.use(trimTrailingSlash())
 
 	// ** Additional headers
+	.use(
+		secureHeaders({
+			contentSecurityPolicy: {
+				baseUri: ["'none'"],
+				// See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src
+				defaultSrc: ["'none'"],
+				formAction: ["'self'"],
+				frameAncestors: ["'none'"],
+				imgSrc: ["'self'", "https://*", "data:"],
+				sandbox: ["allow-downloads", "allow-forms"],
+				// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
+				styleSrc: ["'self'", "'unsafe-inline'"],
+				upgradeInsecureRequests: [],
+			},
+			crossOriginEmbedderPolicy: "require-corp", // FIXME: This and CORP makes CSS assets not load at all unless inlined, with even stricter reqs in Safari
+			crossOriginResourcePolicy: "same-origin",
+			crossOriginOpenerPolicy: "same-origin",
+			originAgentCluster: "?1",
+			referrerPolicy: "no-referrer",
+			strictTransportSecurity: "max-age=31536000; includeSubDomains; preload",
+			xContentTypeOptions: "nosniff",
+			xDnsPrefetchControl: "off",
+			xDownloadOptions: "noopen",
+			xFrameOptions: "DENY",
+			xPermittedCrossDomainPolicies: "none",
+			xXssProtection: "0",
+		}),
+	)
 	.use(async (c, next) => {
 		await next();
 		const res = new Response(c.res.body, c.res);
@@ -48,24 +91,14 @@ const app = new Hono({ strict: true })
 		res.headers.set("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
 		res.headers.set("X-Clacks-Overhead", randomClacks());
 
-		// CORS
-		res.headers.set("Access-Control-Allow-Origin", "https://average.name");
+		// Disable cache (for now)
 		res.headers.set("Vary", "*");
 
 		// Security
-		// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
-		res.headers.set(
-			"Content-Security-Policy",
-			"default-src 'self'; img-src 'self' https://* data:; media-src 'self' https://* data:; script-src 'self'; style-src 'self' 'unsafe-inline'; child-src 'none'; object-src 'none'; worker-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests",
-		);
 		res.headers.set(
 			"Permissions-Policy",
 			"accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), clipboard-write=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, gamepad=(), geolocation=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=*, publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), sync-xhr=(), usb=(), web-share=*, xr-spatial-tracking=()",
 		);
-		res.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-		res.headers.set("X-Content-Type-Options", "nosniff");
-		res.headers.set("X-Frame-Options", "SAMEORIGIN");
-		res.headers.set("Referrer-Policy", "no-referrer");
 
 		c.res = undefined;
 		c.res = res;
@@ -172,8 +205,9 @@ const app = new Hono({ strict: true })
 	})
 
 	// ** Serve the /dist dir
-	.use(
-		"*",
+	.get(
+		"/*",
+		cors(),
 		serveStatic({
 			root: "./dist",
 			rewriteRequestPath(path) {
@@ -195,4 +229,4 @@ function url(str: string): URL | null {
 	}
 }
 
-Deno.serve({ port: 8787, hostname: "localhost" }, app.fetch);
+Deno.serve({ port: PORT, hostname: "localhost" }, app.fetch);

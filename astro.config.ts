@@ -18,6 +18,7 @@ export default defineConfig({
 	compressHTML: false, // Let Prettier do its thing
 	build: {
 		format: "file", // Build HTML pages at root, not in subdirectories
+		inlineStylesheets: "always", // Build stylesheets inline (makes files big, so # TODO: change this later)
 		assets: "assets", // Call the build assets folder "assets" instead of "_astro"
 	},
 	devToolbar: {
