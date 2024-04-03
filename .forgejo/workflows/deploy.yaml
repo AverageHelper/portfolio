@@ -62,7 +62,7 @@ jobs:
       - name: Refresh project
         shell: bash
         run: |
-          ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -v -i __TEMP_INPUT_KEY_FILE "$SSH_USER"@"$SSH_HOST" "cd $PROJECT_NAME && ls -la && pm2 restart $PROJECT_NAME"
+          ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -v -i __TEMP_INPUT_KEY_FILE "$SSH_USER"@"$SSH_HOST" "cd $PROJECT_NAME && ls -la && /home/$SSH_USER/.nvm/versions/node/v20.12.0/bin/pm2 restart $PROJECT_NAME"
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
