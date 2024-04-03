@@ -43,10 +43,14 @@ function randomClacks(): `GNU ${string}` {
 }
 
 const PORT = 8787;
+// const allowedOrigins: ReadonlySet<string> = new Set([
+// 	`http://localhost:${PORT}`,
+// 	"https://average.name",
+// ]);
 
 function cors(): MiddlewareHandler {
 	return _cors({
-		origin: [`http://localhost:${PORT}`, "https://average.name"],
+		origin: "https://average.name",
 	});
 }
 
