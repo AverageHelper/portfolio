@@ -1,0 +1,76 @@
+on:
+  push:
+    branches: [main]
+    paths:
+      - .forgejo/workflows/**
+      - functions/**
+      - public/**
+      - src/**
+      - astro.config.ts
+      - deno.jsonc
+      - deno.lock
+      - package-lock.json
+      - package.json
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Setup deno
+        uses: https://github.com/denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: deno task build
+
+      - name: Install rsync
+        run: |
+          apt update -y
+          apt install rsync -y
+
+      - name: Prepare keys
+        shell: bash
+        run: |
+          echo -e "$SSH_PRIVATE_KEY" > __TEMP_INPUT_KEY_FILE
+          chmod 600 __TEMP_INPUT_KEY_FILE
+          echo -e "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Publish to host
+        shell: bash
+        run: |
+          rsync -rv -e "ssh -o IdentitiesOnly=yes -v -i __TEMP_INPUT_KEY_FILE" $SOURCE "$SSH_USER"@"$SSH_HOST":~/"$TARGET"
+        env:
+          SOURCE: "dist/ functions/ vendor/ deno.jsonc deno.lock app.sh"
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          TARGET: ${{ vars.PROJECT_NAME }}
+
+      - name: Refresh project
+        shell: bash
+        run: |
+          ssh -o IdentitiesOnly=yes -v -i __TEMP_INPUT_KEY_FILE "$SSH_USER"@"$SSH_HOST" "ls -la && pm2 restart $PROJECT_NAME"
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          PROJECT_NAME: ${{ vars.PROJECT_NAME }}
+
+      - name: Clear keys
+        shell: bash
+        run: |
+          rm __TEMP_INPUT_KEY_FILE

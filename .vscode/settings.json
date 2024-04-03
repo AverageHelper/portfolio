@@ -25,5 +25,8 @@
 		"jacoco.xml",
 		"coverage.cobertura.xml"
 	],
-	"gutterpreview.sourceFolder": "public"
+	"gutterpreview.sourceFolder": "public",
+	"yaml.schemas": {
+		"https://json.schemastore.org/github-workflow.json": "**/workflows/*.yml"
+	}
 }

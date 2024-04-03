@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"ignorePatterns": ["lib", "node_modules"],
+	"ignorePatterns": ["lib", "node_modules", "functions", "vendor"], // Let Deno handle lint itself
 
 	"extends": [
 		"strictest/eslint",

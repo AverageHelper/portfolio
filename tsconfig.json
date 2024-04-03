@@ -21,16 +21,15 @@
 		"noPropertyAccessFromIndexSignature": true,
 		"useUnknownInCatchVariables": true,
 		"noUncheckedIndexedAccess": true,
-		"types": ["@cloudflare/workers-types"],
 		"esModuleInterop": true,
 		"skipLibCheck": false,
 		"forceConsistentCasingInFileNames": true,
-		"noEmit": true, // Astro runs TS directly
+		"noEmit": true, // Astro and Deno run TS directly
 		"plugins": [{ "name": "@astrojs/ts-plugin" }],
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"]
 		}
 	},
-	"include": ["./*.ts", "./functions/**/*.ts", "./src/**/*.ts", "./src/**/*.astro"]
+	"include": ["./*.ts", "./src/**/*.ts", "./src/**/*.astro"]
 }

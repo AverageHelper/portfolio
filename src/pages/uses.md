@@ -42,7 +42,7 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 ### Self-host
 
 - **Git forge:** [Forgejo](https://forgejo.org) ([instance](https://git.average.name))
-- **VPS:** [Linode](https://www.linode.com)
+- **VPS:** [Linode](https://www.linode.com) - Hosts this site, and other projects.
 - **Misc:** [NextCloud](https://nextcloud.com) - I actually don't use this much yet. Need to find a better storage solution than the one I use now.
 
 ### Services
@@ -50,6 +50,7 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 - [**EteSync**](https://www.etesync.com) - I keep my contacts and reminders synced this way.
 - [**Proton**](https://proton.me) - Email, Calendar, Drive, VPN, all open-source and well audited.
 - [**SimpleLogin**](https://simplelogin.io) - I make email aliases for every account of mine. That way, when I start getting spam, I can tell from the `to:` field who sold me out :3
+- [**pgs.sh**](https://pgs.sh) - Static site hosting, managed with SSH! (Seriously way cool!)
 - [**Cloudflare**](https://www.cloudflare.com) - DNS, hosting for some projects (for now)
 - [**Libro.fm**](https://libro.fm): DRM-free audiobooks. I use this instead of Audible.
 - [**Qobuz**](https://www.qobuz.com): DRM-free music. I use this instead of iTunes wherever possible. (FLAC for the win!)

@@ -15,7 +15,7 @@ const alreadyOk = new Set<string>([
  */
 export async function checkUrl(src: URL): Promise<void> {
 	if (import.meta.env["MODE"] !== "production") {
-		// Only run in when building
+		// Only run when building
 		return;
 	}
 

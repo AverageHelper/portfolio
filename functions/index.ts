@@ -1,6 +1,6 @@
-import { cors } from "hono/cors";
-import { Hono } from "hono";
-import { serveStatic } from "hono/cloudflare-pages";
+import { badRequest, notFound } from "./utils/responses.ts";
+import { cors, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
+import { Hono } from "hono/mod.ts";
 
 // All requests to the average.name domain route here first.
 // The last handler falls back to serving the contents of /dist.
@@ -35,7 +35,9 @@ function randomClacks(): `GNU ${string}` {
 	return `GNU ${name}`;
 }
 
-const app = new Hono()
+const app = new Hono({ strict: true })
+	.use(trimTrailingSlash())
+
 	// ** Additional headers
 	.use(async (c, next) => {
 		await next();
@@ -45,11 +47,42 @@ const app = new Hono()
 		res.headers.set("X-Pronouns-Acceptable", `en:${PRONOUNS_EN}`);
 		res.headers.set("X-Clacks-Overhead", randomClacks());
 
+		// CORS
+		res.headers.set("Access-Control-Allow-Origin", "https://average.name");
+		res.headers.set("Vary", "*");
+
+		// Security
+		// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
+		res.headers.set(
+			"Content-Security-Policy",
+			"default-src 'self'; img-src 'self' https://* data:; media-src 'self' https://* data:; script-src 'self'; style-src 'self' 'unsafe-inline'; child-src 'none'; object-src 'none'; worker-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests",
+		);
+		res.headers.set(
+			"Permissions-Policy",
+			"accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), clipboard-write=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, gamepad=(), geolocation=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=*, publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), sync-xhr=(), usb=(), web-share=*, xr-spatial-tracking=()",
+		);
+		res.headers.set("X-Frame-Options", "SAMEORIGIN");
+		res.headers.set("Referrer-Policy", "no-referrer");
+
 		c.res = undefined;
 		c.res = res;
 	})
 
+	// ** Redirects
+	.get("/ip", c => c.redirect("https://ip.average.name", 302))
+
+	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper", 302))
+	.get("/@avghelper", c => c.redirect("https://fosstodon.org/@avghelper", 302))
+	.get("/@average", c => c.redirect("https://fosstodon.org/@avghelper", 302))
+
+	.get("/how", c => c.redirect("/ways", 302))
+	.get("/how.html", c => c.redirect("/ways.html", 302))
+
+	.get("/bookmarks", c => c.redirect("/links", 302))
+	.get("/bookmarks.html", c => c.redirect("/links.html", 302))
+
 	// ** Pronouns
+	.get("/pronouns", c => c.redirect("/.well-known/pronouns", 302))
 	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
 	// ** Tell GitHub about our WebFinger proxy coolness
@@ -136,11 +169,21 @@ const app = new Hono()
 	})
 
 	// ** Serve the /dist dir
-	.get("*", serveStatic())
+	.use(
+		"*",
+		serveStatic({
+			root: "./dist",
+			rewriteRequestPath(path) {
+				// Hono by default expects the path to be either a directory or a file, but won't check for .html
+				if (path === "/") return path;
+				if (path.includes(".")) return path;
+				return `${path}.html`;
+			},
+		}),
+	)
 
 	.notFound(c => c.redirect("/404.html"));
 
-//#region Utilities
 function url(str: string): URL | null {
 	try {
 		return new URL(str);
@@ -149,17 +192,4 @@ function url(str: string): URL | null {
 	}
 }
 
-function notFound(): Response {
-	return new Response("404 Not Found", { status: 404 });
-}
-
-function badRequest(): Response {
-	return new Response("400 Bad Request", { status: 400 });
-}
-//#endregion
-
-// The filename [[foo]].ts means we accept any path here.
-// See https://developers.cloudflare.com/pages/platform/functions/get-started/
-export const onRequest: PagesFunction = async c => {
-	return await app.fetch(c.request, c.env, c);
-};
+Deno.serve({ port: 8787, hostname: "localhost" }, app.fetch);

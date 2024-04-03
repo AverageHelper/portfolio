@@ -6,7 +6,7 @@ Feel free to poke around, I guess.
 
 # Usage
 
-We use [Astro](https://astro.build) to generate static HTML from templates.
+We use [Astro](https://astro.build) to generate static HTML from templates. Astro runs on Node, and our webserver uses Deno. Make sure both of these are installed on your system.
 
 ## Install Dependencies
 
@@ -24,29 +24,39 @@ The contents of the `/public` directory get copied into the output folder as-is.
 
 The build result lives in `/dist`, and gets sent verbatim to the web host. Please do not modify these files directly.
 
-The `/functions` directory contains a Worker file that directs dynamic webserver activities, such as responding to WebFinger requests.
+The `/functions` directory contains the back-end logic, including serving static files and responding to WebFinger requests.
 
-Use the following command to run a live webserver:
+Use the following command to build and run a live development webserver:
 
 ```sh
-npm start
+deno task dev
 ```
+
+The webserver will restart whenever files it depends on have changed. Live browser reload is not yet implemented.
 
 ## Build the site
 
-This command will build the site and update `/dist`:
+This command will build static site assets to `/dist` and download runtime dependencies, without starting a webserver:
 
 ```sh
-npm run build
+deno task build
 ```
 
-## Preview the site
+## Run the site
 
-This command will build the site to `/dist` and start a local static webserver:
+After the site is built, this command will run a production-ready webserver:
 
 ```sh
-npm run preview
+deno task start
 ```
+
+To run in the background as a daemon, use [`pm2`](https://pm2.keymetrics.io/docs/usage/quick-start/) like so:
+
+```sh
+pm2 start ./app.sh --name portfolio
+```
+
+The app will run on port `8787`.
 
 ## Contributing
 

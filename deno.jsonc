@@ -1,0 +1,21 @@
+{
+	"imports": {
+		"hono/": "https://deno.land/x/hono@v4.2.0/"
+	},
+	"lock": "deno.lock",
+	"vendor": true,
+	"tasks": {
+		"build": "npm run build && deno task cache",
+		"start": "deno run --cached-only --allow-read --allow-net functions/index.ts",
+		"start:watch": "deno run --allow-read --allow-net --watch functions/index.ts",
+		"cache": "deno cache functions/index.ts",
+		"dev": "sleep 3 && deno task start:watch & npm run build:watch"
+	},
+	"lint": {
+		"exclude": ["vendor"]
+	},
+	"fmt": {
+		"exclude": ["vendor"]
+	},
+	"exclude": ["src", "astro.config.ts"]
+}

@@ -11,4 +11,4 @@ location:   USA
 /* SITE */
 
 standards:  HTML5, CSS3
-software:   Node, NPM, ESLint, Prettier, TypeScript, Astro, Cloudflare Pages
+software:   Node, Deno, NPM, ESLint, Prettier, TypeScript, Astro, Linode

@@ -1,13 +1,13 @@
 {
 	"name": "portfolio",
-	"version": "1.0.0",
 	"description": "My personal website. Very basic.",
 	"private": true,
 	"scripts": {
-		"start": "./node_modules/.bin/astro dev --open",
+		"dev": "deno task dev",
 		"build": "./node_modules/.bin/astro sync && npm run lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && npm run prettify",
+		"build:watch": "./node_modules/.bin/nodemon -w \"src/**\" -e 'ts,json,astro,md' --exec 'MODE=dev ./node_modules/.bin/astro build --silent'",
 		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css}' -w --ignore-path .prettierignore",
-		"preview": "npm run build && ./node_modules/.bin/wrangler pages dev dist --compatibility-date=2023-10-30",
+		"preview": "npm run build && deno task start",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
 		"lint:fix": "npm run lint -- --fix"
 	},
@@ -22,15 +22,11 @@
 	"type": "module",
 	"author": "Average Helper <https://git.average.name/AverageHelper>",
 	"license": "ISC",
-	"dependencies": {
-		"hono": "4.0.6"
-	},
 	"devDependencies": {
 		"@astrojs/check": "0.4.1",
 		"@astrojs/rss": "4.0.5",
 		"@astrojs/sitemap": "3.1.0",
 		"@astrojs/ts-plugin": "1.4.0",
-		"@cloudflare/workers-types": "4.20231025.0",
 		"@fec/remark-a11y-emoji": "4.0.2",
 		"@types/markdown-it": "13.0.7",
 		"@types/sanitize-html": "2.11.0",
@@ -49,13 +45,13 @@
 		"eslint-plugin-promise": "6.1.1",
 		"eslint-plugin-unicorn": "49.0.0",
 		"markdown-it": "14.0.0",
+		"nodemon": "3.1.0",
 		"prettier": "3.1.0",
 		"prettier-plugin-astro": "0.12.3",
 		"rehype-external-links": "3.0.0",
 		"rehype-github-alerts": "3.0.0",
 		"sanitize-html": "2.12.1",
 		"temporal-polyfill": "0.2.1",
-		"typescript": "5.2.2",
-		"wrangler": "3.22.3"
+		"typescript": "5.2.2"
 	}
 }
