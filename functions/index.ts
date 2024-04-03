@@ -1,5 +1,5 @@
 import { badRequest, notFound } from "./utils/responses.ts";
-import { cors, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
+import { compress, cors, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
 import { Hono } from "hono/mod.ts";
 
 // All requests to the average.name domain route here first.
@@ -36,6 +36,7 @@ function randomClacks(): `GNU ${string}` {
 }
 
 const app = new Hono({ strict: true })
+	.use(compress())
 	.use(trimTrailingSlash())
 
 	// ** Additional headers
