@@ -37,6 +37,7 @@ jobs:
         run: deno task build
 
       - name: Install rsync
+        shell: bash
         run: |
           apt update -y
           apt install rsync -y
