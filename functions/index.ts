@@ -61,6 +61,8 @@ const app = new Hono({ strict: true })
 			"Permissions-Policy",
 			"accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), clipboard-read=(), clipboard-write=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=*, gamepad=(), geolocation=(), gyroscope=(), identity-credentials-get=(), idle-detection=(), interest-cohort=(), keyboard-map=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=*, publickey-credentials-create=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), speaker-selection=(), storage-access=(), sync-xhr=(), usb=(), web-share=*, xr-spatial-tracking=()",
 		);
+		res.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+		res.headers.set("X-Content-Type-Options", "nosniff");
 		res.headers.set("X-Frame-Options", "SAMEORIGIN");
 		res.headers.set("Referrer-Policy", "no-referrer");
 
