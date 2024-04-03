@@ -79,7 +79,7 @@ const app = new Hono({ strict: true })
 			originAgentCluster: "?1",
 			referrerPolicy: "no-referrer",
 			// strictTransportSecurity: "max-age=31536000; includeSubDomains; preload",
-			strictTransportSecurity: "max-age=31536000; includeSubDomains",
+			strictTransportSecurity: "max-age=0", // TODO: Ensure all subdomains work before enabling HSTS
 			xContentTypeOptions: "nosniff",
 			xDnsPrefetchControl: "off",
 			xDownloadOptions: "noopen",
