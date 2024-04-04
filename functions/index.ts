@@ -58,6 +58,9 @@ export const app = new Hono({ strict: true })
 		}),
 	)
 
-	.notFound(c => c.redirect("/404.html"));
+	.notFound(async c => {
+		const file = await Deno.readTextFile("./dist/404.html"); // relative to working directory, I think
+		return c.html(file, 404);
+	});
 
 Deno.serve({ hostname: "localhost", port: 8787 }, app.fetch);
