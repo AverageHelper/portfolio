@@ -6,6 +6,8 @@ layout: "@/layouts/Layout.astro"
 
 I'm just a regular average developer girl, doing regular average codethings since 2011. I try to be helpful where I can.
 
+If you can see this, I'm testing something cool!
+
 ---
 
 ## Stuff I do for fun
