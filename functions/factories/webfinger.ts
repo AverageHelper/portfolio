@@ -15,13 +15,14 @@ export const webfinger = factory.createHandlers(cors(), c => {
 	const resourceUri = url(resourceQuery);
 	if (!resourceUri) return badRequest();
 
+	// Something like 'acct:average@average.name' or 'acct:average.name'
 	const resource =
 		resourceUri.protocol === "acct:" ? url(resourceUri.pathname) ?? resourceUri.pathname : null;
 	if (!resource) return badRequest();
 
 	// "If the "resource" parameter is a value for which the server has no information, the server MUST indicate [not found]"
 	const host = typeof resource === "string" ? resource.split("@").at(-1) : resource.host;
-	if (host !== "average.name") return notFound();
+	if (host !== "average.name" && host !== "fosstodon.org") return notFound();
 
 	const relQueries = c.req.queries("rel") ?? [];
 
@@ -74,7 +75,7 @@ export const webfinger = factory.createHandlers(cors(), c => {
 export const nodeinfo = factory.createHandlers(cors(), c => {
 	// Who's asking?
 	const userAgent = c.req.header("User-Agent");
-	if (!userAgent || !userAgent.startsWith("GitHub-NodeinfoQuery")) return c.notFound();
+	if (!userAgent || !userAgent.startsWith("GitHub-NodeinfoQuery")) return notFound();
 
 	// GitHub is asking. Pretend we're Mastodon:
 	return c.redirect("https://fosstodon.org/.well-known/nodeinfo", 302);
