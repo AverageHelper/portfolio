@@ -42,6 +42,14 @@ This command will build static site assets to `/dist` and download runtime depen
 deno task build
 ```
 
+## Run unit tests
+
+To run unit tests and make sure everything is working as expected:
+
+```sh
+deno task test
+```
+
 ## Run the site
 
 After the site is built, this command will run a production-ready webserver:

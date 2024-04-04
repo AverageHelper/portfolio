@@ -1,5 +1,6 @@
 {
 	"imports": {
+		"assert/": "https://deno.land/std@0.221.0/assert/",
 		"hono/": "https://deno.land/x/hono@v4.2.1/"
 	},
 	"lock": "deno.lock",
@@ -8,8 +9,13 @@
 		"build": "npm run build && deno task cache",
 		"start": "deno run --cached-only --allow-read --allow-net functions/index.ts",
 		"start:watch": "deno run --allow-read --allow-net --watch functions/index.ts",
-		"cache": "deno cache functions/index.ts",
-		"dev": "sleep 3 && deno task start:watch & npm run build:watch"
+		"cache": "deno cache functions/index.ts functions/*.test.ts",
+		"dev": "sleep 3 && deno task start:watch & npm run build:watch",
+		"test": "deno test --cached-only --allow-net",
+		"test:watch": "deno test --cached-only --allow-net --watch"
+	},
+	"test": {
+		"include": ["functions"]
 	},
 	"lint": {
 		"exclude": ["vendor"]

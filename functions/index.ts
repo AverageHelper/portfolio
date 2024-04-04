@@ -13,7 +13,7 @@ import { securityHeaders } from "./middleware/securityHeaders.ts";
 // Static content should be served there primarily, built using Astro.
 // Dynamic content is served here using Deno.
 
-const app = new Hono({ strict: true })
+export const app = new Hono({ strict: true })
 	.use(compress())
 	.use(trimTrailingSlash())
 	.use(...securityHeaders)

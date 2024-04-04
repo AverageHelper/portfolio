@@ -26,6 +26,14 @@
 		"coverage.cobertura.xml"
 	],
 	"gutterpreview.sourceFolder": "public",
+	"json.schemas": [
+		{
+			"fileMatch": [".eslintrc", "deno.jsonc"],
+			"schema": {
+				"allowTrailingCommas": true
+			}
+		}
+	],
 	"yaml.schemas": {
 		"https://json.schemastore.org/github-workflow.json": "**/workflows/*.yml"
 	}

@@ -36,6 +36,9 @@ jobs:
       - name: Build
         run: deno task build
 
+      - name: Test
+        run: deno task test
+
       - name: Install rsync
         run: |
           apt update -y

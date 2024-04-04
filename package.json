@@ -9,7 +9,8 @@
 		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css}' -w --ignore-path .prettierignore",
 		"preview": "npm run build && deno task start",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
-		"lint:fix": "npm run lint -- --fix"
+		"lint:fix": "npm run lint -- --fix",
+		"test": "deno task test"
 	},
 	"repository": {
 		"type": "git",
