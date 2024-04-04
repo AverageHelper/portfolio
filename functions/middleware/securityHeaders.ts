@@ -16,12 +16,12 @@ export const securityHeaders = [
 			formAction: ["'self'"],
 			frameAncestors: ["'none'"],
 			imgSrc: ["'self'", "https://*", "data:"],
-			sandbox: ["allow-downloads", "allow-forms"],
+			sandbox: ["allow-same-origin", "allow-downloads", "allow-forms"],
 			// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
 			styleSrc: ["'self'", "'unsafe-inline'"],
 			upgradeInsecureRequests: [],
 		},
-		crossOriginEmbedderPolicy: "require-corp", // FIXME: This and CORP makes CSS assets not load at all unless inlined, with even stricter reqs in Safari
+		crossOriginEmbedderPolicy: "require-corp",
 		crossOriginResourcePolicy: "same-origin",
 		crossOriginOpenerPolicy: "same-origin",
 		originAgentCluster: "?1",
@@ -32,6 +32,6 @@ export const securityHeaders = [
 		xDownloadOptions: "noopen",
 		xFrameOptions: "DENY",
 		xPermittedCrossDomainPolicies: "none",
-		xXssProtection: "0",
+		xXssProtection: "1; mode=block",
 	}),
 ] as const;
