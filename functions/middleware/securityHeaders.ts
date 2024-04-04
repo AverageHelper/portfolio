@@ -26,8 +26,7 @@ export const securityHeaders = [
 		crossOriginOpenerPolicy: "same-origin",
 		originAgentCluster: "?1",
 		referrerPolicy: "no-referrer",
-		// strictTransportSecurity: "max-age=31536000; includeSubDomains; preload",
-		strictTransportSecurity: "max-age=0", // TODO: Ensure all subdomains work before enabling HSTS (https://hstspreload.org)
+		strictTransportSecurity: "max-age=31536000; includeSubDomains; preload",
 		xContentTypeOptions: "nosniff",
 		xDnsPrefetchControl: "off",
 		xDownloadOptions: "noopen",
