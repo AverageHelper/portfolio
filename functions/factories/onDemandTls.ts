@@ -1,0 +1,29 @@
+import { badRequest } from "../utils/responses.ts";
+import { createFactory } from "hono/helper.ts";
+
+const SUBDOMAINS = [
+	// Subdomains that I want to give a *.avg.name alias:
+	"blog",
+	"flashcards",
+	"git",
+	"ip",
+	"ipv4",
+	"www",
+] as const;
+
+const aliasDomains: ReadonlySet<string> = new Set(SUBDOMAINS.map(s => `${s}.avg.name`));
+
+const factory = createFactory();
+
+/**
+ * Answers HTTP 204 if the given `domain` is valid. HTTP 404 otherwise.
+ */
+export const onDemandTls = factory.createHandlers(c => {
+	// See https://caddyserver.com/docs/automatic-https#on-demand-tls
+	const domain = c.req.query("domain");
+	if (!domain) return badRequest();
+
+	if (domain === "avg.name") return new Response(null, { status: 204 });
+	if (aliasDomains.has(domain)) return new Response(null, { status: 204 });
+	return new Response(null, { status: 404 }); // not found
+});
