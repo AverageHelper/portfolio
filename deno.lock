@@ -160,6 +160,7 @@
         "npm:@astrojs/sitemap@3.1.0",
         "npm:@astrojs/ts-plugin@1.4.0",
         "npm:@fec/remark-a11y-emoji@4.0.2",
+        "npm:@kindspells/astro-shield@1.3.4",
         "npm:@types/markdown-it@13.0.7",
         "npm:@types/sanitize-html@2.11.0",
         "npm:@typescript-eslint/eslint-plugin@6.11.0",

@@ -33,7 +33,7 @@ export const securityHeaders = [
 				frameAncestors: ["'none'"],
 				imgSrc: ["'self'", "https://*", "data:"],
 				sandbox: ["allow-same-origin", "allow-downloads", "allow-forms", "allow-scripts"], // allow-scripts is only for rss/styles.xsl
-				// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
+				// TODO: Ditch unsafe-inline. See https://astro-shield.kindspells.dev/guides/subresource-integrity/static-sites/
 				styleSrc: ["'self'", "'unsafe-inline'"],
 				mediaSrc: ["'none'"],
 				// mediaSrc: ["data:"], // Firefox wants this for some reason, but the error FF throws is benign, so leaving it for now.
