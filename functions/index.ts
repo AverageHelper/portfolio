@@ -1,6 +1,7 @@
 import { cacheControl } from "./middleware/cacheControl.ts";
 import { clacks } from "./middleware/clacks.ts";
 import { compress, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
+import { config } from "./config.ts";
 import { cors } from "./middleware/cors.ts";
 import { Hono } from "hono/mod.ts";
 import { ifNotTesting } from "./utils/ifNotTesting.ts";
@@ -67,5 +68,7 @@ export const app = new Hono({ strict: true })
 	});
 
 await ifNotTesting(() => {
-	Deno.serve({ hostname: "localhost", port: 8787 }, app.fetch);
+	const hostname = config.hostname;
+	const port = config.port;
+	Deno.serve({ hostname, port }, app.fetch);
 });

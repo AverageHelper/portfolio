@@ -1,3 +1,4 @@
+import { config } from "../config.ts";
 import { createMiddleware } from "hono/helper.ts";
 import { permissionsPolicy } from "./permissionsPolicy.ts";
 import { secureHeaders } from "hono/middleware.ts";
@@ -18,9 +19,10 @@ export const securityHeaders = [
 		// (3) I don't want to permit localhost resources in production.
 		const url = new URL(c.req.url);
 		const origin = url.origin;
-		const port = url.port; // TODO: Test that the port is correct
-		const knownOrigins = [`http://localhost:${port}`, "https://average.name"];
-		const rssStylesSrc = knownOrigins.includes(origin) ? `${origin}/rss/styles.xsl` : "'none'";
+		const rssStylesSrc =
+			origin === `http://localhost:${config.port}`
+				? `${origin}/rss/styles.xsl` // dev
+				: "https://average.name/rss/styles.xsl"; // prod
 
 		secureHeaders({
 			contentSecurityPolicy: {
@@ -33,9 +35,9 @@ export const securityHeaders = [
 				sandbox: ["allow-same-origin", "allow-downloads", "allow-forms", "allow-scripts"], // allow-scripts is only for rss/styles.xsl
 				// TODO: Ditch unsafe-inline. See https://github.com/KindSpells/astro-shield
 				styleSrc: ["'self'", "'unsafe-inline'"],
-				scriptSrcElem: [rssStylesSrc], // Specifically enable XML stylesheet
 				mediaSrc: ["'none'"],
 				// mediaSrc: ["data:"], // Firefox wants this for some reason, but the error FF throws is benign, so leaving it for now.
+				scriptSrcElem: [rssStylesSrc], // Specifically enable XML stylesheet
 				upgradeInsecureRequests: [],
 			},
 			crossOriginEmbedderPolicy: "require-corp",
