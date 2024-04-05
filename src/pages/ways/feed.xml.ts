@@ -12,6 +12,7 @@ export async function GET(context: { site: URL }): Promise<Response> {
 
 	return rss({
 		stylesheet: "/rss/styles.xsl", // From "public/rss/styles.xsl"
+		// TODO: Fork or PR @astrojs/rss to generate SRI meta for the stylesheet
 		title: "Average Helper | Ways",
 		description: "Average Helper's Ways Folder",
 		customData: "<language>en-us</language>",

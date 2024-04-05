@@ -3,6 +3,7 @@ import { clacks } from "./middleware/clacks.ts";
 import { compress, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
 import { cors } from "./middleware/cors.ts";
 import { Hono } from "hono/mod.ts";
+import { ifNotTesting } from "./utils/ifNotTesting.ts";
 import { nodeinfo, webfinger } from "./factories/webfinger.ts";
 import { onDemandTls } from "./factories/onDemandTls.ts";
 import { pronounsAcceptable, PRONOUNS_EN } from "./middleware/pronounsAcceptable.ts";
@@ -48,6 +49,7 @@ export const app = new Hono({ strict: true })
 		"/*",
 		cors(),
 		serveStatic({
+			// TODO: Use import.meta.dirname to resolve dist/
 			root: "./dist", // relative to working directory, I think
 			rewriteRequestPath(path) {
 				// Hono by default expects the path to be either a directory or a file, but won't check for .html
@@ -59,8 +61,11 @@ export const app = new Hono({ strict: true })
 	)
 
 	.notFound(async c => {
+		// TODO: Use import.meta.dirname to resolve dist/
 		const file = await Deno.readTextFile("./dist/404.html"); // relative to working directory, I think
 		return c.html(file, 404);
 	});
 
-Deno.serve({ hostname: "localhost", port: 8787 }, app.fetch);
+await ifNotTesting(() => {
+	Deno.serve({ hostname: "localhost", port: 8787 }, app.fetch);
+});
