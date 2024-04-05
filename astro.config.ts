@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 import a11yEmoji from "@fec/remark-a11y-emoji";
 import rehypeExternalLinks from "rehype-external-links";
 import { rehypeGithubAlerts } from "rehype-github-alerts";
-import { shield } from "@kindspells/astro-shield";
+// import { shield } from "@kindspells/astro-shield";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -43,6 +43,6 @@ export default defineConfig({
 			changefreq: "weekly",
 			lastmod: new Date(), // Last modified on [today]
 		}),
-		shield({}),
+		// shield({}), // FIXME: This breaks in production but not testing. Why?
 	],
 });
