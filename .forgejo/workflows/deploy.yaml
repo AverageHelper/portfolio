@@ -58,7 +58,7 @@ jobs:
           rsync -rv --delete -e "ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -v -i __TEMP_INPUT_KEY_FILE" $SOURCE "$SSH_USER"@"$SSH_HOST":/home/"$SSH_USER"/"$TARGET"
         env:
           SOURCE: "dist functions vendor deno.jsonc deno.lock app.sh"
-          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_USER: ${{ vars.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           TARGET: ${{ vars.PROJECT_NAME }}
 
@@ -67,7 +67,7 @@ jobs:
         run: |
           ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -v -i __TEMP_INPUT_KEY_FILE "$SSH_USER"@"$SSH_HOST" "cd $PROJECT_NAME && ls -la && pm2 restart $PROJECT_NAME > /dev/null"
         env:
-          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_USER: ${{ vars.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
           PROJECT_NAME: ${{ vars.PROJECT_NAME }}
 
