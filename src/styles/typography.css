@@ -78,8 +78,7 @@ header.ways h2 {
 }
 
 p {
-	margin-top: 0;
-	margin-bottom: 1.2rem;
+	margin-top: 0.6rem 0;
 	line-height: 2;
 	color: var(--label);
 }
@@ -87,7 +86,7 @@ p {
 hr {
 	width: 75%;
 	color: var(--separator);
-	margin-bottom: 1.2rem;
+	margin: 0.6rem 0;
 }
 
 .ways hr {
