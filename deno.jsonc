@@ -1,8 +1,7 @@
 {
 	"imports": {
-		"assert/": "https://deno.land/std@0.221.0/assert/",
 		"hono/": "https://deno.land/x/hono@v4.2.1/",
-		"testing/": "https://deno.land/std@0.221.0/testing/"
+		"std/": "https://deno.land/std@0.221.0/"
 	},
 	"lock": "deno.lock",
 	"vendor": true,

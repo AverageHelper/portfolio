@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "assert/mod.ts";
+import { assert, assertEquals } from "std/assert/mod.ts";
 
 export function assertHeaders(res: Response): void {
 	assert(res.headers.has("Content-Security-Policy"));

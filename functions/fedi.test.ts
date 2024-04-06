@@ -1,7 +1,7 @@
-import { assertEquals, assertObjectMatch } from "assert/mod.ts";
+import { assertEquals, assertObjectMatch } from "std/assert/mod.ts";
 import { assertHeaders } from "./testUtils/assertHeaders.ts";
-import { beforeAll, describe, it as test } from "testing/bdd.ts";
-import { stub } from "testing/mock.ts";
+import { beforeAll, describe, it as test } from "std/testing/bdd.ts";
+import { stub } from "std/testing/mock.ts";
 
 describe("Webfinger", () => {
 	let app: typeof import("./index.ts").app;
