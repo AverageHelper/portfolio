@@ -44,6 +44,8 @@
     "https://deno.land/std@0.221.0/assert/unimplemented.ts": "47ca67d1c6dc53abd0bd729b71a31e0825fc452dbcd4fde4ca06789d5644e7fd",
     "https://deno.land/std@0.221.0/assert/unreachable.ts": "3670816a4ab3214349acb6730e3e6f5299021234657eefe05b48092f3848c270",
     "https://deno.land/std@0.221.0/fmt/colors.ts": "d239d84620b921ea520125d778947881f62c50e78deef2657073840b8af9559a",
+    "https://deno.land/std@0.221.0/testing/_test_suite.ts": "f10a8a6338b60c403f07a76f3f46bdc9f1e1a820c0a1decddeb2949f7a8a0546",
+    "https://deno.land/std@0.221.0/testing/bdd.ts": "7a8ac58eded80e6fefa7cf7538927e88781cf5f247c04b35261c3213316e2dd0",
     "https://deno.land/x/hono@v4.2.1/adapter/deno/serve-static.ts": "62b57d461ecebbc7b98809c4fc2a8358f0828d6e89cdc6841054e5bb3828fc80",
     "https://deno.land/x/hono@v4.2.1/adapter/deno/ssg.ts": "49d73dd0d351fc52a54bfc8094096aff957f5a955a3eb976844ed8d88903bc0f",
     "https://deno.land/x/hono@v4.2.1/adapter/deno/websocket.ts": "032bd72f32103ff948e7ad5945ccb6a32e1ccd507ad222758e72a7b3a7828fb5",
