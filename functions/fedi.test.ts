@@ -36,9 +36,15 @@ describe("Webfinger", () => {
 		assertHeaders(res);
 	});
 
+	test("fails if `resource` param is only protocol", async () => {
+		const res = await app.request("/.well-known/webfinger?resource=acct:");
+		assertEquals(res.status, 400);
+		assertHeaders(res);
+	});
+
 	test("fails if `resource` param protocol is not 'acct:'", async () => {
 		const res = await app.request("/.well-known/webfinger?resource=https:foo.bar");
-		assertEquals(res.status, 400);
+		assertEquals(res.status, 404);
 		assertHeaders(res);
 	});
 

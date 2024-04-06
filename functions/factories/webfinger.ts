@@ -15,9 +15,11 @@ export const webfinger = factory.createHandlers(cors(), c => {
 	const resourceUri = url(resourceQuery);
 	if (!resourceUri) return badRequest();
 
+	// We only know 'acct:' resources
+	if (resourceUri.protocol !== "acct:") return notFound();
+
 	// Something like 'acct:average@average.name' or 'acct:average.name'
-	const resource =
-		resourceUri.protocol === "acct:" ? url(resourceUri.pathname) ?? resourceUri.pathname : null;
+	const resource = url(resourceUri.pathname) ?? resourceUri.pathname;
 	if (!resource) return badRequest();
 
 	// "If the "resource" parameter is a value for which the server has no information, the server MUST indicate [not found]"
