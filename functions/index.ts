@@ -4,7 +4,6 @@ import { compress, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
 import { config } from "./config.ts";
 import { cors } from "./middleware/cors.ts";
 import { Hono } from "hono/mod.ts";
-import { ifNotTesting } from "./utils/ifNotTesting.ts";
 import { nodeinfo, webfinger } from "./factories/webfinger.ts";
 import { onDemandTls } from "./factories/onDemandTls.ts";
 import { pronounsAcceptable, PRONOUNS_EN } from "./middleware/pronounsAcceptable.ts";
@@ -67,19 +66,17 @@ export const app = new Hono({ strict: true })
 		return c.html(file, 404);
 	});
 
-await ifNotTesting(() => {
-	const hostname = config.hostname;
-	const port = config.port;
-	try {
-		Deno.serve({ hostname, port }, app.fetch);
-	} catch (error) {
-		if (!(error instanceof Deno.errors.AddrInUse)) {
-			// Unknown error
-			throw error;
-		}
-
-		// If our port is in use, say something, rather than throwing a nebulous error:
-		console.error(`%cPort ${config.port} is already in use!`, "color: red; font-weight: bold");
-		Deno.exit(1);
+const hostname = config.hostname;
+const port = config.port;
+try {
+	Deno.serve({ hostname, port }, app.fetch);
+} catch (error) {
+	if (!(error instanceof Deno.errors.AddrInUse)) {
+		// Unknown error
+		throw error;
 	}
-});
+
+	// If our port is in use, say something, rather than throwing a nebulous error:
+	console.error(`%cPort ${config.port} is already in use!`, "color: red; font-weight: bold");
+	Deno.exit(1);
+}

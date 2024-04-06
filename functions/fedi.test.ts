@@ -1,9 +1,19 @@
-import { app } from "./index.ts";
 import { assertEquals, assertObjectMatch } from "assert/mod.ts";
 import { assertHeaders } from "./testUtils/assertHeaders.ts";
-import { describe, it as test } from "testing/bdd.ts";
+import { beforeAll, describe, it as test } from "testing/bdd.ts";
+import { stub } from "testing/mock.ts";
 
 describe("Webfinger", () => {
+	let app: typeof import("./index.ts").app;
+
+	beforeAll(async () => {
+		// Don't run webserver when testing
+		stub(Deno, "serve", () => ({}) as Deno.HttpServer);
+
+		// Import unit under test (with mocks)
+		app = (await import("./index.ts")).app;
+	});
+
 	testRedirect("/@average", "https://fosstodon.org/@avghelper", "temporary");
 	testRedirect("/@avghelper", "https://fosstodon.org/@avghelper", "temporary");
 	testRedirect("/@avg", "https://fosstodon.org/@avghelper", "temporary");
