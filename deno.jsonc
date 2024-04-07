@@ -12,7 +12,7 @@
 		"cache": "deno cache functions/index.ts functions/*.test.ts",
 		"dev": "sleep 3 && deno task start:watch & npm run build:watch",
 		"test": "rm -fr coverage && deno test --coverage=coverage --cached-only && deno coverage --lcov --output=coverage/lcov.info && deno coverage",
-		"test:watch": "deno test --cached-only --allow-net --watch"
+		"test:watch": "deno test --cached-only --watch"
 	},
 	"test": {
 		"include": ["functions"]
