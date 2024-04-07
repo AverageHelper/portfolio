@@ -59,9 +59,11 @@ header ul li {
 
 footer {
 	width: fit-content;
+	min-width: 25%;
 	margin: 0 auto;
 	padding: 21px;
 	text-align: center;
+	border-top: 2px solid var(--separator);
 }
 
 footer ul.links {
@@ -83,6 +85,7 @@ footer ul.links li:not(:last-of-type) {
 
 @media only screen and (max-width: 330px) {
 	footer {
+		width: 90%;
 		margin: 0 16px;
 		padding: 0;
 	}
