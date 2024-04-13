@@ -81,5 +81,5 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 - **Pronouns:** she / her 🏳️‍⚧️
 - **Aliases:** Average Helper, AvgHelper, Avg
 - **Social Media:**
-  - Fedi: [@average@average.name](https://average.name/@average)
-  - Matrix: [@average:average.name](https://matrix.to/#/@average:average.name)
+  - **Fedi**: [@average@average.name](https://average.name/@average)
+  - **Matrix**: [@average:average.name](https://matrix.to/#/@average:average.name)
