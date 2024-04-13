@@ -6,6 +6,7 @@ operator:   AverageHelper
 pronouns:   she/her
 site:       https://average.name
 fediverse:  https://average.name/@average
+matrix:     @average:average.name
 location:   USA
 
 /* SITE */
