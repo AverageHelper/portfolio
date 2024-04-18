@@ -197,16 +197,36 @@ ul#contact {
 }
 
 ul#contact li > a {
+	position: relative;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
+	text-decoration: none;
+	min-height: 60px;
+	padding: 8px;
+}
+
+@media (hover: hover) {
+	/* Fancy overlapping hover background a la macOS status bar */
+	ul#contact li > a:hover::after {
+		content: "";
+		z-index: -1;
+		position: absolute;
+		top: -5%;
+		left: 0;
+		width: 100%;
+		height: 110%;
+		background-color: var(--navbar-button-highlight);
+		border-radius: 8px;
+		cursor: pointer;
+		pointer-events: none;
+	}
 }
 
 ul#contact li img,
 ul#contact li svg {
-	height: 24px;
-	margin: 21px auto;
+	width: 60px;
 	color: var(--label);
 }
 
