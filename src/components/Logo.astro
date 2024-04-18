@@ -20,6 +20,10 @@ const logos = {
 		name: "Matrix",
 		path: "/images/logo-matrix.svg",
 	},
+	phone: {
+		name: "Telephone",
+		path: "/images/logo-telephone.svg",
+	},
 } as const;
 
 interface Props {
@@ -29,8 +33,8 @@ interface Props {
 
 const { name: key } = Astro.props;
 const logo = logos[key];
-const alt = `${logo.name} logo` as const;
 const src = logo.path;
+const alt = logo.name;
 ---
 
 <img src={src} alt={alt} />
