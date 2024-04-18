@@ -2,29 +2,40 @@
 import ExternalLink from "@/components/ExternalLink.astro";
 import Layout from "@/layouts/Layout.astro";
 import Logo from "@/components/Logo.astro";
+
+const socials = [
+	{
+		platform: "matrix",
+		handle: "@average:average.name",
+		href: "https://matrix.to/#/@average:average.name",
+	},
+	{
+		platform: "fedi",
+		handle: "@average@average.name",
+		href: "https://average.name/@average",
+	},
+	{
+		platform: "discord",
+		handle: "discord.com:avghelper",
+		href: "https://discordapp.com/users/498477215931957258",
+	},
+] as const;
 ---
 
 <Layout contentClass="content contact">
 	<h1 id="how-to-reach-me">How to reach me</h1>
 	<ul>
-		<li>
-			<ExternalLink href="https://matrix.to/#/@average:average.name">
-				<Logo name="matrix" />
-				<span>@average:average.name</span>
-			</ExternalLink>
-		</li>
-		<li>
-			<ExternalLink href="https://average.name/@average">
-				<Logo name="fedi" />
-				<span>@average@average.name</span>
-			</ExternalLink>
-		</li>
-		<li>
-			<ExternalLink href="https://discordapp.com/users/498477215931957258">
-				<Logo name="discord" />
-				<span>discord.com:avghelper</span>
-			</ExternalLink>
-		</li>
+		{
+			socials.map(s => (
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+				<li>
+					<ExternalLink href={s.href}>
+						<Logo name={s.platform} />
+						<span>{s.handle}</span>
+					</ExternalLink>
+				</li>
+			))
+		}
 		<li>
 			<ExternalLink href="#" class="plain">
 				<Logo name="phone" />
