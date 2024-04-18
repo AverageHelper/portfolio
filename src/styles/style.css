@@ -192,28 +192,21 @@ nav a.current {
 
 ul#contact {
 	padding-left: 0;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
 	list-style-type: none;
 }
 
-ul#contact li {
-	border: none;
-}
-
 ul#contact li > a {
-	padding: 16px;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
 }
 
 ul#contact li img,
 ul#contact li svg {
-	width: 24px;
 	height: 24px;
-	margin: 21px 8px;
+	margin: 21px auto;
 	color: var(--label);
-	cursor: pointer;
 }
 
 .visually-hidden {
