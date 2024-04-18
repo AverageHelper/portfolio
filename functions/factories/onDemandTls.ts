@@ -8,6 +8,7 @@ const SUBDOMAINS = [
 	"git",
 	"ip",
 	"ipv4",
+	"status",
 	"www",
 ] as const;
 
