@@ -136,7 +136,8 @@ nav a.disabled {
 	pointer-events: none;
 }
 
-nav a.current {
+nav a.current,
+footer a.current {
 	color: var(--secondary-label);
 	text-decoration: none;
 }
