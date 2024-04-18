@@ -211,11 +211,6 @@ main.contact ul li > a {
 	font-weight: bold;
 	min-height: 60px;
 	padding: 8px 10px;
-	color: var(--label);
-}
-
-main.contact ul li > a:hover {
-	color: var(--link);
 }
 
 @media (hover: hover) {
