@@ -164,7 +164,7 @@ footer a.current {
 @media only screen and (max-width: 450px) {
 	main.content {
 		margin: 0 auto;
-		padding: 2em;
+		padding: 1.2em;
 	}
 
 	nav ul {
@@ -173,6 +173,10 @@ footer a.current {
 }
 
 @media only screen and (max-width: 350px) {
+	main.content {
+		width: 100%;
+	}
+
 	nav a {
 		padding: 21px 12px;
 	}
@@ -183,7 +187,6 @@ footer a.current {
 @media only screen and (min-width: 451px) and (max-width: 960px) {
 	main.content {
 		margin: 0 auto;
-		padding: 2em;
 	}
 }
 
@@ -194,6 +197,12 @@ footer a.current {
 main.contact h1 {
 	width: 100%;
 	text-align: center;
+}
+
+@media only screen and (max-width: 451px) {
+	main.contact h1 {
+		text-align: inherit;
+	}
 }
 
 main.contact ul {
@@ -211,6 +220,12 @@ main.contact ul li > a {
 	font-weight: bold;
 	min-height: 60px;
 	padding: 8px 10px;
+}
+
+@media only screen and (max-width: 300px) {
+	main.contact ul li > a {
+		font-size: small;
+	}
 }
 
 @media (hover: hover) {
@@ -235,6 +250,14 @@ main.contact ul li svg {
 	width: 60px;
 	margin-right: 24px;
 	color: var(--label);
+}
+
+@media only screen and (max-width: 451px) {
+	main.contact ul li img,
+	main.contact ul li svg {
+		width: 40px;
+		margin-right: 18px;
+	}
 }
 
 .visually-hidden {
