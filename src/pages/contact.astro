@@ -8,16 +8,25 @@ const socials = [
 		platform: "matrix",
 		handle: "@average:average.name",
 		href: "https://matrix.to/#/@average:average.name",
+		plain: false,
 	},
 	{
 		platform: "fedi",
 		handle: "@average@average.name",
 		href: "https://average.name/@average",
+		plain: false,
 	},
 	{
 		platform: "discord",
 		handle: "discord.com:avghelper",
 		href: "https://discordapp.com/users/498477215931957258",
+		plain: false,
+	},
+	{
+		platform: "phone",
+		handle: "Wouldn't you like to know?",
+		href: "#",
+		plain: true,
 	},
 ] as const;
 ---
@@ -29,18 +38,12 @@ const socials = [
 			socials.map(s => (
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				<li>
-					<ExternalLink href={s.href}>
+					<ExternalLink href={s.href} class={s.plain ? "plain" : null}>
 						<Logo name={s.platform} />
 						<span>{s.handle}</span>
 					</ExternalLink>
 				</li>
 			))
 		}
-		<li>
-			<ExternalLink href="#" class="plain">
-				<Logo name="phone" />
-				<span>Wouldn't you like to know?</span>
-			</ExternalLink>
-		</li>
 	</ul>
 </Layout>
