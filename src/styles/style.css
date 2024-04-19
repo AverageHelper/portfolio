@@ -233,21 +233,19 @@ main.contact ul li > a.plain {
 	}
 }
 
-@media (hover: hover) {
-	/* Fancy overlapping hover background a la macOS status bar */
-	main.contact ul li > a:hover::after {
-		content: "";
-		z-index: -1;
-		position: absolute;
-		top: -5%;
-		left: 0;
-		width: 100%;
-		height: 110%;
-		background-color: var(--navbar-button-highlight);
-		border-radius: 8px;
-		cursor: pointer;
-		pointer-events: none;
-	}
+/* Fancy overlapping hover background a la macOS status bar */
+main.contact ul li > a:hover::after {
+	content: "";
+	z-index: -1;
+	position: absolute;
+	top: -5%;
+	left: 0;
+	width: 100%;
+	height: 110%;
+	background-color: var(--navbar-button-highlight);
+	border-radius: 8px;
+	cursor: pointer;
+	pointer-events: none;
 }
 
 main.contact ul li img,
