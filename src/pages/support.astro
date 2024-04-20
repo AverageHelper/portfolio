@@ -1,37 +1,20 @@
 ---
 import ExternalLink from "@/components/ExternalLink.astro";
 import Layout from "@/layouts/Layout.astro";
-import LocalLink from "@/components/LocalLink.astro";
 import Logo from "@/components/Logo.astro";
+import LocalLink from "@/components/LocalLink.astro";
 
-const socials = [
-	// In rough order of my contact preference:
+const funding = [
+	// In rough order of my funding preference:
 	{
-		platform: "signal",
-		// Signal usernames are designed to be ephemeral, so sharing my "stable" one here doesn't make much sense
-		handle: "Ask on another platform",
-		href: "https://signal.org/download/",
-		note: true,
+		platform: "kofi",
+		handle: "ko-fi.com/avghelper",
+		href: "https://ko-fi.com/avghelper",
 	},
 	{
-		platform: "matrix",
-		handle: "@average:average.name",
-		href: "https://matrix.to/#/@average:average.name",
-	},
-	{
-		platform: "fedi",
-		handle: "@average@average.name",
-		href: "https://average.name/@average",
-	},
-	{
-		platform: "discord",
-		handle: "avghelper:discord.com",
-		href: "https://discordapp.com/users/498477215931957258",
-	},
-	{
-		platform: "phone",
-		handle: "Wouldn't you like to know?",
-		note: true,
+		platform: "liberapay",
+		handle: "liberapay.com/average",
+		href: "https://liberapay.com/avg",
 	},
 ] as const satisfies NonEmptyArray<ContactInfo>;
 
@@ -61,10 +44,10 @@ type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>];
 ---
 
 <Layout contentClass="content contact">
-	<h1 id="how-to-reach-me">How to reach me</h1>
+	<h1 id="how-to-fund-me">How to fund me</h1>
 	<ul>
 		{
-			socials.map(s => (
+			funding.map(s => (
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				<li>
 					<ExternalLink href={"href" in s ? s.href : "#"} class={"note" in s ? "plain" : null}>
@@ -75,6 +58,6 @@ type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>];
 			))
 		}
 	</ul>
-	<p class="align--center">See also ways to <LocalLink fileName="support">support me</LocalLink>.</p
+	<p class="align--center">See also ways to <LocalLink fileName="contact">contact me</LocalLink>.</p
 	>
 </Layout>
