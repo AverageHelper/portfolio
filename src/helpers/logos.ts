@@ -34,6 +34,10 @@ export const logos = {
 		name: "Matrix",
 		path: "/images/logo-matrix.svg",
 	},
+	paypal: {
+		name: "PayPal",
+		path: "/images/logo-paypal.svg",
+	},
 	phone: {
 		name: "Telephone",
 		path: "/images/logo-telephone.svg",
