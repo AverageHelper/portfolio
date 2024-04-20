@@ -1,0 +1,33 @@
+---
+import type { ContactInfo } from "@/@types/contact";
+import ExternalLink from "./ExternalLink.astro";
+import Logo from "./Logo.astro";
+import LocalLink from "./LocalLink.astro";
+
+interface Props {
+	profile: ContactInfo;
+}
+
+const { profile: s } = Astro.props;
+
+// External link if href, with rel=me by default.
+// Omit rel=me if notMe is specified.
+---
+
+{
+	"href" in s && s.href ? (
+		<ExternalLink
+			relMe={!("notMe" in s) || !s.notMe}
+			href={s.href}
+			class={"note" in s ? "plain" : null}
+		>
+			<Logo name={s.platform} />
+			<span>{s.handle}</span>
+		</ExternalLink>
+	) : (
+		<LocalLink fileName="contact#" class={"note" in s ? "plain" : null}>
+			<Logo name={s.platform} />
+			<span>{s.handle}</span>
+		</LocalLink>
+	)
+}

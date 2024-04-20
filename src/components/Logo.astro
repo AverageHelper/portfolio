@@ -1,50 +1,10 @@
 ---
-const logos = {
-	codeberg: {
-		name: "Codeberg",
-		path: "/images/logo-codeberg.svg",
-	},
-	discord: {
-		name: "Discord",
-		path: "/images/logo-discord.svg",
-	},
-	fedi: {
-		name: "Fediverse",
-		path: "/images/logo-fediverse.svg",
-	},
-	forgejo: {
-		name: "Forgejo",
-		path: "/images/logo-forgejo.svg",
-	},
-	github: {
-		name: "GitHub",
-		path: "/images/logo-github.svg",
-	},
-	kofi: {
-		name: "Ko-fi",
-		path: "/images/logo-kofi.svg",
-	},
-	liberapay: {
-		name: "Liberapay",
-		path: "/images/logo-liberapay.svg",
-	},
-	matrix: {
-		name: "Matrix",
-		path: "/images/logo-matrix.svg",
-	},
-	phone: {
-		name: "Telephone",
-		path: "/images/logo-telephone.svg",
-	},
-	signal: {
-		name: "Signal",
-		path: "/images/logo-signal.svg",
-	},
-} as const;
+import type { PlatformName } from "@/helpers/logos.js";
+import { logos } from "@/helpers/logos.js";
 
 interface Props {
 	/** A string identifying the platform whose logo to display. */
-	name: keyof typeof logos;
+	name: PlatformName;
 }
 
 const { name: key } = Astro.props;

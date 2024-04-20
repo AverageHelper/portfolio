@@ -1,10 +1,10 @@
 ---
-import ExternalLink from "@/components/ExternalLink.astro";
+import type { ContactInfo, ReadonlyNonEmptyArray } from "@/@types/contact";
 import Layout from "@/layouts/Layout.astro";
 import LocalLink from "@/components/LocalLink.astro";
-import Logo from "@/components/Logo.astro";
+import SocialLink from "@/components/SocialLink.astro";
 
-const socials = [
+const profiles = [
 	// In rough order of my contact preference:
 	{
 		platform: "signal",
@@ -12,6 +12,7 @@ const socials = [
 		handle: "Ask on another platform",
 		href: "https://signal.org/download/",
 		note: true,
+		notMe: true,
 	},
 	{
 		platform: "matrix",
@@ -33,44 +34,17 @@ const socials = [
 		handle: "Wouldn't you like to know?",
 		note: true,
 	},
-] as const satisfies NonEmptyArray<ContactInfo>;
-
-interface ContactInfo {
-	/**
-	 * The name of the contact platform where I may be found.
-	 */
-	platform: Parameters<typeof Logo>[0]["name"];
-
-	/**
-	 * My unique identifier on the platform, or an explanatory note.
-	 */
-	handle: string;
-
-	/**
-	 *  A URL by which I can be reached on the platform.
-	 */
-	href?: string;
-
-	/**
-	 * Whether the `handle` is an explanatory note (and therefore should be rendered in a mixed-width font).
-	 */
-	note?: true;
-}
-
-type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>];
+] as const satisfies ReadonlyNonEmptyArray<ContactInfo>;
 ---
 
 <Layout contentClass="content contact">
 	<h1 id="how-to-reach-me">How to reach me</h1>
 	<ul>
 		{
-			socials.map(s => (
+			profiles.map(profile => (
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				<li>
-					<ExternalLink href={"href" in s ? s.href : "#"} class={"note" in s ? "plain" : null}>
-						<Logo name={s.platform} />
-						<span>{s.handle}</span>
-					</ExternalLink>
+					<SocialLink profile={profile} />
 				</li>
 			))
 		}

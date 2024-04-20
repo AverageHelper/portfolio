@@ -1,10 +1,10 @@
 ---
-import ExternalLink from "@/components/ExternalLink.astro";
+import type { ContactInfo, ReadonlyNonEmptyArray } from "@/@types/contact";
 import Layout from "@/layouts/Layout.astro";
-import Logo from "@/components/Logo.astro";
 import LocalLink from "@/components/LocalLink.astro";
+import SocialLink from "@/components/SocialLink.astro";
 
-const funding = [
+const profiles = [
 	// In rough order of my funding preference:
 	{
 		platform: "kofi",
@@ -16,44 +16,17 @@ const funding = [
 		handle: "liberapay.com/average",
 		href: "https://liberapay.com/avg",
 	},
-] as const satisfies NonEmptyArray<ContactInfo>;
-
-interface ContactInfo {
-	/**
-	 * The name of the contact platform where I may be found.
-	 */
-	platform: Parameters<typeof Logo>[0]["name"];
-
-	/**
-	 * My unique identifier on the platform, or an explanatory note.
-	 */
-	handle: string;
-
-	/**
-	 *  A URL by which I can be reached on the platform.
-	 */
-	href?: string;
-
-	/**
-	 * Whether the `handle` is an explanatory note (and therefore should be rendered in a mixed-width font).
-	 */
-	note?: true;
-}
-
-type NonEmptyArray<T> = readonly [T, ...ReadonlyArray<T>];
+] as const satisfies ReadonlyNonEmptyArray<ContactInfo>;
 ---
 
 <Layout contentClass="content contact">
 	<h1 id="how-to-fund-me">How to fund me</h1>
 	<ul>
 		{
-			funding.map(s => (
+			profiles.map(profile => (
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 				<li>
-					<ExternalLink href={"href" in s ? s.href : "#"} class={"note" in s ? "plain" : null}>
-						<Logo name={s.platform} />
-						<span>{s.handle}</span>
-					</ExternalLink>
+					<SocialLink profile={profile} />
 				</li>
 			))
 		}
