@@ -7,14 +7,6 @@ import SocialLink from "@/components/SocialLink.astro";
 const profiles = [
 	// In rough order of my contact preference:
 	{
-		platform: "signal",
-		// Signal usernames are designed to be ephemeral, so sharing my "stable" one here doesn't make much sense
-		handle: "Ask on another platform",
-		href: "https://signal.org/download/",
-		note: true,
-		notMe: true,
-	},
-	{
 		platform: "matrix",
 		handle: "@average:average.name",
 		href: "https://matrix.to/#/@average:average.name",
@@ -28,6 +20,14 @@ const profiles = [
 		platform: "discord",
 		handle: "avghelper:discord.com",
 		href: "https://discordapp.com/users/498477215931957258",
+	},
+	{
+		platform: "signal",
+		// Signal usernames are designed to be ephemeral, so sharing my "stable" one here doesn't make much sense
+		handle: "Ask on another platform",
+		href: "https://signal.org/download/",
+		note: true,
+		notMe: true,
 	},
 	{
 		platform: "phone",
