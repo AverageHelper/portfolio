@@ -1,5 +1,5 @@
 import { badRequest } from "../utils/responses.ts";
-import { createFactory } from "hono/helper.ts";
+import { factory } from "./factory.ts";
 
 const SUBDOMAINS = [
 	// Subdomains that I want to give a *.avg.name alias:
@@ -13,8 +13,6 @@ const SUBDOMAINS = [
 ] as const;
 
 const aliasDomains: ReadonlySet<string> = new Set(SUBDOMAINS.map(s => `${s}.avg.name`));
-
-const factory = createFactory();
 
 /**
  * Answers HTTP 204 if the given `domain` is valid. HTTP 404 otherwise.

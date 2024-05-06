@@ -1,5 +1,5 @@
 import { config } from "../config.ts";
-import { createMiddleware } from "hono/helper.ts";
+import { factory } from "../factories/factory.ts";
 import { permissionsPolicy } from "./permissionsPolicy.ts";
 import { secureHeaders } from "hono/middleware.ts";
 
@@ -10,7 +10,7 @@ export const securityHeaders = [
 	// TODO: Validate https://csp-evaluator.withgoogle.com/?csp=https://average.name
 	// TODO: Validate https://observatory.mozilla.org/analyze/average.name
 	permissionsPolicy(),
-	createMiddleware(async (c, next) => {
+	factory.createMiddleware(async (c, next) => {
 		await next();
 
 		// We need to set script-src-elem dynamically, because

@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono/mod.ts";
-import { createMiddleware } from "hono/helper.ts";
+import { factory } from "../factories/factory.ts";
 
 const NAMES = ["Terry Pratchett", "Nex Benedict"] as const;
 
@@ -7,7 +7,7 @@ const NAMES = ["Terry Pratchett", "Nex Benedict"] as const;
  * Sets the `X-Clacks-Overhead` response header.
  */
 export function clacks(): MiddlewareHandler {
-	return createMiddleware(async (c, next) => {
+	return factory.createMiddleware(async (c, next) => {
 		await next();
 		const res = new Response(c.res.body, c.res);
 

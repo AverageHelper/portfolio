@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono/mod.ts";
-import { createMiddleware } from "hono/helper.ts";
+import { factory } from "../factories/factory.ts";
 
 export const PRONOUNS_EN = "she/her";
 
@@ -7,7 +7,7 @@ export const PRONOUNS_EN = "she/her";
  * Sets the `X-Pronouns-Acceptable` response header.
  */
 export function pronounsAcceptable(): MiddlewareHandler {
-	return createMiddleware(async (c, next) => {
+	return factory.createMiddleware(async (c, next) => {
 		await next();
 		const res = new Response(c.res.body, c.res);
 

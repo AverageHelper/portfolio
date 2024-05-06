@@ -1,8 +1,6 @@
 import { badRequest, notFound } from "../utils/responses.ts";
-import { createFactory } from "hono/helper.ts";
+import { factory } from "./factory.ts";
 import { cors } from "../middleware/cors.ts";
-
-const factory = createFactory();
 
 /**
  * Answers Webfinger requests.

@@ -3,7 +3,7 @@ import { clacks } from "./middleware/clacks.ts";
 import { compress, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
 import { config } from "./config.ts";
 import { cors } from "./middleware/cors.ts";
-import { Hono } from "hono/mod.ts";
+import { factory } from "./factories/factory.ts";
 import { nodeinfo, webfinger } from "./factories/webfinger.ts";
 import { onDemandTls } from "./factories/onDemandTls.ts";
 import { pronounsAcceptable, PRONOUNS_EN } from "./middleware/pronounsAcceptable.ts";
@@ -14,7 +14,8 @@ import { securityHeaders } from "./middleware/securityHeaders.ts";
 // Static content should be served there primarily, built using Astro.
 // Dynamic content is served here using Deno.
 
-export const app = new Hono({ strict: true })
+export const app = factory
+	.createApp()
 	.use(compress())
 	.use(trimTrailingSlash())
 	.use(...securityHeaders)
