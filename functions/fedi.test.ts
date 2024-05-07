@@ -8,7 +8,7 @@ describe("Webfinger", () => {
 
 	beforeAll(async () => {
 		// Don't run webserver when testing
-		stub(Deno, "serve", () => ({}) as Deno.HttpServer);
+		stub(Deno, "serve", () => ({}) as Deno.HttpServer<Deno.NetAddr>);
 
 		// Import unit under test (with mocks)
 		app = (await import("./index.ts")).app;

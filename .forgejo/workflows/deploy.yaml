@@ -28,7 +28,7 @@ jobs:
       - name: Setup deno
         uses: https://github.com/denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: v1.43.1
 
       - name: Install Dependencies
         run: npm ci
