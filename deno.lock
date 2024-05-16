@@ -170,7 +170,7 @@
         "npm:@types/sanitize-html@2.11.0",
         "npm:@typescript-eslint/eslint-plugin@6.11.0",
         "npm:@typescript-eslint/parser@6.11.0",
-        "npm:astro@4.1.1",
+        "npm:astro@4.8.4",
         "npm:eslint-config-prettier@9.0.0",
         "npm:eslint-config-strictest@0.8.1",
         "npm:eslint-plugin-astro@0.31.0",
