@@ -52,6 +52,8 @@ deno task test
 
 ## Run the site
 
+This part is mainly for my own notes. Run your own website, lol!
+
 After the site is built, this command will run a production-ready webserver:
 
 ```sh
