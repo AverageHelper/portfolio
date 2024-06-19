@@ -12,7 +12,7 @@ A pile of useful and favorite webpages. For tools that I use frequently, see my 
 
 ### Completed
 
-- [_Rain_ by Jocelyn](https://rain.thecomicseries.com/comics/first/#content-start): A story for boys, girls, and everyone in between.
+- [_Rain_ by Jocelyn](https://rain.thecomicseries.com/comics/first/#content-start): A story for boys, girls, and everyone in between. (I help run [the wiki](https://rainverse.wiki/wiki/Rainverse_Wiki)!)
 
 ### Ongoing
 
