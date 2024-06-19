@@ -22,7 +22,7 @@ Here's a few things I built myself that I'm proud of:
 
 [**This website**](https://git.average.name/AverageHelper/portfolio) - All HTML, CSS, and Markdown, rolled together statically using Astro. (Always a work in progress, lol.)
 
-And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repositories).
+And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repositories). See also my [status page](https://status.average.name) for my self-hosting endeavors.
 
 ---
 
