@@ -133,6 +133,22 @@ ol ol {
 	margin-bottom: 0;
 }
 
+ul.word-list {
+	/* padding-left: 0; */
+	display: flex;
+	flex-flow: row wrap;
+}
+
+ul.word-list li {
+	list-style-type: none;
+}
+
+ul.word-list li:not(:last-of-type)::after {
+	display: inline;
+	content: ", ";
+	white-space-collapse: preserve;
+}
+
 blockquote {
 	margin-top: 1.5rem;
 	margin-bottom: 1.5rem;
