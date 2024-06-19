@@ -12,13 +12,13 @@ A pile of useful and favorite webpages. For tools that I use frequently, see my 
 
 ### Completed
 
-- [_Rain_ by Jocelyn](https://rain.thecomicseries.com/comics/first/#content-start): A story for boys, girls, and everyone in between. (I help run [the wiki](https://rainverse.wiki/wiki/Rainverse_Wiki)!)
+- _[Rain](https://rain.thecomicseries.com/comics/first/#content-start)_ by Jocelyn Samara DiDomenick: A story for boys, girls, and everyone in between. (I help run [the unofficial official wiki](https://rainverse.wiki/wiki/Rainverse_Wiki)!)
 
 ### Ongoing
 
-- [_I want to be a cute anime girl_ by Azul Crescent](https://www.webtoons.com/en/canvas/i-want-to-be-a-cute-anime-girl/list?title_no=349416): When cross-dressing turns out to be a little more than that.
-- [_My Impossible Soulmate_ by Jocelyn](https://mis.thecomicseries.com/comics/first/#content-start): An isekai adventure in the universe of _Rain_ by the same author.
-- [_The Prettiest Platypus_ by Platypus_Pro](https://www.webtoons.com/en/canvas/the-prettiest-platypus/list?title_no=463063): A story of self discovery with a little help from kind friends.
+- _[I want to be a cute anime girl](https://www.webtoons.com/en/canvas/i-want-to-be-a-cute-anime-girl/list?title_no=349416)_ by Azul Crescent: When cross-dressing turns out to be a little more than that.
+- _[My Impossible Soulmate](https://mis.thecomicseries.com/comics/first/#content-start)_ by Jocelyn Samara DiDomenick: An isekai adventure in the universe of _Rain_ by the same author.
+- _[The Prettiest Platypus](https://www.webtoons.com/en/canvas/the-prettiest-platypus/list?title_no=463063)_ by Platypus_Pro: A story of self discovery with a little help from kind friends.
 
 ## LGBTQ+ Resources
 
