@@ -52,3 +52,10 @@ A pile of useful and favorite webpages. For tools that I use frequently, see my 
 - [The Tor browser](https://www.torproject.org/download): Because your ISP doesn't need to know what you use your internet for.
 - [Signal Messenger](https://signal.org): Because nobody but the people you're messaging need to know what you're saying, or to whom.
 - [SimpleLogin.io](https://simplelogin.io): Puts email spam firmly under your control.
+
+### Self-host your online life
+
+- [Immich](https://immich.app): Run this instead of Google Photos.
+- [Audiobookshelf](https://www.audiobookshelf.org/): Run this instead of Audible or Podcast apps.
+- [Jellyfin](https://jellyfin.org/): Run this instead of Plex or music streaming services.
+- [uptime-kuma](https://github.com/louislam/uptime-kuma): Run this to keep track of your servers.
