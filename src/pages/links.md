@@ -56,6 +56,7 @@ A pile of useful and favorite webpages. For tools that I use frequently, see my 
 ### Self-host your online life
 
 - [Immich](https://immich.app): Run this instead of Google Photos.
-- [Audiobookshelf](https://www.audiobookshelf.org/): Run this instead of Audible or Podcast apps.
-- [Jellyfin](https://jellyfin.org/): Run this instead of Plex or music streaming services.
+- [Audiobookshelf](https://www.audiobookshelf.org): Run this instead of Audible or Podcast apps.
+- [Jellyfin](https://jellyfin.org): Run this instead of Plex or music streaming services.
+- [Forgejo](https://forgejo.org): Run this instead of GitHub.
 - [uptime-kuma](https://github.com/louislam/uptime-kuma): Run this to keep track of your servers.
