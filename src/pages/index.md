@@ -16,9 +16,9 @@ Here's a few things I built myself that I'm proud of:
 
 [**flashcards**](https://flashcards.average.name) - A simple flashcards site. Uses zero Javascript to present card decks! (Very much work-in-progress.)
 
-[**ItemEncryptor**](https://github.com/AverageHelper/ItemEncryptor) - A Swift package to make data encryption easy. I use this in some of my smaller projects to facilitate end-to-end encryption of sensitive data. (Basically done, might need updating for Swift 6.)
-
 [**Recorded Finance**](https://recorded.finance) - An end-to-end encrypted finance app for keeping track of account balances. The front-end is written in Svelte, with TypeScript on the front- and back-end. (Work-in progress, rewriting back-end for easier self-hosting.)
+
+[**ItemEncryptor**](https://github.com/AverageHelper/ItemEncryptor) - A Swift package to make data encryption easy. I use this in some of my smaller projects to facilitate end-to-end encryption of sensitive data. (Basically done, might need updating for Swift 6.)
 
 [**This website**](https://git.average.name/AverageHelper/portfolio) - All HTML, CSS, and Markdown, rolled together statically using Astro. (Always a work in progress, lol.)
 
