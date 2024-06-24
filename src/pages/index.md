@@ -28,6 +28,6 @@ And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repos
 
 ## Stuff I get paid for
 
-[I freelance](/work) in my spare time.
+I freelance in my spare time. [Hire me](/work)!
 
 [My first and biggest client so far](https://github.com/Inventory-Shield/) have only closed-source code, unfortunately, but I have contributed to open-source projects on their behalf.
