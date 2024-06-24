@@ -4,7 +4,7 @@ layout: "@/layouts/Layout.astro"
 
 # Average Helper
 
-I'm just a regular average developer girl, doing regular average codethings since 2011. I try to be helpful where I can.
+I'm a regular average software developer, doing regular average codethings since 2011. I try to be helpful where I can.
 
 ---
 
