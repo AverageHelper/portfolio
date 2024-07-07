@@ -18,11 +18,9 @@ export const securityHeaders = [
 		// (2) we don't know which origin the request comes from until here, and
 		// (3) I don't want to permit localhost resources in production.
 		const url = new URL(c.req.url);
-		const origin = url.origin;
-		const rssStylesSrc =
-			origin === `http://localhost:${config.port}`
-				? `${origin}/rss/styles.xsl` // dev
-				: "https://average.name/rss/styles.xsl"; // prod
+		const rssStylesSrc = isLocalhost(url)
+			? `${url.origin}/rss/styles.xsl` // dev
+			: "https://average.name/rss/styles.xsl"; // prod
 
 		secureHeaders({
 			contentSecurityPolicy: {
@@ -55,3 +53,11 @@ export const securityHeaders = [
 		})(c, () => Promise.resolve());
 	}),
 ] as const;
+
+function isLocalhost(url: URL): boolean {
+	return [
+		`http://localhost:${config.port}`,
+		`http://127.0.0.1:${config.port}`,
+		`http://[::1]:${config.port}`,
+	].includes(url.origin);
+}
