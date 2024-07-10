@@ -1,0 +1,299 @@
+---
+import type { SonaDescription } from "@/helpers/fursona.js";
+import Emoji from "@/components/Emoji.astro";
+import ExternalLink from "@/components/ExternalLink.astro";
+import MarkdownIt from "markdown-it";
+import mila from "markdown-it-link-attributes";
+import PlainDate from "@/components/PlainDate.astro";
+import sanitize from "sanitize-html";
+import { isISO8601, isURL, sonaDescription } from "@/helpers/fursona.js";
+import { Temporal } from "temporal-polyfill";
+import { validate } from "superstruct";
+
+type ValidationErrors = Partial<Record<keyof SonaDescription, string>>;
+function validateSona(sona: SonaDescription): ValidationErrors {
+	// Validation logic needs to happen in a function, or else we lose Props types for some reason
+	const errors: ValidationErrors = {};
+
+	const [error] = validate(sona, sonaDescription, { coerce: true });
+	const failures = error?.failures() ?? [];
+	for (const failure of failures) {
+		const key = failure.path[0] as keyof ValidationErrors;
+		errors[key] = `Fursona ${key} is invalid: ${failure.message}`;
+	}
+
+	return errors;
+}
+
+// ** Collect data
+
+interface Props {
+	sona: SonaDescription;
+}
+
+const { sona } = Astro.props;
+const errors = validateSona(sona);
+
+// ** Format data
+
+const parser = new MarkdownIt();
+parser.use(mila, {
+	attrs: {
+		rel: "external noopener noreferrer",
+	},
+});
+
+function md(markdown: string): string {
+	return sanitize(parser.renderInline(markdown), {
+		allowedAttributes: {
+			...sanitize.defaults.allowedAttributes,
+			// Add "rel" to list of allowed anchor attributes
+			a: (sanitize.defaults.allowedAttributes["a"] ?? []).concat("rel"),
+		},
+	});
+}
+
+function pathIfLocal(url: URL | null): string | null {
+	if (!Astro.site || !url) return null;
+	return url.origin === Astro.site.origin ? url.pathname : null;
+}
+
+const avatarUrl = sona.avatar && isURL(sona.avatar) ? new URL(sona.avatar) : null;
+const avatar = pathIfLocal(avatarUrl) ?? avatarUrl?.href;
+const avatarAlt = sona.avatarAlt ?? "";
+
+const refUrl = sona.ref && isURL(sona.ref) ? new URL(sona.ref) : null;
+const ref = pathIfLocal(refUrl) ?? refUrl?.href;
+
+// Birthdate from schema
+const birthdate =
+	sona.birthdate && isISO8601(sona.birthdate)
+		? Temporal.PlainDate.from(sona.birthdate).toZonedDateTime("America/Denver").toPlainDate()
+		: null;
+
+// Age from schema, or calculated age from birthdate
+const currentCalendar = new Intl.DateTimeFormat().resolvedOptions().calendar;
+const now = Temporal.Now.plainDate(currentCalendar);
+const bday =
+	sona.birthdate && isISO8601(sona.birthdate)
+		? Temporal.PlainDate.from(sona.birthdate).withCalendar(currentCalendar)
+		: null;
+const until = bday?.until(now, { largestUnit: "year" });
+const untilYears = bday ? until?.round({ largestUnit: "year", relativeTo: bday }) : null;
+const age =
+	typeof sona.age === "number" ? sona.age : sona.birthdate && untilYears ? untilYears.years : null;
+const refAlt = sona.refAlt;
+---
+
+<article>
+	<section class="avatar">
+		{
+			sona.avatar && (
+				<>
+					{errors.avatar ? (
+						<p class="error">{errors.avatar}</p>
+					) : (
+						<>
+							{errors.ref ? (
+								<img src={avatar} alt={avatarAlt} />
+							) : (
+								ref && (
+									<ExternalLink class="view-ref avatar" href={ref}>
+										<img src={avatar} alt={avatarAlt} />
+									</ExternalLink>
+								)
+							)}
+						</>
+					)}
+				</>
+			)
+		}
+		{
+			errors.ref ? (
+				<p class="error">{errors.ref}</p>
+			) : (
+				// prettier-ignore
+				ref && <ExternalLink class="view-ref top" href={ref} title={refAlt}>View Ref Sheet</ExternalLink>
+			)
+		}
+	</section>
+
+	{
+		(sona.name || sona.pronouns) && (
+			<h1>
+				{sona.name ?? "Unnamed"}
+				{sona.pronouns && <span class="pronouns">({sona.pronouns})</span>}
+			</h1>
+		)
+	}
+
+	<h2>
+		{sona.gender}
+		{sona.species ?? "Creature"}
+	</h2>
+
+	{
+		errors.description ? (
+			<p class="error">{errors.description}</p>
+		) : (
+			<>
+				{sona.description && <p set:html={md(sona.description)} />}
+				{sona.refArtist && (
+					<p>
+						Ref by <ExternalLink href={sona.refArtist.url}>{sona.refArtist.name}</ExternalLink>
+					</p>
+				)}
+			</>
+		)
+	}
+
+	{
+		errors.birthdate ? (
+			<p class="error">{errors.birthdate}</p>
+		) : errors.age ? (
+			<p class="error">{errors.age}</p>
+		) : birthdate && age !== null ? (
+			<p>
+				<Emoji name="birthday" aria-label="Born" />
+				<PlainDate date={birthdate} />
+				<span aria-label={`(${age} years old)`}>({age})</span>
+			</p>
+		) : birthdate ? (
+			<p>
+				<Emoji name="birthday" aria-label="Born" />
+				<PlainDate date={birthdate} />
+			</p>
+		) : age !== null ? (
+			<p>
+				<Emoji name="birthday" aria-label="Born" /> {age} years ago
+			</p>
+		) : null
+	}
+
+	{
+		errors.colors ? (
+			<p class="error">{errors.colors}</p>
+		) : (
+			sona.colors &&
+			sona.colors.length > 0 && (
+				<ul class="colors">
+					{sona.colors.map(color => (
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+						<li>
+							<div class="color-block" style={`background-color: ${color}`} />
+							<p>
+								<code>{color.toLowerCase()}</code>
+							</p>
+						</li>
+					))}
+				</ul>
+			)
+		)
+	}
+
+	{
+		errors.ref ? (
+			<p class="error">{errors.ref}</p>
+		) : (
+			// prettier-ignore
+			ref && <ExternalLink class="view-ref bottom" href={ref} title={refAlt}>View Ref Sheet</ExternalLink>
+		)
+	}
+</article>
+
+<style scoped>
+	article {
+		background-color: var(--secondary-background);
+		border-radius: 8px;
+		padding: 16px;
+		margin-bottom: 16px;
+		overflow: hidden; /* height should extend to encompass floated children */
+	}
+
+	article h1 {
+		margin-top: 0;
+		width: fit-content;
+	}
+
+	article .pronouns {
+		font-size: large;
+		white-space: pre; /* prevent wrapping */
+	}
+
+	article .avatar {
+		margin-left: 16px;
+		width: fit-content;
+		float: right;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	article .avatar img {
+		width: 200px;
+		border-radius: 4px;
+		margin-bottom: 4px;
+	}
+
+	article .colors {
+		display: flex;
+		flex-flow: row wrap;
+		padding: 0;
+		margin: 0;
+	}
+
+	article .colors li {
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 4px;
+	}
+
+	article .avatar img,
+	article .colors .color-block {
+		border-radius: 4px;
+		border: 2px solid var(--secondary-label);
+	}
+
+	article .colors .color-block {
+		width: 100px;
+		height: 100px;
+	}
+
+	article .colors p {
+		margin-top: 4px;
+	}
+
+	article .colors p > code {
+		color: var(--label);
+	}
+
+	/* "Move" view-ref link appropriately for smaller views */
+	article .view-ref.bottom {
+		display: none;
+	}
+
+	@media only screen and (max-width: 550px) {
+		article .avatar {
+			float: unset;
+			flex-direction: row;
+			margin: 0;
+			margin-bottom: 8px;
+		}
+
+		article .avatar img {
+			margin-right: 12px;
+		}
+	}
+
+	@media only screen and (max-width: 400px) {
+		article .view-ref.top {
+			display: none;
+		}
+
+		article .view-ref.bottom {
+			display: initial;
+		}
+	}
+</style>

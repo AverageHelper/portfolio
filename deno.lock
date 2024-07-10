@@ -166,6 +166,7 @@
         "npm:@astrojs/ts-plugin@1.4.0",
         "npm:@fec/remark-a11y-emoji@4.0.2",
         "npm:@kindspells/astro-shield@1.3.4",
+        "npm:@types/markdown-it-link-attributes@3.0.4",
         "npm:@types/markdown-it@13.0.7",
         "npm:@types/sanitize-html@2.11.0",
         "npm:@typescript-eslint/eslint-plugin@6.11.0",
@@ -182,6 +183,7 @@
         "npm:eslint-plugin-promise@6.1.1",
         "npm:eslint-plugin-unicorn@49.0.0",
         "npm:eslint@8.54.0",
+        "npm:markdown-it-link-attributes@4.0.1",
         "npm:markdown-it@14.0.0",
         "npm:nodemon@3.1.0",
         "npm:prettier-plugin-astro@0.12.3",
@@ -189,6 +191,7 @@
         "npm:rehype-external-links@3.0.0",
         "npm:rehype-github-alerts@3.0.0",
         "npm:sanitize-html@2.12.1",
+        "npm:superstruct@1.0.4",
         "npm:temporal-polyfill@0.2.1",
         "npm:typescript@5.2.2"
       ]

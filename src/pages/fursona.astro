@@ -1,0 +1,41 @@
+---
+import data from "@/../public/.well-known/fursona.json";
+import Layout from "@/layouts/Layout.astro";
+import Sonas from "@/components/Sonas.astro";
+import { fursonaSchema, isURL } from "@/helpers/fursona.js";
+import { validate } from "superstruct";
+
+// TODO: It would be real cool to have our own generator site, like https://fursona.gmem.ca/pyrox.dev
+
+const [error, fursona] = validate(data, fursonaSchema, { coerce: true });
+
+const first = fursona?.sonas?.[0];
+
+const title =
+	fursona?.sonas?.length === 1 && first
+		? first.name ?? "AverageHelper's Fursona"
+		: "AverageHelper's Fursonas";
+
+const description =
+	fursona?.sonas?.length === 1
+		? first?.description ?? "1 character"
+		: fursona?.sonas
+		  ? `${fursona.sonas.length} characters`
+		  : "Fursona schema is invalid.";
+
+const imageHref = first?.avatar ?? first?.ref;
+const image = imageHref && isURL(imageHref) ? new URL(imageHref) : null;
+
+const imageAlt = first?.avatarAlt ?? `Portrait of ${first?.name ?? "AverageHelper's Fursona"}`;
+---
+
+<Layout title={title} description={description} image={image} imageAlt={imageAlt}>
+	<h1>{(fursona?.sonas?.length ?? 0) === 1 ? "Fursona" : "Fursonas"}</h1>
+	{
+		error ? (
+			<p class="error">Fursona schema is invalid: {error.message}</p>
+		) : (
+			<Sonas schema={fursona} />
+		)
+	}
+</Layout>

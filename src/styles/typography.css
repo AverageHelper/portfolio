@@ -252,6 +252,11 @@ img.cc {
 	float: left;
 }
 
+p.error,
+span.error {
+	color: var(--red);
+}
+
 /* Announce strikethrough to screen readers */
 /* See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del#accessibility_concerns */
 del::before,

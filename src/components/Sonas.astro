@@ -1,0 +1,41 @@
+---
+import type { FursonaSchema } from "@/helpers/fursona.js";
+import ExternalLink from "@/components/ExternalLink.astro";
+import LocalLink from "@/components/LocalLink.astro";
+import PlainDate from "@/components/PlainDate.astro";
+import Sona from "@/components/Sona.astro";
+import { Temporal } from "temporal-polyfill";
+import { isISO8601 } from "@/helpers/fursona.js";
+
+interface Props {
+	schema: FursonaSchema;
+}
+
+const { schema } = Astro.props;
+
+const dateModified =
+	schema.dateModified && isISO8601(schema.dateModified)
+		? Temporal.PlainDate.from(schema.dateModified).toZonedDateTime("America/Denver").toPlainDate()
+		: null;
+---
+
+{
+	schema.sonas?.map(sona => (
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+		<Sona sona={sona} />
+	)) ?? <p class="error">No fursonas found in schema.</p>
+}
+<p
+	>Generated from <LocalLink fileName=".well-known/fursona.json">JSON source</LocalLink> using <!-- prettier-ignore -->
+	<ExternalLink
+		href="https://github.com/pyrox0/fursona-schema/"
+	>fursona-schema</ExternalLink>
+	{
+		dateModified && (
+			<>
+				on
+				<PlainDate date={dateModified} />.
+			</>
+		)
+	}</p
+>

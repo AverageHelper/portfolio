@@ -1,0 +1,17 @@
+---
+import type { Temporal } from "temporal-polyfill";
+
+interface Props {
+	date: Temporal.PlainDate;
+}
+
+const { date } = Astro.props;
+
+// Human-readable
+const formattedDate = date?.toLocaleString(undefined, { dateStyle: "long" }) ?? null;
+
+// YYYY-MM-DD for use with <time>
+const datetime = date?.toString() ?? null;
+---
+
+<time datetime={datetime} title={datetime}>{formattedDate}</time>

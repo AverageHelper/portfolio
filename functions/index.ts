@@ -35,6 +35,10 @@ export const app = factory
 	.get("/pronouns", c => c.redirect("/.well-known/pronouns", 302))
 	.get("/.well-known/pronouns", cors(), c => c.text(`${PRONOUNS_EN}\n`))
 
+	// ** Fursona
+	.get("/fursona.json", c => c.redirect("/.well-known/fursona.json", 302))
+	.get("/.well-known/fursona", c => c.redirect("/.well-known/fursona.json", 302))
+
 	// ** Fediverse aliases
 	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper", 302))
 	.get("/@avghelper", c => c.redirect("https://fosstodon.org/@avghelper", 302))
