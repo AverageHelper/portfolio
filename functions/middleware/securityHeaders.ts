@@ -39,7 +39,9 @@ export const securityHeaders = [
 				upgradeInsecureRequests: [],
 			},
 			crossOriginEmbedderPolicy: "require-corp",
-			crossOriginResourcePolicy: "same-origin",
+			crossOriginResourcePolicy:
+				// Specifically allow other domains to access the fursona avatar
+				url.pathname === "/images/refs/AverageHelper-avatar.png" ? "cross-origin" : "same-origin",
 			crossOriginOpenerPolicy: "same-origin",
 			originAgentCluster: "?1",
 			referrerPolicy: "no-referrer",
