@@ -38,6 +38,13 @@ export const app = factory
 	// ** Fursona
 	.get("/fursona.json", c => c.redirect("/.well-known/fursona.json", 302))
 	.get("/.well-known/fursona", c => c.redirect("/.well-known/fursona.json", 302))
+	.get(
+		"/images/refs/AverageHelper-avatar.png",
+		cors(),
+		serveStatic({
+			path: "./dist/images/refs/AverageHelper-avatar.png",
+		}),
+	)
 
 	// ** Fediverse aliases
 	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper", 302))
