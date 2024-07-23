@@ -10,9 +10,9 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 
 ## DevOps
 
-- **Editor:** [VSCodium](https://vscodium.com), [NeoVim](https://neovim.io)
+- **Editors:** [VSCodium](https://vscodium.com), [NeoVim](https://neovim.io)
 - **Coding Font:** [Hack Nerd Font Mono](https://github.com/ryanoasis/nerd-fonts)
-- **Terminal:** [Kitty](https://sw.kovidgoyal.net/kitty/), Zsh
+- **Terminal:** [Kitty](https://sw.kovidgoyal.net/kitty/), [Zsh](https://en.wikipedia.org/wiki/Z_shell)
 - **Dotfiles**: [Simple bare Git repo](https://git.average.name/AverageHelper/dotfiles)
 
 ## Favorite Tools
@@ -28,9 +28,9 @@ A non-exhaustive list of things that I use every day. For miscellaneous useful t
 
 - **OS:** MacOS - I'm pretty much stuck on this for my main hardware until I either migrate onto another system or [Asahi Linux](https://asahilinux.org) gets stable.
 - **OS:** [Fedora Silverblue](https://fedoraproject.org/atomic-desktops/silverblue/) - Like Fedora, but... silver? Idk, I like having a read-only system partition. I use this for my secondary machine. Might try NixOS later, idk.
-- **Notes:** [Obsidian](https://obsidian.md) - Portable notes files in Markdown!
+- **Notes:** [Obsidian](https://obsidian.md) - Portable notes in Markdown!
 - **Email:** [Thunderbird](https://www.thunderbird.net) - Widely-available FOSS email client that works just as well as Apple's default one.
-- **Browser:** [Firefox](https://www.mozilla.org/firefox/download/thanks/) - I [harden](https://web.archive.org/web/20221013104259/https://chrisx.xyz/blog/yet-another-firefox-hardening-guide/) mine. Better than Chr\*me, don't @ me
+- **Browser:** [Firefox](https://www.mozilla.org/firefox/download/thanks/) ([+ Firefox hardening guide](https://web.archive.org/web/20221013104259/https://chrisx.xyz/blog/yet-another-firefox-hardening-guide/)) - Better than Chr\*me, don't @ me. (I should write my own hardening guide at some point...)
 - **Epub reader:** [Thorium Reader](https://thorium.edrlab.org) - Trying this one out as a FOSS alternative to Apple's default offering. <!-- TODO: Try https://github.com/johnfactotum/foliate on Linux, and maybe try building for macOS? -->
 
 ### Mobile

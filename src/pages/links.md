@@ -44,12 +44,12 @@ A pile of useful and favorite webpages. For tools that I use frequently, see my 
 
 - [32-Bit Cafe](https://32bit.cafe): I discovered them recently, and I like what they're about.
 - [Computing and Sustainability, Saint-Louis, 21 Sep 2023](https://100r.co/site/computing_and_sustainability.html)
-- [Can I use (web APIs)?](https://caniuse.com): To find out how many of your users can use a given web API.
+- [Can I Use (web APIs)?](https://caniuse.com): To find out how many of your users can use a given web API.
 - [Does my site need HTTPS?](https://doesmysiteneedhttps.com): Yes. Yes it does.
 
 ### Internet Privacy
 
-- [The Tor browser](https://www.torproject.org/download): Because your ISP doesn't need to know what you use your internet for.
+- [The Tor Browser](https://www.torproject.org/download): Because your ISP doesn't need to know what you use your internet for.
 - [Signal Messenger](https://signal.org): Because nobody but the people you're messaging need to know what you're saying, or to whom.
 - [SimpleLogin.io](https://simplelogin.io): Puts email spam firmly under your control.
 

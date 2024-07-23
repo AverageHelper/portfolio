@@ -20,9 +20,13 @@ Here's a few things I built myself that I'm proud of:
 
 [**ItemEncryptor**](https://github.com/AverageHelper/ItemEncryptor) - A Swift package to make data encryption easy. I use this in some of my smaller projects to facilitate end-to-end encryption of sensitive data. (Basically done, might need updating for Swift 6.)
 
-[**This website**](https://git.average.name/AverageHelper/portfolio) - All HTML, CSS, and Markdown, rolled together statically using Astro. (Always a work in progress, lol.)
+[**This website (HTTP version)**](https://git.average.name/AverageHelper/portfolio) - All HTML, CSS, and Markdown, rolled together statically using Astro. (Always a work in progress, lol.)
+
+[**This website (Gemini version)**](https://git.average.name/AverageHelper/portfolio-gemini) - Static Gemtext to experiment with Geminispace, hosted at [gemini://average.name](gemini://average.name)
 
 And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repositories). See also my [status page](https://status.average.name) for my self-hosting endeavors.
+
+<!-- TODO: Add a thing about Rainverse Wiki. That's not something I did *myself*, but a project I'm on that I'm proud of. Probs don't mention that I own the domain, since I don't want that to be forever. Maybe reorganize this part? Use a /now page for projects? Idk -->
 
 ---
 
