@@ -1,16 +1,15 @@
+import type { MiddlewareHandler } from "hono";
 import { config } from "../config.ts";
 import { factory } from "../factories/factory.ts";
-import { permissionsPolicy } from "./permissionsPolicy.ts";
 import { secureHeaders } from "hono/secure-headers";
 
 /**
  * Sets security-related response headers.
  */
-export const securityHeaders = [
+export function securityHeaders(): MiddlewareHandler {
 	// TODO: Validate https://csp-evaluator.withgoogle.com/?csp=https://average.name
 	// TODO: Validate https://observatory.mozilla.org/analyze/average.name
-	permissionsPolicy(),
-	factory.createMiddleware(async (c, next) => {
+	return factory.createMiddleware(async (c, next) => {
 		await next();
 
 		// We need to set script-src-elem dynamically, because
@@ -23,6 +22,65 @@ export const securityHeaders = [
 			: "https://average.name/rss/styles.xsl"; // prod
 
 		secureHeaders({
+			// Hono follows https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md
+			permissionsPolicy: {
+				accelerometer: [],
+				allScreensCapture: [],
+				ambientLightSensor: [],
+				attributionReporting: [],
+				autoplay: [],
+				battery: [],
+				bluetooth: [],
+				browsingTopics: [],
+				camera: [],
+				capturedSurfaceControl: [],
+				clipboardRead: [],
+				clipboardWrite: [],
+				crossOriginIsolated: [],
+				digitalCredentialsGet: [],
+				directSockets: [],
+				displayCapture: [],
+				// documentDomain: [], // TODO: Do we need this one?
+				encryptedMedia: [],
+				executionWhileNotRendered: [],
+				executionWhileOutOfViewport: [],
+				focusWithoutUserActivation: [],
+				fullscreen: true,
+				gemepad: [],
+				geolocation: [],
+				gyroscope: [],
+				hid: [],
+				identityCredentialsGet: [],
+				idleDetection: [],
+				// interestCohort: [], // TODO: Does this one exist?
+				joinAdInterestGroup: [],
+				keyboardMap: [],
+				localFonts: [],
+				magnetometer: [],
+				microphone: [],
+				midi: [],
+				navigationOverride: [],
+				payment: [],
+				pictureInPicture: true,
+				// publickeyCredentialsCreate: [], // TODO: Does this one exist?
+				publickeyCredentialsGet: [],
+				runAdAuction: [],
+				screenWakeLock: [],
+				serial: [],
+				sharedAutofill: [],
+				smartCard: [],
+				speakerSelection: [],
+				storageAccess: [],
+				syncScript: [],
+				syncXhr: [],
+				trustTokenRedemption: [],
+				unload: [],
+				usb: [],
+				verticalScroll: ["self"],
+				webShare: true,
+				windowManagement: [],
+				xrSpatialTracking: [],
+			},
 			contentSecurityPolicy: {
 				baseUri: ["'none'"],
 				// See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src
@@ -53,8 +111,8 @@ export const securityHeaders = [
 			xPermittedCrossDomainPolicies: "none",
 			xXssProtection: "1; mode=block",
 		})(c, () => Promise.resolve());
-	}),
-] as const;
+	});
+}
 
 function isLocalhost(url: URL): boolean {
 	return [

@@ -20,7 +20,7 @@ export const app = factory
 	.createApp()
 	.use(compress())
 	.use(trimTrailingSlash())
-	.use(...securityHeaders)
+	.use(securityHeaders())
 	.use(cacheControl())
 	.use(clacks())
 	.use(pronounsAcceptable())
