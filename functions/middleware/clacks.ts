@@ -1,4 +1,4 @@
-import type { MiddlewareHandler } from "hono/mod.ts";
+import type { MiddlewareHandler } from "hono";
 import { factory } from "../factories/factory.ts";
 
 const NAMES = ["Terry Pratchett", "Nex Benedict"] as const;
