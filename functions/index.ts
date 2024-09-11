@@ -1,6 +1,6 @@
 import { cacheControl } from "./middleware/cacheControl.ts";
 import { clacks } from "./middleware/clacks.ts";
-import { compress, serveStatic, trimTrailingSlash } from "hono/middleware.ts";
+import { compress } from "hono/compress";
 import { config } from "./config.ts";
 import { cors } from "./middleware/cors.ts";
 import { factory } from "./factories/factory.ts";
@@ -8,6 +8,8 @@ import { nodeinfo, webfinger } from "./factories/webfinger.ts";
 import { onDemandTls } from "./factories/onDemandTls.ts";
 import { pronounsAcceptable, PRONOUNS_EN } from "./middleware/pronounsAcceptable.ts";
 import { securityHeaders } from "./middleware/securityHeaders.ts";
+import { serveStatic } from "hono/deno";
+import { trimTrailingSlash } from "hono/trailing-slash";
 
 // All requests to the average.name domain route here first.
 // The last handler falls back to serving the contents of /dist.

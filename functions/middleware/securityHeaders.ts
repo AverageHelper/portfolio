@@ -1,7 +1,7 @@
 import { config } from "../config.ts";
 import { factory } from "../factories/factory.ts";
 import { permissionsPolicy } from "./permissionsPolicy.ts";
-import { secureHeaders } from "hono/middleware.ts";
+import { secureHeaders } from "hono/secure-headers";
 
 /**
  * Sets security-related response headers.

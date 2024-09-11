@@ -1,6 +1,6 @@
 {
 	"imports": {
-		"hono/": "https://deno.land/x/hono@v4.3.2/",
+		"hono": "jsr:@hono/hono@4.6.1",
 		"std/": "https://deno.land/std@0.221.0/"
 	},
 	"lock": "deno.lock",

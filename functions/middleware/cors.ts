@@ -1,5 +1,5 @@
-import type { MiddlewareHandler } from "hono/mod.ts";
-import { cors as _cors } from "hono/middleware.ts";
+import type { MiddlewareHandler } from "hono";
+import { cors as _cors } from "hono/cors";
 
 export function cors(originOverride?: string): MiddlewareHandler {
 	return _cors({
