@@ -38,9 +38,11 @@ interface Props {
 	imageAlt?: string | null;
 }
 
+const defaultTitle = "An Average Developer";
+
 const {
 	contentClass = "content",
-	title = "An Average Developer",
+	title = defaultTitle,
 	description = "Helpful open-source software.",
 	image,
 	imageAlt,
@@ -72,7 +74,7 @@ const {
 		<meta property="og:locale" content="en" />
 		<meta property="og:url" content={Astro.url.href} />
 		<meta property="og:title" content={title} />
-		<meta property="og:site_name" content={title} />
+		<meta property="og:site_name" content={defaultTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="description" content={description} />
 		{
