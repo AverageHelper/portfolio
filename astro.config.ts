@@ -36,6 +36,7 @@ export default defineConfig({
 			// Emulate GitHub's fancy Blockquote Alerts
 			rehypeGithubAlerts,
 		],
+		// FIXME: Prism is unmaintained. Use Shiki instead
 		syntaxHighlight: "prism", // Use Prism instead of Shiki to render code blocks
 	},
 	integrations: [
