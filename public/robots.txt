@@ -13,8 +13,7 @@ Disallow: /
 Allow: /ads.txt
 Allow: /app-ads.txt
 
-# > Enabling our crawler to access your site offers several significant benefits
-# to you as a publisher. By allowing us access, you enable the maximum number
+# By allowing us access, you enable the maximum number
 # of advertisers to confidently purchase advertising space on your pages. Our
 # comprehensive data insights help advertisers understand the suitability and
 # context of your content, ensuring that their ads align with your audience's
@@ -102,21 +101,28 @@ Disallow: /
 User-agent: Google-Extended
 Disallow: /
 
-# There isn't any public documentation for this AFAICT.
-# Reuters thinks this works so I might as well give it a shot.
+# Official way to opt-out of LLM training by Apple
+# <https://support.apple.com/en-us/119829#datausage>
+User-agent: Applebot-Extended
+Disallow: /
+
+# Anthropic-AI crawler posted guidance after a long period of crawling without opt-out documentation: <https://support.anthropic.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler>
 User-agent: anthropic-ai
 User-agent: Claude-Web
-Disallow: /
-# Extremely aggressive crawling with no documentation. people had to email the
-# company about this for robots.txt guidance.
 User-agent: ClaudeBot
 Disallow: /
 
 # FacebookBot crawls public web pages to improve language models for our speech
 # recognition technology.
 # <https://developers.facebook.com/docs/sharing/bot/?_fb_noscript=1>
+# UPDATE: The Meta-ExternalAgent crawler crawls the web for use cases such as training AI models or improving products by indexing content directly.
+# <https://developers.facebook.com/docs/sharing/webmasters/web-crawlers>
 User-Agent: FacebookBot
+User-Agent: meta-externalagent
 Disallow: /
+
+# This one doesn't support robots.txt: https://www.allenai.org/crawler
+# block it with your reverse-proxy or WAF or something.
 
 # I'm not blocking CCBot for now. It publishes a free index for anyone to use.
 # Googe used this to train the initial version of Bard (now called Gemini).
@@ -133,5 +139,61 @@ Disallow: /
 # scrape data for LLM training purposes. The crawling powers search engines
 # with integrated pre-trained LLMs.
 # TODO: investigate whether YouBot scrapes to train its own in-house LLM.
+
+# AverageHelper: Some more from Codeberg's robots.txt:
+
+User-Agent: Amazonbot
+Disallow: /
+
+User-Agent: Bytespider
+Disallow: /
+
+User-Agent: cohere-ai
+Disallow: /
+
+User-Agent: Diffbot
+Disallow: /
+
+User-Agent: facebookexternalhit
+Disallow: /
+
+User-Agent: FriendlyCrawler
+Disallow: /
+
+User-Agent: ICC-Crawler
+Disallow: /
+
+User-Agent: ImagesiftBot
+Disallow: /
+
+User-Agent: img2dataset
+Disallow: /
+
+User-Agent: OAI-SearchBot
+Disallow: /
+
+User-Agent: Omgili
+Disallow: /
+
+User-Agent: Omgilibot
+Disallow: /
+
+User-Agent: PerplexityBot
+Disallow: /
+
+User-Agent: PetalBot
+Disallow: /
+
+User-Agent: Scrapy
+Disallow: /
+
+User-Agent: Timpibot
+Disallow: /
+
+User-Agent: VelenPublicWebCrawler
+Disallow: /
+
+User-Agent: YouBot
+Disallow: /
 
 Sitemap: https://average.name/sitemap-index.xml
