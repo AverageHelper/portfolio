@@ -4,13 +4,10 @@ import { getCollection } from "astro:content";
 import { Temporal } from "temporal-polyfill";
 import ExternalLink from "@/components/ExternalLink.astro";
 import LocalLink from "@/components/LocalLink.astro";
+import PlainDate from "@/components/PlainDate.astro";
 import WaysLayout from "@/layouts/WaysLayout.astro";
 
 type AnyEntryMap = CollectionEntry<CollectionKey>;
-
-function toDate(str: string): Temporal.PlainDate {
-	return Temporal.PlainDate.from(str);
-}
 
 // Generate a new path for every collection entry
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -28,16 +25,14 @@ interface Props {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const date = Temporal.PlainDate.from(entry.data.date);
 ---
 
 <WaysLayout title={entry.data.title} description={entry.data.description}>
 	<header class="ways" slot="header">
 		<h1>{entry.data.title}</h1>
-		<h2
-			><time datetime={entry.data.date}
-				>{toDate(entry.data.date).toLocaleString("en-US", { dateStyle: "full" })}</time
-			></h2
-		>
+		<h2><PlainDate date={date} locale="en-US" dateStyle="full" /></h2>
 	</header>
 
 	<Content />

@@ -3,12 +3,14 @@ import type { Temporal } from "temporal-polyfill";
 
 interface Props {
 	date: Temporal.PlainDate;
+	locale?: "en-US" | undefined;
+	dateStyle?: "long" | "full";
 }
 
-const { date } = Astro.props;
+const { date, locale, dateStyle = "long" } = Astro.props;
 
 // Human-readable
-const formattedDate = date?.toLocaleString(undefined, { dateStyle: "long" }) ?? null;
+const formattedDate = date?.toLocaleString(locale, { dateStyle }) ?? null;
 
 // YYYY-MM-DD for use with <time>
 const datetime = date?.toString() ?? null;
