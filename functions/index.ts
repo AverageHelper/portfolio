@@ -73,6 +73,10 @@ export const app = factory
 	)
 
 	.notFound(async c => {
+		if (c.req.path.endsWith("favicon.ico")) {
+			return c.text("Not found", 404);
+		}
+
 		// TODO: Use import.meta.dirname to resolve dist/
 		const file = await Deno.readTextFile("./dist/404.html"); // relative to working directory, I think
 		return c.html(file, 404);
