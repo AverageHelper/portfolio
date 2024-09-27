@@ -212,12 +212,21 @@ blockquote {
 	margin-right: 8px;
 }
 
+/* Inline <code> */
 code:not([class*="language-"]) {
 	padding: 2px 4px;
 	border-radius: 4px;
 	font-family: var(--code-font-family);
 	background-color: var(--background-code);
 	color: var(--label-code);
+}
+
+a:has(code:not([class*="language-"])) {
+	text-decoration: none;
+}
+
+a:has(code:not([class*="language-"])):hover {
+	text-decoration: underline;
 }
 
 p code:not([class*="language-"]) {
