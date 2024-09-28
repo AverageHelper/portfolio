@@ -1,4 +1,5 @@
 ---
+import ExternalLink from "@/components/ExternalLink.astro";
 import Layout from "./Layout.astro";
 import LocalLink from "@/components/LocalLink.astro";
 
@@ -27,6 +28,10 @@ const { title = "Average Ways Folder", description = "Helpful information on how
 		<footer>
 			<ul class="links">
 				<li><LocalLink>Home</LocalLink></li>
+				<li>
+					<!-- prettier-ignore -->
+					<ExternalLink href="https://git.average.name/AverageHelper/portfolio">Source</ExternalLink>
+				</li>
 				<li><LocalLink fileName="ways/feed.xml">RSS</LocalLink></li>
 			</ul>
 		</footer>
