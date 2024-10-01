@@ -4,10 +4,12 @@ import { factory } from "./factory.ts";
 const SUBDOMAINS = [
 	// Subdomains that I want to give a *.avg.name alias:
 	"blog",
+	"dotfiles",
 	"flashcards",
 	"git",
 	"ip",
 	"ipv4",
+	"jsonresume",
 	"status",
 	"www",
 ] as const;
