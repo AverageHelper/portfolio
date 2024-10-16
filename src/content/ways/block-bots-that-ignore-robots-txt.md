@@ -8,6 +8,10 @@ The [robots.txt](https://www.robotstxt.org/robotstxt.html) file is a standard wa
 
 In order to avoid being scraped, smaller webservers may wish to resort to more creative measures.
 
+## Updates to this document
+
+_Update 16 October 2024:_ Added double quotes around `header_regexp` matcher arguments for clarity and compatibility with complex user-agent strings.
+
 ## Assumptions
 
 This document assumes you're serving your site using [Caddy 2.x](https://caddyserver.com/), and configuring Caddy using a [Caddyfile](https://caddyserver.com/docs/caddyfile). For example, my Caddyfile looks something like this:
@@ -46,7 +50,7 @@ In your Caddyfile, inside your site block, construct a [named matcher](https://c
 average.name {
 	@badrobots {
 		# Bots that self-report with one of these User-Agent strings are matched:
-		header_regexp User-Agent Adsbot|peer39_crawler|TurnitinBot|NPBot|SlySearch|BLEXBot|CheckMarkNetwork|BrandVerity|PiplBot|MJ12bot|ChatGPT-User|GPTBot|Google-Extended|Applebot-Extended|Claude-Web|anthropic-ai|ClaudeBot|FacebookBot|meta-externalagent|AI2Bot|Amazonbot|Bytespider|cohere-ai|Diffbot|facebookexternalhit|FriendlyCrawler|ICC-Crawler|ImagesiftBot|img2dataset|OAI-SearchBot|Omgili|Omgilibot|PerplexityBot|PetalBot|Scrapy|Timpibot|VelenPublicWebCrawler|YouBot
+		header_regexp User-Agent "Adsbot|peer39_crawler|TurnitinBot|NPBot|SlySearch|BLEXBot|CheckMarkNetwork|BrandVerity|PiplBot|MJ12bot|ChatGPT-User|GPTBot|Google-Extended|Applebot-Extended|Claude-Web|anthropic-ai|ClaudeBot|FacebookBot|meta-externalagent|AI2Bot|Amazonbot|Bytespider|cohere-ai|Diffbot|facebookexternalhit|FriendlyCrawler|ICC-Crawler|ImagesiftBot|img2dataset|OAI-SearchBot|Omgili|Omgilibot|PerplexityBot|PetalBot|Scrapy|Timpibot|VelenPublicWebCrawler|YouBot"
 
 		# The matcher does not catch if the request is for robots.txt:
 		not path /robots.txt
@@ -112,7 +116,7 @@ If your Caddyfile defines multiple websites, you might consider wrapping your bo
 (block_bad_bots) {
 	@badrobots {
 		# We ask these bots in robots.txt not to proceed
-		header_regexp User-Agent Adsbot|peer39_crawler|TurnitinBot|NPBot|SlySearch|BLEXBot|CheckMarkNetwork|BrandVerity|PiplBot|MJ12bot|ChatGPT-User|GPTBot|Google-Extended|Applebot-Extended|Claude-Web|anthropic-ai|ClaudeBot|FacebookBot|meta-externalagent|AI2Bot|Amazonbot|Bytespider|cohere-ai|Diffbot|facebookexternalhit|FriendlyCrawler|ICC-Crawler|ImagesiftBot|img2dataset|OAI-SearchBot|Omgili|Omgilibot|PerplexityBot|PetalBot|Scrapy|Timpibot|VelenPublicWebCrawler|YouBot
+		header_regexp User-Agent "Adsbot|peer39_crawler|TurnitinBot|NPBot|SlySearch|BLEXBot|CheckMarkNetwork|BrandVerity|PiplBot|MJ12bot|ChatGPT-User|GPTBot|Google-Extended|Applebot-Extended|Claude-Web|anthropic-ai|ClaudeBot|FacebookBot|meta-externalagent|AI2Bot|Amazonbot|Bytespider|cohere-ai|Diffbot|facebookexternalhit|FriendlyCrawler|ICC-Crawler|ImagesiftBot|img2dataset|OAI-SearchBot|Omgili|Omgilibot|PerplexityBot|PetalBot|Scrapy|Timpibot|VelenPublicWebCrawler|YouBot"
 
 		# Always send robots.txt, even to bad bots
 		not path /robots.txt
