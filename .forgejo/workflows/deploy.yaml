@@ -52,6 +52,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      # TODO: Dockerize instead. (`git pull` then `docker compose up -d --rebuild`(?), instead of doing rsync)
       - name: Publish to host
         shell: bash
         run: |
