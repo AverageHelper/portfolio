@@ -34,7 +34,7 @@
     "npm:eslint@8.57.1": "8.57.1",
     "npm:markdown-it-link-attributes@4.0.1": "4.0.1",
     "npm:markdown-it@14.0.0": "14.0.0",
-    "npm:nodemon@3.1.0": "3.1.0",
+    "npm:nodemon@3.1.7": "3.1.7",
     "npm:prettier-plugin-astro@0.12.3": "0.12.3",
     "npm:prettier@3.1.0": "3.1.0",
     "npm:rehype-external-links@3.0.0": "3.0.0",
@@ -3415,8 +3415,8 @@
     "node-releases@2.0.18": {
       "integrity": "sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g=="
     },
-    "nodemon@3.1.0": {
-      "integrity": "sha512-xqlktYlDMCepBJd43ZQhjWwMw2obW/JRvkrLxq5RCNcuDDX1DbcPT+qT1IlIIdf+DhnWs90JpTMe+Y5KxOchvA==",
+    "nodemon@3.1.7": {
+      "integrity": "sha512-hLj7fuMow6f0lbB0cD14Lz2xNjwsyruH251Pk4t/yIitCFJbmY1myuLlHm/q06aST4jg6EgAh74PIBBrRqpVAQ==",
       "dependencies": [
         "chokidar@3.6.0",
         "debug@4.3.7",
@@ -4992,7 +4992,7 @@
         "npm:eslint@8.57.1",
         "npm:markdown-it-link-attributes@4.0.1",
         "npm:markdown-it@14.0.0",
-        "npm:nodemon@3.1.0",
+        "npm:nodemon@3.1.7",
         "npm:prettier-plugin-astro@0.12.3",
         "npm:prettier@3.1.0",
         "npm:rehype-external-links@3.0.0",
