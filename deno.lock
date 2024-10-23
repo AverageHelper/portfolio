@@ -1,13 +1,11 @@
 {
-  "version": "3",
-  "packages": {
-    "specifiers": {
-      "jsr:@hono/hono@4.6.3": "jsr:@hono/hono@4.6.3"
-    },
-    "jsr": {
-      "@hono/hono@4.6.3": {
-        "integrity": "a1f5a18cd12a0db54755b0461dd5a4e2d93a6f85403073eb710103eacc42daf3"
-      }
+  "version": "4",
+  "specifiers": {
+    "jsr:@hono/hono@4.6.3": "4.6.3"
+  },
+  "jsr": {
+    "@hono/hono@4.6.3": {
+      "integrity": "a1f5a18cd12a0db54755b0461dd5a4e2d93a6f85403073eb710103eacc42daf3"
     }
   },
   "remote": {
@@ -53,10 +51,10 @@
     ],
     "packageJson": {
       "dependencies": [
-        "npm:@astrojs/check@0.4.1",
-        "npm:@astrojs/rss@4.0.5",
-        "npm:@astrojs/sitemap@3.1.0",
-        "npm:@astrojs/ts-plugin@1.4.0",
+        "npm:@astrojs/check@0.9.4",
+        "npm:@astrojs/rss@4.0.9",
+        "npm:@astrojs/sitemap@3.2.1",
+        "npm:@astrojs/ts-plugin@1.10.3",
         "npm:@fec/remark-a11y-emoji@4.0.2",
         "npm:@kindspells/astro-shield@1.3.4",
         "npm:@types/markdown-it-link-attributes@3.0.4",
@@ -64,10 +62,10 @@
         "npm:@types/sanitize-html@2.11.0",
         "npm:@typescript-eslint/eslint-plugin@6.11.0",
         "npm:@typescript-eslint/parser@6.11.0",
-        "npm:astro@4.8.4",
+        "npm:astro@4.16.7",
         "npm:eslint-config-prettier@9.0.0",
         "npm:eslint-config-strictest@0.8.1",
-        "npm:eslint-plugin-astro@0.31.0",
+        "npm:eslint-plugin-astro@1.3.0",
         "npm:eslint-plugin-deprecation@2.0.0",
         "npm:eslint-plugin-file-progress@1.3.0",
         "npm:eslint-plugin-import@2.29.0",
@@ -75,7 +73,7 @@
         "npm:eslint-plugin-prettier@5.0.1",
         "npm:eslint-plugin-promise@6.1.1",
         "npm:eslint-plugin-unicorn@49.0.0",
-        "npm:eslint@8.54.0",
+        "npm:eslint@8.57.1",
         "npm:markdown-it-link-attributes@4.0.1",
         "npm:markdown-it@14.0.0",
         "npm:nodemon@3.1.0",
