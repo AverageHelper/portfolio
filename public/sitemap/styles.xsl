@@ -10,7 +10,9 @@
 
 
 <!-- get the hostname from the first url/loc -->
-<xsl:variable name="hostname" select="substring-before(substring-after(/sitemap:urlset/sitemap:url[1]/sitemap:loc, '://'), '/')" />
+<!-- <xsl:variable name="hostname" select="substring-before(substring-after(/sitemap:urlset/sitemap:url[1]/sitemap:loc, '://'), '/')" /> -->
+<!-- Modified because our URL doesn't end in slash usually: -->
+<xsl:variable name="hostname" select="substring-after(/sitemap:urlset/sitemap:url[1]/sitemap:loc, '://')" />
 
         <html>
             <head>
