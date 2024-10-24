@@ -6,7 +6,7 @@ import sanitizeHtml from "sanitize-html";
 
 const parser = new MarkdownIt();
 
-// Astro looks for this function to generate the feed:
+// Astro looks for this function to generate the feed at build time:
 export async function GET(context: { site: URL }): Promise<Response> {
 	const ways = await getCollection("ways");
 

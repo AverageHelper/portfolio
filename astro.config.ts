@@ -43,6 +43,7 @@ export default defineConfig({
 		sitemap({
 			changefreq: "weekly",
 			lastmod: new Date(), // Last modified on [today]
+			xslURL: "/sitemap/styles.xsl",
 		}),
 		// shield({}), // FIXME: This breaks in production but not testing. Why?
 	],

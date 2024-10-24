@@ -13,13 +13,12 @@ export function securityHeaders(): MiddlewareHandler {
 		await next();
 
 		// We need to set script-src-elem dynamically, because
-		// (1) rss/styles.xsl somehow reads as a script,
-		// (2) we don't know which origin the request comes from until here, and
+		// (1) XML styles somehow read as a script,
+		// (2) we don't know which origin the request comes from until this spot, and
 		// (3) I don't want to permit localhost resources in production.
 		const url = new URL(c.req.url);
-		const rssStylesSrc = isLocalhost(url)
-			? `${url.origin}/rss/styles.xsl` // dev
-			: "https://average.name/rss/styles.xsl"; // prod
+		const rssStylesSrc = `${resourceOrigin(url)}/rss/styles.xsl`;
+		const sitemapStylesSrc = `${resourceOrigin(url)}/sitemap/styles.xsl`;
 
 		secureHeaders({
 			// Hono follows https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md
@@ -93,7 +92,7 @@ export function securityHeaders(): MiddlewareHandler {
 				styleSrc: ["'self'", "'unsafe-inline'"],
 				mediaSrc: ["'none'"],
 				// mediaSrc: ["data:"], // Firefox wants this for some reason, but the error FF throws is benign, so leaving it for now.
-				scriptSrcElem: [rssStylesSrc], // Specifically enable XML stylesheet
+				scriptSrcElem: [rssStylesSrc, sitemapStylesSrc], // Specifically enable XML stylesheets
 				upgradeInsecureRequests: [],
 			},
 			crossOriginEmbedderPolicy: "require-corp",
@@ -120,4 +119,10 @@ function isLocalhost(url: URL): boolean {
 		`http://127.0.0.1:${config.port}`,
 		`http://[::1]:${config.port}`,
 	].includes(url.origin);
+}
+
+function resourceOrigin(url: URL): string {
+	return isLocalhost(url)
+		? url.origin // dev
+		: "https://average.name"; // prod
 }
