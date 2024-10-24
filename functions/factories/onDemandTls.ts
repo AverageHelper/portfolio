@@ -18,7 +18,7 @@ const aliasDomains: ReadonlySet<string> = new Set(SUBDOMAINS.map(s => `${s}.avg.
 
 const AT_PROTO = [
 	// Subdomains that I want to give an AT Protocol handle, i.e. @test.average.name
-	"test",
+	"avgtest",
 ];
 
 const atProtoDomains: ReadonlySet<string> = new Set(AT_PROTO.map(s => `${s}.average.name`));
