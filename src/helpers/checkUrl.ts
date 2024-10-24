@@ -5,6 +5,7 @@ import { FgBlue, FgCyan, FgGreen, FgRed, Reset } from "./consoleColors.js";
 const alreadyOk = new Set<string>([
 	"https://ko-fi.com/avghelper", // answers 403 to the CI, so check this manually
 	"https://ko-fi.com/decemberbreezee", // answers 403 to the CI
+	"https://bsky.app/profile/avg.average.name", // answers 404 to the CI
 ]);
 
 /**
