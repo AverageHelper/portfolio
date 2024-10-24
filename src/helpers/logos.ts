@@ -2,6 +2,10 @@
  * The list of supported logo platforms and their logos.
  */
 export const logos = {
+	bsky: {
+		name: "Bluesky",
+		path: "/images/logo-bsky.svg",
+	},
 	codeberg: {
 		name: "Codeberg",
 		path: "/images/logo-codeberg.svg",
