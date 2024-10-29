@@ -12,7 +12,6 @@
 	],
 	"type": "module",
 	"author": "Average Helper <https://git.average.name/AverageHelper>",
-	"license": "ISC",
 	"devDependencies": {
 		"@astrojs/check": "0.9.4",
 		"@astrojs/rss": "4.0.9",
