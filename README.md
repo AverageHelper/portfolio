@@ -13,7 +13,7 @@ We use [Astro](https://astro.build) to generate static HTML from templates. Astr
 We'll need these for our build tools.
 
 ```sh
-deno install
+deno install --frozen
 npm ci
 ```
 
