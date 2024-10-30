@@ -82,10 +82,9 @@ export const app = factory
 		return c.html(file, 404);
 	});
 
-const hostname = config.hostname;
 const port = config.port;
 try {
-	Deno.serve({ hostname, port }, app.fetch);
+	Deno.serve({ port }, app.fetch);
 } catch (error) {
 	if (!(error instanceof Deno.errors.AddrInUse)) {
 		// Unknown error
