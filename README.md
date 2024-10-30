@@ -74,7 +74,7 @@ The app will run on port `8787`.
 This part is mainly for my own notes. Go run your own website! lol
 
 ```sh
-docker compose up -d
+docker compose up -d --no-deps --build
 ```
 
 The app will run on port `8787`. You can modify that in [`compose.yaml`](compose.yaml) or use a `docker run` command instead.
