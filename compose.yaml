@@ -1,0 +1,9 @@
+services:
+  avg-portfolio:
+    build:
+      context: .
+      target: final
+    container_name: avg-portfolio
+    restart: unless-stopped
+    ports:
+      - 8787:8787

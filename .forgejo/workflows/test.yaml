@@ -1,6 +1,16 @@
 on:
-  pull_request:
+  push:
     branches: [main]
+    paths:
+      - .forgejo/workflows/**
+      - functions/**
+      - public/**
+      - src/**
+      - astro.config.ts
+      - deno.jsonc
+      - deno.lock
+      - package-lock.json
+      - package.json
   workflow_dispatch:
 
 jobs:
@@ -18,7 +28,7 @@ jobs:
       - name: Setup deno
         uses: https://github.com/denoland/setup-deno@v1
         with:
-          deno-version: v2.0.1
+          deno-version: v2.0.3
 
       - name: Install Dependencies
         run: |

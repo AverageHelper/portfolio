@@ -51,9 +51,9 @@ To run unit tests and make sure everything is working as expected:
 deno task test
 ```
 
-## Run the site
+## Run the site with Deno
 
-This part is mainly for my own notes. Run your own website, lol!
+This part is mainly for my own notes. Go run your own website! lol
 
 After the site is built, this command will run a production-ready webserver:
 
@@ -68,6 +68,16 @@ pm2 start ./app.sh --name portfolio
 ```
 
 The app will run on port `8787`.
+
+## Run the site with Docker Compose
+
+This part is mainly for my own notes. Go run your own website! lol
+
+```sh
+docker compose up -d
+```
+
+The app will run on port `8787`. You can modify that in [`compose.yaml`](compose.yaml) or use a `docker run` command instead.
 
 ## Contributing
 
