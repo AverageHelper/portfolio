@@ -7,6 +7,7 @@ const alreadyOk = new Set<string>([
 	"https://ko-fi.com/decemberbreezee", // answers 403 to the CI
 	"https://bsky.app/profile/did:plc:zxthjxcmxpjl372uwgrm6dxi", // answers 404 to the CI
 ]);
+const ownDomain = "https://average.name";
 
 /**
  * Resolves if the given URL is accessible. Throws a {@link TypeError} otherwise.
@@ -22,8 +23,8 @@ export async function checkUrl(src: URL): Promise<void> {
 	}
 
 	// Check cache, make sure we haven't already checked this URL
-	if (alreadyOk.has(src.href)) {
-		console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(skipped)${Reset}`);
+	if (alreadyOk.has(src.href) || src.href.startsWith(ownDomain)) {
+		console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(skipped)${Reset}`);
 		return;
 	}
 
@@ -43,23 +44,23 @@ export async function checkUrl(src: URL): Promise<void> {
 		// Success! Remember this URL for later
 		alreadyOk.add(src.href);
 		if (didRedirect) {
-			console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(redirected)${Reset}`);
+			console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(redirected)${Reset}`);
 		} else {
-			console.info(`href ${FgBlue}'${src.href}'${FgGreen} OK${Reset}`);
+			console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK${Reset}`);
 		}
 	} catch (error) {
 		if (typeof error === "number") {
 			// Got non-OK HTTP response
-			console.info(`href ${FgBlue}'${src.href}'${FgRed} HTTP ${error}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} HTTP ${error}${Reset}`);
 			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${error}${Reset}`);
 		} else if (error instanceof Error) {
 			// Got network error
-			console.info(`href ${FgBlue}'${src.href}'${FgRed} Network Error: ${error.message}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} Network Error: ${error.message}${Reset}`);
 			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${error.message}${Reset}`);
 		} else {
 			// Got unknown error
 			const message = JSON.stringify(error);
-			console.info(`href ${FgBlue}'${src.href}'${FgRed} Unknown Error: ${message}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} Unknown Error: ${message}${Reset}`);
 			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${message}${Reset}`);
 		}
 	}
