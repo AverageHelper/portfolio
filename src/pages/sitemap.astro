@@ -20,7 +20,10 @@ function isDefined<T>(tbd: T | undefined): tbd is T {
 	return tbd !== undefined;
 }
 
-const waysEntries = await getCollection("ways");
+const waysEntries = (await getCollection("ways")).sort((a, b) => {
+	// Chronologically
+	return Temporal.PlainDate.compare(a.data.date, b.data.date);
+});
 
 const markdownEntries = await Astro.glob("/src/pages/*.md");
 

@@ -8,7 +8,10 @@ const parser = new MarkdownIt();
 
 // Astro looks for this function to generate the feed at build time:
 export async function GET(context: { site: URL }): Promise<Response> {
-	const ways = await getCollection("ways");
+	const ways = (await getCollection("ways")).sort((a, b) => {
+		// Reverse-chronologically
+		return Temporal.PlainDate.compare(b.data.date, a.data.date);
+	});
 
 	return rss({
 		stylesheet: "/rss/styles.xsl", // From "public/rss/styles.xsl"
