@@ -29,7 +29,7 @@ curl -fsSL https://deno.land/install.sh | sh
 export PATH=$PATH:/root/.deno/bin
 
 # Build the application.
-deno install --frozen --allow-scripts
+deno install --frozen
 npm ci
 ./node_modules/.bin/astro telemetry disable
 deno task build
