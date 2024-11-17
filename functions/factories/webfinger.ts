@@ -65,7 +65,7 @@ export const webfinger = factory.createHandlers(cors(), c => {
 		200,
 
 		// "The media type used for the JSON Resource Descriptor (JRD) is `application/jrd+json`"
-		{ "Content-Type": "application/jrd+json; charset=UTF=8" },
+		{ "Content-Type": "application/jrd+json; charset=UTF-8" },
 	);
 });
 
