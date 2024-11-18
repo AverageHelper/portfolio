@@ -1,0 +1,3 @@
+# Because rust-analyzer doesn't yet read .editorconfig by default
+edition = "2021"
+hard_tabs = true
