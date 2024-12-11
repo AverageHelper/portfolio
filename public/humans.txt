@@ -1,15 +1,23 @@
 /* humans.txt file -- please visit https://humanstxt.org/ for details */
 
 /* TEAM */
+	Operator:   AverageHelper
+	Pronouns:   she/her
+	Site:       https://average.name
+	Matrix:     @average:average.name
+	Fedi:       https://average.name/@average
+	AT Proto:   @average.name
+	Location:   USA
 
-operator:   AverageHelper
-pronouns:   she/her
-site:       https://average.name
-fediverse:  https://average.name/@average
-matrix:     @average:average.name
-location:   USA
+/* THANKS */
+	"Created by a human" badge: Cadence
+	Via: https://cadence.moe/blog/2024-10-05-created-by-a-human-badges
+	Site: https://cadence.moe
 
 /* SITE */
-
-standards:  HTML5, CSS3
-software:   Caddy, Node, Deno, NPM, ESLint, Prettier, TypeScript, Astro, Linode
+	Language:   English
+	Standards:  HTML5, CSS3
+	IDE:        VSCodium
+	Webserver:  Caddy, Deno
+	Builder:    TypeScript, Deno, NPM, Astro, ESLint, Prettier
+	Server:     Linode
