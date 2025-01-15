@@ -1,12 +1,12 @@
 use actix_files::NamedFile;
 use actix_http::{
-	header::{self, HeaderValue},
+	// header::{self, HeaderValue},
 	uri::PathAndQuery,
 	Uri,
 };
 use actix_service::{fn_service, Service, ServiceFactory};
 use actix_web::{
-	body::MessageBody,
+	// body::MessageBody,
 	dev::{self, HttpServiceFactory, ResourceDef, ServiceRequest, ServiceResponse},
 	http::StatusCode,
 };
@@ -87,7 +87,7 @@ impl Service<ServiceRequest> for ServeFiles {
 		let service = self.service.clone();
 		Box::pin(async move {
 			let rewritten_req = rewrite_request_path(req);
-			let mut res = service
+			let res = service
 				.new_service(())
 				.await
 				.unwrap() // TODO

@@ -350,7 +350,7 @@ mod tests {
 			assert!(content_length > 0); // at least 1 byte
 
 			if let BodySize::Sized(size) = res.into_body().size() {
-				assert_eq!(size, 0)
+				assert_eq!(size, content_length)
 			} else {
 				assert!(false, "Body should be sized")
 			}
