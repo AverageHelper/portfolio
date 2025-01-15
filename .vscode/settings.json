@@ -28,5 +28,6 @@
 	],
 	"yaml.schemas": {
 		"https://json.schemastore.org/github-workflow.json": "**/workflows/*.yml"
-	}
+	},
+	"deno.enable": true
 }
