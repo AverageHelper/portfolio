@@ -41,4 +41,4 @@ jobs:
       - name: Test
         run: |
           . "$HOME/.cargo/env"
-          cargo test --verbose --locked --release
+          cargo test --verbose --locked
