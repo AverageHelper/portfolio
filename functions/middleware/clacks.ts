@@ -1,7 +1,6 @@
 import type { MiddlewareHandler } from "hono";
 import { factory } from "../factories/factory.ts";
-
-const NAMES = ["Terry Pratchett", "Nex Benedict"] as const;
+import { randomName } from "../utils/memorials.ts";
 
 /**
  * Sets the `X-Clacks-Overhead` response header.
@@ -11,19 +10,10 @@ export function clacks(): MiddlewareHandler {
 		await next();
 		const res = new Response(c.res.body, c.res);
 
-		res.headers.set("X-Clacks-Overhead", randomClacks());
+		const name = randomName();
+		res.headers.set("X-Clacks-Overhead", `GNU ${name}`);
 
 		c.res = undefined;
 		c.res = res;
 	});
-}
-
-function randomElementOfArray<T>(array: readonly [T, ...ReadonlyArray<T>]): T {
-	const index = Math.floor(Math.random() * array.length);
-	return array[index] ?? array[0];
-}
-
-function randomClacks(): `GNU ${string}` {
-	const name = randomElementOfArray(NAMES);
-	return `GNU ${name}`;
 }

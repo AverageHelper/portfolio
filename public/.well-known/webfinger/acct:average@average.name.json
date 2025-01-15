@@ -1,0 +1,26 @@
+{
+	"subject": "acct:avghelper@fosstodon.org",
+	"aliases": [
+		"https://average.name/@average",
+		"https://average.name/@avg",
+		"https://average.name/@avghelper",
+		"https://fosstodon.org/@avghelper",
+		"https://fosstodon.org/users/avghelper"
+	],
+	"links": [
+		{
+			"rel": "http://webfinger.net/rel/profile-page",
+			"type": "text/html",
+			"href": "https://fosstodon.org/@avghelper"
+		},
+		{
+			"rel": "self",
+			"type": "application/activity+json",
+			"href": "https://fosstodon.org/users/avghelper"
+		},
+		{
+			"rel": "http://ostatus.org/schema/1.0/subscribe",
+			"template": "https://fosstodon.org/authorize_interaction?uri={uri}"
+		}
+	]
+}

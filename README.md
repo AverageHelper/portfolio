@@ -4,9 +4,9 @@ A basic web site to plug my projects and things, accessible at https://average.n
 
 Feel free to poke around, I guess.
 
-# Usage
+# Contributing
 
-We use [Astro](https://astro.build) to generate static HTML from templates. Astro runs on Node, and our webserver uses Deno. Make sure both of these are installed on your system.
+We use [Astro](https://astro.build) to generate static HTML from templates, which we serve statically using [Actix Web](https://actix.rs/). Astro runs on Node, and our webserver uses Rust. Make sure both of these are installed on your system.
 
 ## Install Dependencies
 
@@ -41,15 +41,14 @@ This command will build static site assets to `/dist` and download runtime depen
 
 ```sh
 deno task build
+cargo build
 ```
 
 ## Run unit tests
 
-To run unit tests and make sure everything is working as expected:
+To run unit tests with code coverage, use the `test.sh` script at the directory root. This will prompt you to install the necessary components.
 
-```sh
-deno task test
-```
+To run unit tests without code coverage, run `cargo test`.
 
 ## Run the site with Deno
 
@@ -66,6 +65,8 @@ To run in the background as a daemon, use [`pm2`](https://pm2.keymetrics.io/docs
 ```sh
 pm2 start ./app.sh --name portfolio
 ```
+
+<!-- TODO: How do this with Rust? -->
 
 The app will run on port `8787`.
 

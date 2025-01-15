@@ -39,4 +39,6 @@ jobs:
         run: deno task build
 
       - name: Test
-        run: deno task test
+        run: |
+          . "$HOME/.cargo/env"
+          cargo test --verbose --locked --release
