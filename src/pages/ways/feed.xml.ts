@@ -22,7 +22,7 @@ export async function GET(context: { site: URL }): Promise<Response> {
 		customData: "<language>en-us</language>",
 		site: new URL("ways", context.site), // origin+"/ways/"
 		items: ways.map(way => ({
-			link: `/ways/${way.slug}/`,
+			link: `/ways/${way.id}/`,
 			title: way.data.title,
 			pubDate: new Date(
 				// TODO: Fork or PR @astrojs/rss to take a ZonedDateTime, to be more specific in the XML
@@ -31,7 +31,7 @@ export async function GET(context: { site: URL }): Promise<Response> {
 					.toString({ timeZoneName: "never" }),
 			),
 			description: way.data.description,
-			content: sanitizeHtml(parser.render(way.body)),
+			content: sanitizeHtml(parser.render(way.body ?? "")),
 		})),
 	});
 }

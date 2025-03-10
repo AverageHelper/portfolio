@@ -161,7 +161,7 @@ export default [
 
 			parserOptions: {
 				parser: typescriptEslint.parser,
-				projectService: true, // FIXME: Astro's parser doesn't know how to handle this, so we miss some lints
+				projectService: true, // FIXME: Astro's parser doesn't know how to handle this, so we miss some lints; see https://github.com/ota-meshi/astro-eslint-parser/issues/331
 				tsconfigRootDir: import.meta.dirname,
 				extraFileExtensions: [".astro"],
 			},

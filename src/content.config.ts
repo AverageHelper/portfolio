@@ -1,11 +1,12 @@
-import { z, defineCollection } from "astro:content";
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 /** Mathes `YYYY-MM-DD` strings. */
 const dateString = /(\d{4})-(\d{2})-(\d{2})/gu;
 
 // Define collection schemas here:
 const ways = defineCollection({
-	type: "content",
+	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/ways" }),
 	schema: z.object({
 		/** A descriptive title of the document's content. */
 		title: z.string(),

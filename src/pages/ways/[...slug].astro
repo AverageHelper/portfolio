@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry, CollectionKey } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Temporal } from "temporal-polyfill";
 import ExternalLink from "@/components/ExternalLink.astro";
 import LocalLink from "@/components/LocalLink.astro";
@@ -14,7 +14,7 @@ type AnyEntryMap = CollectionEntry<CollectionKey>;
 export async function getStaticPaths() {
 	const waysEntries = await getCollection("ways");
 	return waysEntries.map(entry => ({
-		params: { slug: entry.slug },
+		params: { slug: entry.id },
 		props: { entry },
 	}));
 }
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 const date = Temporal.PlainDate.from(entry.data.date);
 ---

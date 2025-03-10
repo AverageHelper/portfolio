@@ -1,4 +1,5 @@
 ---
+import type { AstroInstance } from "astro";
 import { getCollection } from "astro:content";
 import { Temporal } from "temporal-polyfill";
 import Layout from "@/layouts/Layout.astro";
@@ -26,11 +27,13 @@ const waysEntries = waysCollection.sort((a, b) => {
 	return Temporal.PlainDate.compare(a.data.date, b.data.date);
 });
 
-const markdownEntries = await Astro.glob("/src/pages/*.md");
+const markdownPages = import.meta.glob<AstroInstance>("/src/pages/*.md", { eager: true });
+const markdownEntries = Object.values(markdownPages);
 
 const txtEntries = ["humans.txt"];
 
-const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
+const astroPages = import.meta.glob<AstroInstance>("/src/pages/**/*.astro", { eager: true });
+const pages = Object.values(astroPages)
 	.concat(Object.values(markdownEntries))
 	.map(entry => entry.url)
 	.filter(isDefined)
@@ -70,7 +73,7 @@ function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
 							{sortedByDate(waysEntries).map(w => (
 								// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 								<li>
-									<LocalLink fileName={`ways/${w.slug}`}>{w.data.title}</LocalLink>
+									<LocalLink fileName={`ways/${w.id}`}>{w.data.title}</LocalLink>
 								</li>
 							))}
 						</ul>

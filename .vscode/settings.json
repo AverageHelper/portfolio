@@ -20,7 +20,7 @@
 	"gutterpreview.sourceFolder": "public",
 	"json.schemas": [
 		{
-			"fileMatch": [".eslintrc", "deno.jsonc"],
+			"fileMatch": ["deno.jsonc"],
 			"schema": {
 				"allowTrailingCommas": true
 			}

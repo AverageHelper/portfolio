@@ -25,11 +25,13 @@
 		"skipLibCheck": false,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true, // Astro and Deno run TS directly
+		"jsx": "preserve", // Allows importing astro files, probably
 		"plugins": [{ "name": "@astrojs/ts-plugin" }],
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"]
 		}
 	},
-	"include": ["./*.ts", "./*.mjs", "./src/**/*.ts", "./src/**/*.astro"]
+	"include": [".astro/types.d.ts", "./*.ts", "./*.mjs", "./src/**/*.ts", "./src/**/*.astro"],
+	"exclude": ["dist"]
 }
