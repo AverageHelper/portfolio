@@ -4,10 +4,10 @@ import { Temporal } from "temporal-polyfill";
 import Layout from "@/layouts/Layout.astro";
 import LocalLink from "@/components/LocalLink.astro";
 
-function titleCase(str: string): string {
-	if (!str) return str;
-	const first = str[0]?.toLocaleUpperCase() ?? "";
-	return first.concat(str.slice(1));
+function titleCase(text: string): string {
+	if (!text) return text;
+	const first = text[0]?.toLocaleUpperCase() ?? "";
+	return first.concat(text.slice(1));
 }
 
 function title(url: string): string {
@@ -20,7 +20,8 @@ function isDefined<T>(tbd: T | undefined): tbd is T {
 	return tbd !== undefined;
 }
 
-const waysEntries = (await getCollection("ways")).sort((a, b) => {
+const waysCollection = await getCollection("ways");
+const waysEntries = waysCollection.sort((a, b) => {
 	// Chronologically
 	return Temporal.PlainDate.compare(a.data.date, b.data.date);
 });
@@ -31,7 +32,7 @@ const txtEntries = ["humans.txt"];
 
 const pages = Object.values(await Astro.glob("/src/pages/**/*.astro"))
 	.concat(Object.values(markdownEntries))
-	.map(res => res.url)
+	.map(entry => entry.url)
 	.filter(isDefined)
 	.map(url => {
 		// Break off the slash and the file extension
@@ -62,11 +63,7 @@ function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
 		{
 			pages.map(p =>
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-return
-				p !== "ways" ? (
-					<li>
-						<LocalLink fileName={p}>{title(p)}</LocalLink>
-					</li>
-				) : (
+				p === "ways" ? (
 					<li>
 						<LocalLink fileName="ways">Ways</LocalLink>
 						<ul>
@@ -77,6 +74,10 @@ function sortedByDate(coll: Readonly<typeof waysEntries>): typeof waysEntries {
 								</li>
 							))}
 						</ul>
+					</li>
+				) : (
+					<li>
+						<LocalLink fileName={p}>{title(p)}</LocalLink>
 					</li>
 				),
 			)

@@ -16,7 +16,7 @@ const { schema } = Astro.props;
 const dateModified =
 	schema.dateModified && isISO8601(schema.dateModified)
 		? Temporal.PlainDate.from(schema.dateModified).toZonedDateTime("America/Denver").toPlainDate()
-		: null;
+		: undefined;
 ---
 
 {

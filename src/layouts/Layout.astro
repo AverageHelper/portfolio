@@ -29,13 +29,13 @@ interface Props {
 	/**
 	 * A URL for an image to use in OpenGraph metadata.
 	 */
-	image?: URL | null;
+	image?: URL | null | undefined;
 
 	/**
 	 * Alt text for the image used in OpenGraph metadata. Ignored if
 	 * no `image` was specified.
 	 */
-	imageAlt?: string | null;
+	imageAlt?: string | null | undefined;
 }
 
 const defaultTitle = "An Average Developer";

@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends Omit<HTMLAttributes<"a">, "href" | "class"> {
 	fileName?: string;
-	class?: string | null;
+	class?: string | null | undefined;
 }
 
 const { fileName = "", class: addtlClass = "", ...attrs } = Astro.props;
@@ -11,7 +11,7 @@ const { fileName = "", class: addtlClass = "", ...attrs } = Astro.props;
 const href = `/${fileName}` as const;
 const slug = Astro.url.pathname.split("/").at(-1)?.split(".").at(0) ?? "";
 const current = slug === fileName;
-const className = current ? `current ${addtlClass ?? ""}`.trim() : addtlClass || null;
+const className = current ? `current ${addtlClass ?? ""}`.trim() : addtlClass || undefined;
 ---
 
 <!-- prettier-ignore -->

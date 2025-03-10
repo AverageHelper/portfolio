@@ -4,13 +4,14 @@ import { Temporal } from "temporal-polyfill";
 import WaysLayout from "@/layouts/WaysLayout.astro";
 import LocalLink from "@/components/LocalLink.astro";
 
-const waysEntries = (await getCollection("ways")).sort((a, b) => {
+const waysCollection = await getCollection("ways");
+const waysEntries = waysCollection.sort((a, b) => {
 	// Reverse-chronologically
 	return Temporal.PlainDate.compare(b.data.date, a.data.date);
 });
 
-function toDate(str: string): Temporal.PlainDate {
-	return Temporal.PlainDate.from(str);
+function toDate(dateString: string): Temporal.PlainDate {
+	return Temporal.PlainDate.from(dateString);
 }
 ---
 

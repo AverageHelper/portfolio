@@ -21,7 +21,7 @@ interface Props extends Omit<HTMLAttributes<"a">, "target" | "rel"> {
 const { href, relMe = false, relLicense = false, ...attrs } = Astro.props;
 
 const rel = ["external", "noopener", "noreferrer", relMe ? "me" : "", relLicense ? "license" : ""]
-	.filter(a => a)
+	.filter(Boolean)
 	.join(" ");
 
 // Ensure external links aren't broken

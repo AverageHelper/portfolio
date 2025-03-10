@@ -31,5 +31,5 @@
 			"@/*": ["src/*"]
 		}
 	},
-	"include": ["./*.ts", "./src/**/*.ts", "./src/**/*.astro"]
+	"include": ["./*.ts", "./*.mjs", "./src/**/*.ts", "./src/**/*.astro"]
 }

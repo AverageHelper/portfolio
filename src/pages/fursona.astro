@@ -13,18 +13,18 @@ const first = fursona?.sonas?.[0];
 
 const title =
 	fursona?.sonas?.length === 1 && first
-		? first.name ?? "AverageHelper's Fursona"
+		? (first.name ?? "AverageHelper's Fursona")
 		: "AverageHelper's Fursonas";
 
 const description =
 	fursona?.sonas?.length === 1
-		? first?.description ?? "1 character"
+		? (first?.description ?? "1 character")
 		: fursona?.sonas
-		  ? `${fursona.sonas.length} characters`
-		  : "Fursona schema is invalid.";
+			? `${fursona.sonas.length} characters`
+			: "Fursona schema is invalid.";
 
 const imageHref = first?.avatar ?? first?.ref;
-const image = imageHref && isURL(imageHref) ? new URL(imageHref) : null;
+const image = imageHref && isURL(imageHref) ? new URL(imageHref) : undefined;
 
 const imageAlt = first?.avatarAlt ?? `Portrait of ${first?.name ?? "AverageHelper's Fursona"}`;
 ---

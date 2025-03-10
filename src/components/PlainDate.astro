@@ -10,10 +10,10 @@ interface Props {
 const { date, locale, dateStyle = "long" } = Astro.props;
 
 // Human-readable
-const formattedDate = date?.toLocaleString(locale, { dateStyle }) ?? null;
+const formattedDate = date.toLocaleString(locale, { dateStyle });
 
 // YYYY-MM-DD for use with <time>
-const datetime = date?.toString() ?? null;
+const datetime = date.toString();
 ---
 
 <time datetime={datetime} title={datetime}>{formattedDate}</time>

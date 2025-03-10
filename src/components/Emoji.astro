@@ -6,6 +6,7 @@
 import type { HTMLAttributes } from "astro/types";
 
 // Get labels from https://github.com/wooorm/gemoji/blob/main/index.js
+/* eslint-disable unicorn/numeric-separators-style */
 const emojiMap = {
 	birthday: { id: 127874, label: "birthday cake" }, // 🎂
 	blush: { id: 128522, label: "smiling face with smiling eyes" }, // 😊
@@ -26,6 +27,7 @@ const emojiMap = {
 	thought_balloon: { id: 128173, label: "thought balloon" }, // 💭
 	thumbsup: { id: 128077, label: "thumbs up" }, // 👍
 } as const;
+/* eslint-enable unicorn/numeric-separators-style */
 
 interface Props extends Omit<HTMLAttributes<"a">, "class"> {
 	/**

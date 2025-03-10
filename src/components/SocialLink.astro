@@ -19,13 +19,13 @@ const { profile: s } = Astro.props;
 		<ExternalLink
 			relMe={!("notMe" in s) || !s.notMe}
 			href={s.href}
-			class={"note" in s ? "plain" : null}
+			class={"note" in s ? "plain" : undefined}
 		>
 			<Logo name={s.platform} />
 			<span>{s.handle}</span>
 		</ExternalLink>
 	) : (
-		<LocalLink fileName="contact#" class={"note" in s ? "plain" : null}>
+		<LocalLink fileName="contact#" class={"note" in s ? "plain" : undefined}>
 			<Logo name={s.platform} />
 			<span>{s.handle}</span>
 		</LocalLink>

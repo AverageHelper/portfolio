@@ -14,54 +14,54 @@ const ownDomain = "https://average.name";
  *
  * Only runs when the `MODE` environment variable is `production`.
  *
- * @param src The URL to check.
+ * @param url The URL to check.
  */
-export async function checkUrl(src: URL): Promise<void> {
+export async function checkUrl(url: URL): Promise<void> {
 	if (import.meta.env["MODE"] !== "production") {
 		// Only run when building
 		return;
 	}
 
 	// Check cache, make sure we haven't already checked this URL
-	if (alreadyOk.has(src.href) || src.href.startsWith(ownDomain)) {
-		console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(skipped)${Reset}`);
+	if (alreadyOk.has(url.href) || url.href.startsWith(ownDomain)) {
+		console.info(`\nhref ${FgBlue}'${url.href}'${FgGreen} OK ${FgCyan}(skipped)${Reset}`);
 		return;
 	}
 
 	try {
 		// Try fetch with HEAD method
-		const result = await fetch(src, { method: "HEAD" });
+		const result = await fetch(url, { method: "HEAD" });
 		let didRedirect = result.redirected;
 		if (result.status === 405) {
 			// HEAD isn't allowed for some reason. Try GET
-			const result2 = await fetch(src, { method: "GET" });
+			const result2 = await fetch(url, { method: "GET" });
 			didRedirect = result2.redirected;
-			if (!result2.ok) throw result2.status;
+			if (!result2.ok) throw result2.status; // eslint-disable-line @typescript-eslint/only-throw-error
 		} else if (!result.ok) {
-			throw result.status;
+			throw result.status; // eslint-disable-line @typescript-eslint/only-throw-error
 		}
 
 		// Success! Remember this URL for later
-		alreadyOk.add(src.href);
+		alreadyOk.add(url.href);
 		if (didRedirect) {
-			console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK ${FgCyan}(redirected)${Reset}`);
+			console.info(`\nhref ${FgBlue}'${url.href}'${FgGreen} OK ${FgCyan}(redirected)${Reset}`);
 		} else {
-			console.info(`\nhref ${FgBlue}'${src.href}'${FgGreen} OK${Reset}`);
+			console.info(`\nhref ${FgBlue}'${url.href}'${FgGreen} OK${Reset}`);
 		}
 	} catch (error) {
 		if (typeof error === "number") {
 			// Got non-OK HTTP response
-			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} HTTP ${error}${Reset}`);
-			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${error}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${url.href}'${FgRed} HTTP ${error}${Reset}`);
+			throw new TypeError(`${FgRed}Link href '${url.href}' is broken: ${error}${Reset}`);
 		} else if (error instanceof Error) {
 			// Got network error
-			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} Network Error: ${error.message}${Reset}`);
-			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${error.message}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${url.href}'${FgRed} Network Error: ${error.message}${Reset}`);
+			throw new TypeError(`${FgRed}Link href '${url.href}' is broken: ${error.message}${Reset}`);
 		} else {
 			// Got unknown error
 			const message = JSON.stringify(error);
-			console.info(`\nhref ${FgBlue}'${src.href}'${FgRed} Unknown Error: ${message}${Reset}`);
-			throw new TypeError(`${FgRed}Link href '${src.href}' is broken: ${message}${Reset}`);
+			console.info(`\nhref ${FgBlue}'${url.href}'${FgRed} Unknown Error: ${message}${Reset}`);
+			throw new TypeError(`${FgRed}Link href '${url.href}' is broken: ${message}${Reset}`);
 		}
 	}
 }

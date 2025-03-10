@@ -53,23 +53,23 @@ function md(markdown: string): string {
 	});
 }
 
-function pathIfLocal(url: URL | null): string | null {
-	if (!Astro.site || !url) return null;
-	return url.origin === Astro.site.origin ? url.pathname : null;
+function pathIfLocal(url: URL | null | undefined): string | undefined {
+	if (!Astro.site || !url) return undefined;
+	return url.origin === Astro.site.origin ? url.pathname : undefined;
 }
 
-const avatarUrl = sona.avatar && isURL(sona.avatar) ? new URL(sona.avatar) : null;
+const avatarUrl = sona.avatar && isURL(sona.avatar) ? new URL(sona.avatar) : undefined;
 const avatar = pathIfLocal(avatarUrl) ?? avatarUrl?.href;
 const avatarAlt = sona.avatarAlt ?? "";
 
-const refUrl = sona.ref && isURL(sona.ref) ? new URL(sona.ref) : null;
+const refUrl = sona.ref && isURL(sona.ref) ? new URL(sona.ref) : undefined;
 const ref = pathIfLocal(refUrl) ?? refUrl?.href;
 
 // Birthdate from schema
 const birthdate =
 	sona.birthdate && isISO8601(sona.birthdate)
 		? Temporal.PlainDate.from(sona.birthdate).toZonedDateTime("America/Denver").toPlainDate()
-		: null;
+		: undefined;
 
 // Age from schema, or calculated age from birthdate
 const currentCalendar = new Intl.DateTimeFormat().resolvedOptions().calendar;
@@ -77,11 +77,15 @@ const now = Temporal.Now.plainDate(currentCalendar);
 const bday =
 	sona.birthdate && isISO8601(sona.birthdate)
 		? Temporal.PlainDate.from(sona.birthdate).withCalendar(currentCalendar)
-		: null;
+		: undefined;
 const until = bday?.until(now, { largestUnit: "year" });
-const untilYears = bday ? until?.round({ largestUnit: "year", relativeTo: bday }) : null;
+const untilYears = bday ? until?.round({ largestUnit: "year", relativeTo: bday }) : undefined;
 const age =
-	typeof sona.age === "number" ? sona.age : sona.birthdate && untilYears ? untilYears.years : null;
+	typeof sona.age === "number"
+		? sona.age
+		: sona.birthdate && untilYears
+			? untilYears.years
+			: undefined;
 const refAlt = sona.refAlt;
 ---
 
@@ -152,7 +156,7 @@ const refAlt = sona.refAlt;
 			<p class="error">{errors.birthdate}</p>
 		) : errors.age ? (
 			<p class="error">{errors.age}</p>
-		) : birthdate && age !== null ? (
+		) : birthdate && age !== undefined ? (
 			<p>
 				<Emoji name="birthday" aria-label="Born" />
 				<PlainDate date={birthdate} />
@@ -163,11 +167,11 @@ const refAlt = sona.refAlt;
 				<Emoji name="birthday" aria-label="Born" />
 				<PlainDate date={birthdate} />
 			</p>
-		) : age !== null ? (
+		) : age === undefined ? undefined : (
 			<p>
 				<Emoji name="birthday" aria-label="Born" /> {age} years ago
 			</p>
-		) : null
+		)
 	}
 
 	{
