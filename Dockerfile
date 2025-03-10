@@ -16,7 +16,7 @@ WORKDIR /app
 COPY functions functions
 COPY public public
 COPY src src
-COPY .eslintrc .npmrc .prettierignore .prettierrc astro.config.ts deno.jsonc deno.lock package-lock.json package.json tsconfig.json .
+COPY eslint.config.mjs .editorconfig .npmrc .prettierignore .prettierrc astro.config.ts deno.jsonc deno.lock package-lock.json package.json tsconfig.json .
 
 # Build the application.
 RUN <<EOF
