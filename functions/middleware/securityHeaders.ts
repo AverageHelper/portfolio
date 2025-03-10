@@ -84,6 +84,7 @@ export function securityHeaders(): MiddlewareHandler {
 				baseUri: ["'none'"],
 				// See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src
 				defaultSrc: ["'none'"],
+				fontSrc: ["'self'"],
 				formAction: ["'self'"],
 				frameAncestors: ["'none'"],
 				imgSrc: ["'self'", "https://*", "data:"],

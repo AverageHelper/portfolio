@@ -14,6 +14,10 @@
 	Via: https://cadence.moe/blog/2024-10-05-created-by-a-human-badges
 	Site: https://cadence.moe
 
+	"Atkinson Hyperlegible" font face: Braille Institute
+	Site: https://www.brailleinstitute.org/freefont/
+	License: https://average.name/fonts/Atkinson-Hyperlegible/LICENSE.txt
+
 /* SITE */
 	Language:   English
 	Standards:  HTML5, CSS3
