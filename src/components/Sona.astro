@@ -99,11 +99,11 @@ const refAlt = sona.refAlt;
 					) : (
 						<>
 							{errors.ref ? (
-								<img src={avatar} alt={avatarAlt} />
+								<img src={avatar} alt={avatarAlt} title={avatarAlt} />
 							) : (
 								ref && (
 									<ExternalLink class="view-ref avatar" href={ref}>
-										<img src={avatar} alt={avatarAlt} />
+										<img src={avatar} alt={avatarAlt} title={avatarAlt} />
 									</ExternalLink>
 								)
 							)}
