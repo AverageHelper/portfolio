@@ -45,6 +45,11 @@ export const app = factory
 		cors("*"),
 		serveStatic({ path: "./dist/images/refs/AverageHelper-avatar.png" }),
 	)
+	.get(
+		"/.well-known/fursona.json",
+		cors("*"),
+		serveStatic({ path: "./dist/.well-known/fursona.json" }),
+	)
 
 	// ** Fediverse aliases
 	.get("/@avg", c => c.redirect("https://fosstodon.org/@avghelper", 302))
