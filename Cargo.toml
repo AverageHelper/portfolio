@@ -1,5 +1,6 @@
 [package]
-name = "server"
+name = "portfolio"
+description = "My personal website. Very basic."
 edition = "2021"
 repository = "https://git.average.name/AverageHelper/portfolio"
 authors = ["AverageHelper"]
@@ -12,7 +13,15 @@ actix-cors = "0.7.0"
 actix-files = "0.6.6"
 actix-http = "3.9.0"
 actix-service = "2.0.2"
-actix-web = { version = "4.9.0", default-features = false, features = ["macros", "compress-brotli", "compress-gzip", "compress-zstd", "http2", "unicode", "compat"] }
+actix-web = { version = "4.9.0", default-features = false, features = [
+	"macros",
+	"compress-brotli",
+	"compress-gzip",
+	"compress-zstd",
+	"http2",
+	"unicode",
+	"compat",
+] }
 futures-core = "0.3.31"
 mime-infer = "3.0.0"
 rand = "0.8.5"
@@ -24,5 +33,5 @@ url = "2.5.4"
 unsafe_code = "forbid"
 
 [[bin]]
-name = "server"
+name = "portfolio"
 path = "functions/main.rs"

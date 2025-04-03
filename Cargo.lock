@@ -960,6 +960,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "953ec861398dccce10c670dfeaf3ec4911ca479e9c02154b3a215178c5f566f2"
 
 [[package]]
+name = "portfolio"
+version = "0.0.0"
+dependencies = [
+ "actix-cors",
+ "actix-files",
+ "actix-http",
+ "actix-service",
+ "actix-web",
+ "futures-core",
+ "mime-infer",
+ "rand",
+ "serde",
+ "serde_json",
+ "url",
+]
+
+[[package]]
 name = "powerfmt"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1141,23 +1158,6 @@ dependencies = [
  "itoa",
  "ryu",
  "serde",
-]
-
-[[package]]
-name = "server"
-version = "0.0.0"
-dependencies = [
- "actix-cors",
- "actix-files",
- "actix-http",
- "actix-service",
- "actix-web",
- "futures-core",
- "mime-infer",
- "rand",
- "serde",
- "serde_json",
- "url",
 ]
 
 [[package]]
