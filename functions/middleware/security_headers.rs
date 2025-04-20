@@ -106,7 +106,7 @@ impl Fairing for ExtraSecurityHeaders {
 		let sitemap_styles_src =
 			format!("{}/sitemap/styles.xsl", resource_origin(user_provided_host));
 
-		response.set_raw_header(header::CONTENT_SECURITY_POLICY.to_string(), format!("base-uri 'none'; default-src 'none'; form-action 'self'; frame-ancestors 'none'; img-src 'self' https://* data:; sandbox allow-same-origin allow-downloads allow-forms allow-scripts; style-src 'self' 'unsafe-inline'; media-src 'none'; script-src-elem {rss_styles_src} {sitemap_styles_src}; upgrade-insecure-requests"));
+		response.set_raw_header(header::CONTENT_SECURITY_POLICY.to_string(), format!("base-uri 'none'; default-src 'none'; font-src 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' https://* data:; sandbox allow-same-origin allow-downloads allow-forms allow-scripts; style-src 'self' 'unsafe-inline'; media-src 'none'; script-src-elem {rss_styles_src} {sitemap_styles_src}; upgrade-insecure-requests"));
 		response.set_raw_header(CROSS_ORIGIN_EMBEDDER_POLICY, "require-corp");
 		response.set_raw_header(CROSS_ORIGIN_OPENER_POLICY, "same-origin");
 		response.set_raw_header(CROSS_ORIGIN_RESOURCE_POLICY, "same-origin");
