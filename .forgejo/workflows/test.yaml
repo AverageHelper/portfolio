@@ -11,6 +11,8 @@ on:
       - deno.lock
       - package-lock.json
       - package.json
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -30,6 +32,14 @@ jobs:
         with:
           deno-version: v2.0.3
 
+      - name: Install rustup
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+      - name: Setup Rust toolchain
+        run: |
+          . "$HOME/.cargo/env"
+          rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
+
       - name: Install Dependencies
         run: |
           deno install --frozen
@@ -39,4 +49,6 @@ jobs:
         run: deno task build
 
       - name: Test
-        run: deno task test
+        run: |
+          . "$HOME/.cargo/env"
+          cargo test --verbose --locked

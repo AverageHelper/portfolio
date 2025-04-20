@@ -1,33 +1,18 @@
 {
-	"imports": {
-		"hono": "jsr:@hono/hono@4.7.4",
-		"@std/assert": "jsr:@std/assert@1.0.11",
-		"@std/testing": "jsr:@std/testing@1.0.9"
-	},
 	"lock": "deno.lock",
 	"vendor": true,
 	"tasks": {
-		"build": "./node_modules/.bin/astro sync && deno task lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && deno task prettify && deno task cache",
+		"build": "./node_modules/.bin/astro sync && deno task lint && ./node_modules/.bin/astro check && rm -fr dist && ./node_modules/.bin/astro build && deno task prettify",
 		"build:watch": "./node_modules/.bin/nodemon -w \"src/**\" -e 'ts,json,astro,md,css' --exec 'MODE=dev ./node_modules/.bin/astro build --silent'",
 		"prettify": "./node_modules/.bin/prettier 'dist/**/*.{html,css}' -w --ignore-path .prettierignore",
-		"start": "deno run --cached-only --allow-read --allow-net --no-prompt functions/index.ts",
-		"start:watch": "deno run --allow-read --allow-net --watch functions/index.ts",
-		"preview": "deno task build && deno task start",
-		"cache": "deno cache functions/index.ts functions/*.test.ts",
-		"dev": "sleep 3 && deno task start:watch & deno task build:watch",
 		"lint": "./node_modules/.bin/eslint . --ext .ts,.astro",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts,.astro --fix",
-		"test": "rm -fr coverage && deno test --coverage=coverage --cached-only && deno coverage --lcov --output=coverage/lcov.info && deno coverage",
-		"test:watch": "deno test --cached-only --watch"
-	},
-	"test": {
-		"include": ["functions"]
 	},
 	"lint": {
-		"exclude": ["vendor"]
+		"exclude": ["vendor"],
 	},
 	"fmt": {
-		"exclude": ["vendor"]
+		"exclude": ["vendor"],
 	},
-	"exclude": ["src", "astro.config.ts"]
+	"exclude": ["src", "astro.config.ts"],
 }

@@ -31,4 +31,5 @@ temp
 /stats.html
 .wrangler
 .astro
+lcov.info
 vendor

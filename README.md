@@ -4,9 +4,9 @@ A basic web site to plug my projects and things, accessible at https://average.n
 
 Feel free to poke around, I guess.
 
-# Usage
+# Contributing
 
-We use [Astro](https://astro.build) to generate static HTML from templates. Astro runs on Node, and our webserver uses Deno. Make sure both of these are installed on your system.
+We use [Astro](https://astro.build) to generate static HTML from templates, which we serve statically using [Rocket.rs](https://rocket.rs/). Astro runs on Node, and our webserver uses Rust. Make sure both of these are installed on your system in order to build the webserver.
 
 ## Install Dependencies
 
@@ -27,29 +27,20 @@ The build result lives in `/dist`, and gets sent verbatim to the web host. Pleas
 
 The `/functions` directory contains the back-end logic, including serving static files and responding to WebFinger requests.
 
-Use the following command to build and run a live development webserver:
-
-```sh
-deno task dev
-```
-
-The webserver will restart whenever files it depends on have changed. Live browser reload is not yet implemented.
-
 ## Build the site
 
 This command will build static site assets to `/dist` and download runtime dependencies, without starting a webserver:
 
 ```sh
 deno task build
+cargo build --release
 ```
 
 ## Run unit tests
 
-To run unit tests and make sure everything is working as expected:
+To run unit tests with code coverage, use the `test.sh` script at the directory root. This will prompt you to install the necessary components.
 
-```sh
-deno task test
-```
+To run unit tests without code coverage, run `cargo test`.
 
 ## Run the site with Deno
 
@@ -58,13 +49,7 @@ This part is mainly for my own notes. Go run your own website! lol
 After the site is built, this command will run a production-ready webserver:
 
 ```sh
-deno task start
-```
-
-To run in the background as a daemon, use [`pm2`](https://pm2.keymetrics.io/docs/usage/quick-start/) like so:
-
-```sh
-pm2 start ./app.sh --name portfolio
+cargo run --release
 ```
 
 The app will run on port `8787`.
