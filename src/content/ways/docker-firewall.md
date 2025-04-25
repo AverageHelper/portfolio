@@ -4,6 +4,10 @@ description: "If you're running a service using Docker that you want open to the
 date: "2024-04-06"
 ---
 
+_Update 25 Apr 2025: There's a better way to go about this: https://github.com/chaifeng/ufw-docker_
+
+---
+
 If you're running a service using Docker that you want open to the internet via a reverse proxy, and not via Docker's open port, you'll need to disable Docker's default IPTables behavior.
 
 For example, consider a web service that:
