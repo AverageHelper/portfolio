@@ -96,17 +96,17 @@ fn fursona() -> CorsAllowAllResponse<RawJson<&'static str>> {
 
 #[get("/@avg")]
 fn at_avg() -> Redirect {
-	Redirect::found(uri!("https://fosstodon.org/@avghelper"))
+	Redirect::found(uri!("https://gts.average.name/@avghelper"))
 }
 
 #[get("/@avghelper")]
 fn at_avghelper() -> Redirect {
-	Redirect::found(uri!("https://fosstodon.org/@avghelper"))
+	Redirect::found(uri!("https://gts.average.name/@avghelper"))
 }
 
 #[get("/@average")]
 fn at_average() -> Redirect {
-	Redirect::found(uri!("https://fosstodon.org/@avghelper"))
+	Redirect::found(uri!("https://gts.average.name/@avghelper"))
 }
 
 #[get("/.well-known/webfinger?<resource>&<rel>")]
@@ -675,9 +675,9 @@ mod tests {
 			("/pronouns", "/.well-known/pronouns"),
 			("/fursona.json", "/.well-known/fursona.json"),
 			("/.well-known/fursona", "/.well-known/fursona.json"),
-			("/@avg", "https://fosstodon.org/@avghelper"),
-			("/@avghelper", "https://fosstodon.org/@avghelper"),
-			("/@average", "https://fosstodon.org/@avghelper"),
+			("/@avg", "https://gts.average.name/@avghelper"),
+			("/@avghelper", "https://gts.average.name/@avghelper"),
+			("/@average", "https://gts.average.name/@avghelper"),
 		];
 
 		let client = build_client();
