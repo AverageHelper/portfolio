@@ -423,8 +423,8 @@ mod tests {
 			let body = res.into_string().expect("Result should be a string");
 			let result: WebFinger =
 				serde_json::from_str(&body).expect("Result should be a JSON string");
-			assert_eq!(result.subject, "acct:avghelper@fosstodon.org");
-			assert_eq!(result.links.len(), 3);
+			assert_eq!(result.subject, "acct:avghelper@gts.average.name");
+			assert_eq!(result.links.len(), 2);
 		}
 		client.terminate();
 	}
@@ -449,7 +449,7 @@ mod tests {
 			let body = res.into_string().expect("Result should be a string");
 			let result: WebFinger =
 				serde_json::from_str(&body).expect("Result should be a JSON string");
-			assert_eq!(result.subject, "acct:avghelper@fosstodon.org");
+			assert_eq!(result.subject, "acct:avghelper@gts.average.name");
 			assert_eq!(result.links.len(), 1);
 		}
 		client.terminate();

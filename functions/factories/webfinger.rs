@@ -45,18 +45,6 @@ impl<'r> AvailableLink<'r> {
 			template: None,
 		}
 	}
-
-	fn with_subscribe_template<T>(template: T) -> Self
-	where
-		T: Into<&'r str>,
-	{
-		AvailableLink {
-			rel: "http://ostatus.org/schema/1.0/subscribe".into(), // Seems ostatus.org is no more, but Mastodon's docs still reference it
-			r#type: None,
-			href: None,
-			template: Some(template.into()),
-		}
-	}
 }
 
 #[derive(Serialize, Deserialize)]
@@ -112,7 +100,7 @@ pub fn webfinger<'r>(
 
 	// "If the "resource" parameter is a value for which the server has no information, the server MUST indicate [not found]"
 	let host = resource.split("@").last().unwrap_or("");
-	if host != "average.name" && host != "fosstodon.org" {
+	if !host.ends_with("average.name") && host != "fosstodon.org" {
 		return Err(Status::NotFound);
 	}
 
@@ -123,11 +111,8 @@ pub fn webfinger<'r>(
 
 	let links: Vec<AvailableLink> = {
 		let mut available_links = vec![
-			AvailableLink::with_profile_page("https://fosstodon.org/@avghelper"),
-			AvailableLink::with_self("https://fosstodon.org/users/avghelper"),
-			AvailableLink::with_subscribe_template(
-				"https://fosstodon.org/authorize_interaction?uri={uri}",
-			),
+			AvailableLink::with_profile_page("https://gts.average.name/@avghelper"),
+			AvailableLink::with_self("https://gts.average.name/users/avghelper"),
 		];
 
 		// "When the "rel" parameter is used and accepted, only the link relation types that match the link relation type provided via the "rel" parameter are included."
@@ -139,14 +124,13 @@ pub fn webfinger<'r>(
 	};
 
 	return Ok(WebFinger {
-		// subject: "acct:average@average.name".into(),
-		subject: "acct:avghelper@fosstodon.org".into(),
+		subject: "acct:avghelper@gts.average.name".into(),
 		aliases: vec![
 			"https://average.name/@average".into(),
 			"https://average.name/@avg".into(),
 			"https://average.name/@avghelper".into(),
-			"https://fosstodon.org/@avghelper".into(),
-			"https://fosstodon.org/users/avghelper".into(),
+			"https://gts.average.name/@avghelper".into(),
+			"https://gts.average.name/users/avghelper".into(),
 		],
 		links,
 	});
@@ -165,7 +149,7 @@ impl<'r> FromRequest<'r> for UserAgent<'r> {
 	}
 }
 
-/// Returns Fosstodon's nodeinfo if the requester is GitHub's noneinfo query bot.
+/// Returns my Fedi's nodeinfo if the requester is GitHub's noneinfo query bot.
 pub fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
 	// Who's asking?
 	if user_agent.0.is_none()
@@ -177,9 +161,9 @@ pub fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
 		return Err(Status::NotFound);
 	}
 
-	// GitHub is asking. Point to Mastodon:
-	let mastodon = uri!("https://fosstodon.org/.well-known/nodeinfo");
-	return Ok(Redirect::found(mastodon));
+	// GitHub is asking. Point to Fedi:
+	let fedi = uri!("https://gts.average.name/.well-known/nodeinfo");
+	return Ok(Redirect::found(fedi));
 }
 
 // MARK: - Tests
@@ -284,27 +268,27 @@ mod tests {
 			Err(_) => panic!("Expected 200"),
 		};
 
-		assert_eq!(data.subject, "acct:avghelper@fosstodon.org");
+		assert_eq!(data.subject, "acct:avghelper@gts.average.name");
 		assert_eq!(
 			data.aliases,
 			vec![
 				"https://average.name/@average",
 				"https://average.name/@avg",
 				"https://average.name/@avghelper",
-				"https://fosstodon.org/@avghelper",
-				"https://fosstodon.org/users/avghelper",
+				"https://gts.average.name/@avghelper",
+				"https://gts.average.name/users/avghelper",
 			]
 		);
 
 		let links = data.links;
-		assert_eq!(links.len(), 3);
+		assert_eq!(links.len(), 2);
 
 		let link0 = links[0].clone();
 		assert_eq!(link0.rel, "http://webfinger.net/rel/profile-page");
 		assert_eq!(link0.r#type.expect("kind should be present"), "text/html");
 		assert_eq!(
 			link0.href.expect("href should be present"),
-			"https://fosstodon.org/@avghelper"
+			"https://gts.average.name/@avghelper"
 		);
 
 		let link1 = links[1].clone();
@@ -315,14 +299,7 @@ mod tests {
 		);
 		assert_eq!(
 			link1.href.expect("href should be present"),
-			"https://fosstodon.org/users/avghelper"
-		);
-
-		let link2 = links[2].clone();
-		assert_eq!(link2.rel, "http://ostatus.org/schema/1.0/subscribe");
-		assert_eq!(
-			link2.template.expect("template should be present"),
-			"https://fosstodon.org/authorize_interaction?uri={uri}"
+			"https://gts.average.name/users/avghelper"
 		);
 	}
 
@@ -335,6 +312,24 @@ mod tests {
 	#[test]
 	fn test_webfinger_succeeds_with_resource_acct_average_average_name() {
 		let res = webfinger("acct:average@average.name", None);
+		assert_base_finger(res);
+	}
+
+	#[test]
+	fn test_webfinger_succeeds_with_resource_acct_gts_average_average_name() {
+		let res = webfinger("acct:average@gts.average.name", None);
+		assert_base_finger(res);
+	}
+
+	#[test]
+	fn test_webfinger_succeeds_with_resource_acct_social_average_average_name() {
+		let res = webfinger("acct:average@social.average.name", None);
+		assert_base_finger(res);
+	}
+
+	#[test]
+	fn test_webfinger_succeeds_with_resource_acct_any_subdomain_average_average_name() {
+		let res = webfinger("acct:average@thissubdomaindoesnotexist.average.name", None);
 		assert_base_finger(res);
 	}
 
@@ -356,7 +351,7 @@ mod tests {
 			Ok(wf) => wf,
 			Err(_) => panic!("Expected 200"),
 		};
-		assert_eq!(data.subject, "acct:avghelper@fosstodon.org");
+		assert_eq!(data.subject, "acct:avghelper@gts.average.name");
 		assert!(!data.aliases.is_empty(), "Aliases should be nonempty");
 
 		let links = data.links;
@@ -370,7 +365,7 @@ mod tests {
 		);
 		assert_eq!(
 			link0.href.expect("href should be present"),
-			"https://fosstodon.org/users/avghelper"
+			"https://gts.average.name/users/avghelper"
 		);
 	}
 }
