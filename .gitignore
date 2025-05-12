@@ -15,6 +15,7 @@
 
 # Secret files
 *.env
+.certs
 
 # Useless files
 *.log

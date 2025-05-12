@@ -4,6 +4,7 @@
 	Operator:   AverageHelper
 	Pronouns:   she/her
 	Site:       https://average.name
+	Capsule:    gemini://average.name
 	Matrix:     @average:average.name
 	Fedi:       https://average.name/@average
 	AT Proto:   @average.name
@@ -20,8 +21,8 @@
 
 /* SITE */
 	Language:   English
-	Standards:  HTML5, CSS3
+	Standards:  HTML5, CSS3, Gemtext
 	IDE:        VSCodium
-	Webserver:  Caddy, Deno
+	Webserver:  Caddy, Rocket, Fluffer
 	Builder:    TypeScript, Deno, NPM, Astro, ESLint, Prettier
-	Server:     Linode
+	Host:       Akamai

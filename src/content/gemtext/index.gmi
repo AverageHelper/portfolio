@@ -1,0 +1,30 @@
+# Hello, world!
+
+I'm a regular average software developer, doing regular average codethings since 2011. I try to be helpful where I can.
+
+I'm still porting my site to Gemtext, so here's what I've got so far!
+
+=> /ways Ways folder
+=> /ways/ways About Ways
+=> /contact Contact Me
+=> /humans.txt humans.txt
+
+## Stuff i do for fun
+
+Things I'm most proud of lately:
+
+=> gemini://git.average.name git-gemini-forge
+for proxying Git forges to Geminispace. Still a work-in-progress, but very nearly functional! It's what all of these source code links point to :3
+
+=> gemini://git.average.name/AverageHelper/portfolio This site
+I recently ported my homepage's webserver from Typescript to Rust.
+
+=> https://git.average.name
+I started hosting my own Git forge some time ago, on Forgejo. All of my recent projects are there, and a few of my older ones. I'm slowly working through moving all of my projects from GitHub to there, but there are so many and each one is such an involved process that it'll be quite some time before that's done. 😅
+
+=> https://average.gay
+A simple little site to show people they're awesome! A Gemtext version is planned.
+
+------
+=> gemini://git.average.name/AverageHelper/portfolio View source
+=> https://average.name HTTP version

@@ -39,7 +39,7 @@ EOF
 ################################################################################
 # Create a stage for building the application.
 
-FROM docker.io/library/rust:1.85.1-slim as rust-builder
+FROM docker.io/library/rust:1.86.0-slim as rust-builder
 
 # Prepare static linker for minimal final
 RUN rustup target add x86_64-unknown-linux-musl
@@ -86,6 +86,7 @@ COPY --from=rust-builder /app/target/x86_64-unknown-linux-musl/release/portfolio
 USER appuser:appuser
 
 # The port that the application listens on.
+EXPOSE 1965
 EXPOSE 8787
 
 ENTRYPOINT ["/app/portfolio"]

@@ -5,5 +5,11 @@ services:
       target: final
     container_name: avg-portfolio
     restart: unless-stopped
+    environment:
+      GEMINI_HOSTNAME: "average.name"
+      GEMINI_CERTS_DIR: "/app/certs"
+    volumes:
+      - ./.certs:/app/certs:ro
     ports:
       - 8787:8787
+      - 1965:1965

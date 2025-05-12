@@ -1,19 +1,22 @@
+mod capsule;
+mod config;
 mod factories;
 mod middleware;
 mod utils;
 
+use capsule::gemini_service;
+use config::Config;
 use factories::{UserAgent, WebFinger};
-use include_dir::{include_dir, Dir};
-use middleware::{shield, CorsAllowAllResponse, CorsOnlyProdResponse, TrimSlash, PRONOUNS_EN};
+use include_dir::{Dir, include_dir};
 use middleware::{Clacks, ExtraSecurityHeaders, PronounsAcceptable};
+use middleware::{CorsAllowAllResponse, CorsOnlyProdResponse, PRONOUNS_EN, TrimSlash, shield};
 use rocket::http::{ContentType, Status};
 use rocket::response::content::RawJson;
 use rocket::response::status::BadRequest;
-use rocket::response::{content::RawHtml, status::NotFound, Redirect};
-use rocket::{catch, catchers, get, launch, routes, uri, Build, Config, Rocket};
+use rocket::response::{Redirect, content::RawHtml, status::NotFound};
+use rocket::{Build, Rocket, catch, catchers, get, routes, uri};
 use rocket_async_compression::CachedCompression;
 use std::ffi::OsStr;
-use std::net::Ipv4Addr;
 use std::path::PathBuf;
 
 // MARK: - Routes
@@ -193,7 +196,9 @@ fn not_found() -> NotFound<RawHtml<&'static str>> {
 	NotFound(RawHtml(not_found))
 }
 
-fn service(config: Config) -> Rocket<Build> {
+fn http_service(config: &Config) -> Rocket<Build> {
+	let config = config.rocket_config();
+
 	let suffixes = vec![".css", ".html", ".svg", ".xml", ".txt"]
 		.iter()
 		.map(ToString::to_string)
@@ -235,18 +240,37 @@ fn service(config: Config) -> Rocket<Build> {
 		.register("/", catchers![bad_request, not_found])
 }
 
-static HOSTNAME: Ipv4Addr = Ipv4Addr::new(0, 0, 0, 0); // 0.0.0.0
-static PORT: u16 = 8787;
+async fn start_gemini_service(config: &Config) {
+	if let Err(err) = gemini_service(config).await {
+		eprintln!("{err}");
+		std::process::exit(1);
+	}
+}
 
-#[launch]
-fn rocket() -> _ {
-	let config = Config {
-		port: PORT,
-		address: HOSTNAME.into(),
-		..Config::debug_default()
+async fn start_http_service(config: &Config) {
+	let rocket = match http_service(&config).ignite().await {
+		Err(err) => {
+			eprintln!("{err}");
+			std::process::exit(1);
+		}
+		Ok(rocket) => rocket,
 	};
+	println!("HTTP: Serving on port {}", config.http_port);
+	if let Err(err) = rocket.launch().await {
+		eprintln!("{err}");
+		std::process::exit(1);
+	}
+}
 
-	service(config)
+#[rocket::main]
+async fn main() {
+	let config = Config::default();
+
+	// Run both webservers at once, and kill the other when one dies:
+	tokio::select! {
+		_ = start_gemini_service(&config) => {},
+		_ = start_http_service(&config) => {},
+	};
 }
 
 // MARK: - Tests
@@ -272,11 +296,12 @@ mod tests {
 
 	fn assert_headers(res: &LocalResponse) {
 		assert!(res.headers().contains(header::CONTENT_SECURITY_POLICY));
-		assert!(res
-			.headers()
-			.get_one(header::CONTENT_SECURITY_POLICY.as_str())
-			.expect("Content-Security-Policy value should exist")
-			.contains("upgrade-insecure-requests"));
+		assert!(
+			res.headers()
+				.get_one(header::CONTENT_SECURITY_POLICY.as_str())
+				.expect("Content-Security-Policy value should exist")
+				.contains("upgrade-insecure-requests")
+		);
 		assert_header(&res, header::REFERRER_POLICY.as_str(), "no-referrer");
 		assert!(res.headers().contains(header::STRICT_TRANSPORT_SECURITY));
 		assert!(res.headers().contains(header::X_CONTENT_TYPE_OPTIONS));
@@ -322,8 +347,8 @@ mod tests {
 	}
 
 	fn build_client() -> Client {
-		let config = Config::debug_default();
-		Client::tracked(service(config)).expect("Test client should launch")
+		let config = Config::default();
+		Client::tracked(http_service(&config)).expect("Test client should launch")
 	}
 
 	struct Origin(&'static str);

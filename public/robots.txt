@@ -1,3 +1,8 @@
+# Disallow Gemini web proxies; HTTP users should visit our HTTP view directly
+# See gemini://geminiprotocol.net/docs/companion/robots.gmi
+User-agent: webproxy
+Disallow: /
+
 # Robots TXT file adapted from https://seirdy.one/robots.txt
 
 User-agent: *
