@@ -255,7 +255,6 @@ async fn start_http_service(config: &Config) {
 		}
 		Ok(rocket) => rocket,
 	};
-	println!("HTTP: Serving on port {}", config.http_port);
 	if let Err(err) = rocket.launch().await {
 		eprintln!("{err}");
 		std::process::exit(1);
