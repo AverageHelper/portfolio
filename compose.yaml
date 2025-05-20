@@ -9,7 +9,8 @@ services:
       GEMINI_HOSTNAME: "average.name"
       GEMINI_CERTS_DIR: "/app/certs"
     volumes:
-      - ./.certs:/app/certs:ro
+      # TODO: Not sure why :z works when :ro does not...
+      - ./.certs:/app/certs:z
     ports:
       - 8787:8787
       - 1965:1965

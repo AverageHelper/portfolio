@@ -39,11 +39,10 @@ EOF
 ################################################################################
 # Create a stage for building the application.
 
-FROM docker.io/library/rust:1.86.0-slim as rust-builder
+FROM docker.io/library/rust:1.86.0-alpine as rust-builder
 
-# Prepare static linker for minimal final
-RUN rustup target add x86_64-unknown-linux-musl
-RUN apt update && apt install -y musl-tools musl-dev openssl-dev openssl
+# Prepare static linker and install OpenSSL dependency
+RUN apk add musl-dev pkgconf openssl-dev openssl-libs-static
 RUN update-ca-certificates
 
 # Create a non-privileged user that the app will run under.
@@ -63,11 +62,14 @@ WORKDIR /app
 # Copy necessary build files
 COPY --from=builder /app/dist dist
 COPY ./functions ./functions
+COPY ./public ./public
+COPY ./src ./src
+COPY build.rs .
 COPY Cargo.lock .
 COPY Cargo.toml .
 
 # Build the application.
-RUN cargo build --target x86_64-unknown-linux-musl --release --locked
+RUN cargo build --release --locked
 
 ################################################################################
 # Create a new stage for running the application that contains the minimal
@@ -80,10 +82,7 @@ COPY --from=rust-builder /etc/group /etc/group
 WORKDIR /app
 
 # Copy the executable from the "build" stage.
-COPY --from=rust-builder /app/target/x86_64-unknown-linux-musl/release/portfolio ./
-
-# Copy runtime dependency
-COPY .certs .certs
+COPY --from=rust-builder /app/target/release/portfolio ./
 
 # Use the unprivileged user created previously
 USER appuser:appuser
