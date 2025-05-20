@@ -74,6 +74,9 @@ RUN cargo build --target x86_64-unknown-linux-musl --release --locked
 # runtime dependencies for the application.
 FROM docker.io/library/alpine as final
 
+# Install OpenSSL and static linker
+RUN apk add openssl-dev musl-dev
+
 # Copy user from builder
 COPY --from=rust-builder /etc/passwd /etc/passwd
 COPY --from=rust-builder /etc/group /etc/group
@@ -81,6 +84,9 @@ WORKDIR /app
 
 # Copy the executable from the "build" stage.
 COPY --from=rust-builder /app/target/x86_64-unknown-linux-musl/release/portfolio ./
+
+# Copy runtime dependency
+COPY .certs .certs
 
 # Use the unprivileged user created previously
 USER appuser:appuser
