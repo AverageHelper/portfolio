@@ -43,7 +43,7 @@ FROM docker.io/library/rust:1.86.0-slim as rust-builder
 
 # Prepare static linker for minimal final
 RUN rustup target add x86_64-unknown-linux-musl
-RUN apt update && apt install -y musl-tools musl-dev
+RUN apt update && apt install -y musl-tools musl-dev openssl-dev
 RUN update-ca-certificates
 
 # Create a non-privileged user that the app will run under.
@@ -73,9 +73,6 @@ RUN cargo build --target x86_64-unknown-linux-musl --release --locked
 # Create a new stage for running the application that contains the minimal
 # runtime dependencies for the application.
 FROM docker.io/library/alpine as final
-
-# Install OpenSSL and static linker
-RUN apk add openssl-dev musl-dev
 
 # Copy user from builder
 COPY --from=rust-builder /etc/passwd /etc/passwd
