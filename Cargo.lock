@@ -467,9 +467,9 @@ dependencies = [
 
 [[package]]
 name = "fluffer"
-version = "4.0.1"
+version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a607456b563293c336f40a6c191d4f16d9defeabd354cd03b8628cd8c3de241a"
+checksum = "973c573a9a1587ede3513c06e78cddbc88a04c45d88a983e635429ce92f80a32"
 dependencies = [
  "async-trait",
  "log",
