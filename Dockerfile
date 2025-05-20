@@ -43,7 +43,7 @@ FROM docker.io/library/rust:1.86.0-slim as rust-builder
 
 # Prepare static linker for minimal final
 RUN rustup target add x86_64-unknown-linux-musl
-RUN apt update && apt install -y musl-tools musl-dev openssl-dev
+RUN apt update && apt install -y musl-tools musl-dev openssl-dev openssl
 RUN update-ca-certificates
 
 # Create a non-privileged user that the app will run under.
