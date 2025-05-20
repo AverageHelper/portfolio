@@ -9,7 +9,7 @@
 
 ARG DENO_VERSION=2.0.3
 ARG NODE_VERSION=22
-FROM docker.io/library/node:${NODE_VERSION}-bullseye-slim as builder
+FROM docker.io/library/node:${NODE_VERSION}-bullseye-slim AS builder
 ARG DENO_VERSION
 WORKDIR /app
 
@@ -39,7 +39,7 @@ EOF
 ################################################################################
 # Create a stage for building the application.
 
-FROM docker.io/library/rust:1.86.0-alpine as rust-builder
+FROM docker.io/library/rust:1.86.0-alpine AS rust-builder
 
 # Prepare static linker and install OpenSSL dependency
 RUN apk add musl-dev pkgconf openssl-dev openssl-libs-static
@@ -74,7 +74,7 @@ RUN cargo build --release --locked
 ################################################################################
 # Create a new stage for running the application that contains the minimal
 # runtime dependencies for the application.
-FROM docker.io/library/alpine as final
+FROM docker.io/library/alpine AS final
 
 # Copy user from builder
 COPY --from=rust-builder /etc/passwd /etc/passwd

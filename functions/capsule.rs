@@ -60,7 +60,12 @@ async fn static_gmi(client: fluffer::Client<Config>) -> Result<Vec<u8>, RequestE
 			str
 		};
 		let asset = GemtextAsset::get(&file_path).ok_or(RequestError::NotFound)?;
-		Ok::<Vec<u8>, RequestError>(asset.data.to_vec())
+		let data = match String::from_utf8(asset.data.to_vec()) {
+			Err(_) => return Err(RequestError::TemporaryFailure),
+			Ok(content) => content,
+		};
+
+		Ok(data) // text/gemini
 	})
 	.await
 }
@@ -141,11 +146,12 @@ enum RequestError {
 impl fluffer::GemBytes for RequestError {
 	async fn gem_bytes(self) -> Vec<u8> {
 		match self {
-			Self::BadRequest => (Status::BadRequest, "", "").gem_bytes().await,
-			Self::NotFound => (Status::NotFound, "", "Page not found.").gem_bytes().await,
-			Self::TemporaryFailure => (Status::TemporaryFailure, "", "").gem_bytes().await,
-			Self::WrongHost => (Status::ProxyRequestRefused, "", "").gem_bytes().await,
+			Self::BadRequest => (Status::BadRequest, "Bad request.").gem_bytes(),
+			Self::NotFound => (Status::NotFound, "Page not found.").gem_bytes(),
+			Self::TemporaryFailure => (Status::TemporaryFailure, "Temporary failure.").gem_bytes(),
+			Self::WrongHost => (Status::ProxyRequestRefused, "Wrong host.").gem_bytes(),
 		}
+		.await
 	}
 }
 
