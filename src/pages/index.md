@@ -6,6 +6,8 @@ layout: "@/layouts/Layout.astro"
 
 I'm a regular average software developer, doing regular average codethings since 2011. I try to be helpful where I can.
 
+I mostly work in whatever seems interesting to me at the moment. Lately, that's been Rust, recently was Typescript, and before that was C++, Swift, and Objective-C.
+
 ---
 
 ## Stuff I do for fun
@@ -32,6 +34,5 @@ And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repos
 
 ## Stuff I get paid for
 
-I freelance in my spare time. [Hire me](/work)!
+Not much yet, but I do try to freelance. [Hire me](/work), if you'd like!
 
-[My first and biggest client so far](https://github.com/Inventory-Shield/) have only closed-source code, unfortunately, but I have contributed to open-source projects on their behalf.
