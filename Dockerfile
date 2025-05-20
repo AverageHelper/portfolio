@@ -69,6 +69,7 @@ COPY Cargo.lock .
 COPY Cargo.toml .
 
 # Build the application.
+# FIXME: Somehow cache the dependencies' build; these take ages to compile now!
 RUN cargo build --release --locked
 
 ################################################################################
