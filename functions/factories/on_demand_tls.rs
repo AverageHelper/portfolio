@@ -1,6 +1,6 @@
 use rocket::http::Status;
 
-const ALIAS_DOMAINS: [&'static str; 9] = [
+const ALIAS_DOMAINS: &[&'static str] = &[
 	// Subdomains that I want to give a *.avg.name alias:
 	"blog.avg.name",
 	"dotfiles.avg.name",
@@ -14,7 +14,7 @@ const ALIAS_DOMAINS: [&'static str; 9] = [
 	"www.avg.name",
 ];
 
-const AT_PROTO_DOMAINS: [&'static str; 2] = [
+const AT_PROTO_DOMAINS: &[&'static str] = &[
 	// Subdomains that I want to give an AT Protocol handle, i.e. @avgtest.average.name
 	// "test.average.name", // DO NOT USE: This name is reserved internally in bsky
 	"avgtest.average.name",
