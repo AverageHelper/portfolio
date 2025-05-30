@@ -9,6 +9,7 @@ const ALIAS_DOMAINS: [&'static str; 9] = [
 	"ip.avg.name",
 	"ipv4.avg.name",
 	"jsonresume.avg.name",
+	"redir.avg.name",
 	"status.avg.name",
 	"www.avg.name",
 ];
