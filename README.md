@@ -73,13 +73,13 @@ If you're already developing a Gemini capsule locally, copy those certs into a n
 ```sh
 mkdir -p .certs
 cd .certs
-openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 1103760 -nodes -subj '/CN=localhost'
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 1103760 -nodes -subj '/CN=localhost' -addext 'subjectAltName=DNS:average.name'
 ```
 
-> [!IMPORTANT]
-> Change the `'/CN=localhost'` part to your expected domain when using in production.
-
 Note that the `-days` arg in the command above sets the cert to expire sometime around the year 3024. This is sufficient for use with Gemini capsules or local development, but not much else.
+
+> [!IMPORTANT]
+> Change the `/CN=` and `subjectAltName=` parts to your expected internet domain when using in production. Consider also setting a shorter `-days` parameter, and setting a cron job to re-issue a new cert when this one expires.
 
 The `<project>/.certs` directory must contain `key.pem` and `cert.pem`, or the server will panic.
 
