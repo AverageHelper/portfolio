@@ -73,7 +73,7 @@ If you're already developing a Gemini capsule locally, copy those certs into a n
 ```sh
 mkdir -p .certs
 cd .certs
-openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 1103760 -nodes -subj '/CN=localhost' -addext 'subjectAltName=DNS:average.name'
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 1103760 -nodes -subj '/CN=localhost' -addext 'subjectAltName=DNS:localhost'
 ```
 
 Note that the `-days` arg in the command above sets the cert to expire sometime around the year 3024. This is sufficient for use with Gemini capsules or local development, but not much else.
