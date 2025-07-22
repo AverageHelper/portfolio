@@ -20,6 +20,6 @@ fi
 
 # Turn coverage results into lcov files
 echo "Collecting code coverage..."
-cargo tarpaulin -o lcov --locked
+cargo tarpaulin -o lcov --locked --target-dir target/tarpaulin-target/ --skip-clean "$@"
 
 # TODO: Figure some way to generate and display a cute code-coverage sticker in README.md
