@@ -1,4 +1,5 @@
 use std::{
+	env,
 	net::{IpAddr, Ipv4Addr},
 	path::PathBuf,
 };
@@ -25,17 +26,27 @@ pub struct Config {
 impl Default for Config {
 	fn default() -> Self {
 		let gemini_hostname =
-			std::env::var("GEMINI_HOSTNAME").unwrap_or_else(|_| "average.name".to_owned());
-		let gemini_certs_dir = std::env::var("GEMINI_CERTS_DIR")
+			env::var("GEMINI_HOSTNAME").unwrap_or_else(|_| "average.name".to_owned());
+		let gemini_certs_dir = env::var("GEMINI_CERTS_DIR")
 			.ok()
 			.or_else(|| Some(".certs".to_owned()))
 			.map(PathBuf::from);
+		let gemini_port = env::var("GEMINI_PORT")
+			.ok()
+			.map(|p| p.parse::<u16>().ok())
+			.flatten()
+			.unwrap_or(1965);
+		let http_port = env::var("HTTP_PORT")
+			.ok()
+			.map(|p| p.parse::<u16>().ok())
+			.flatten()
+			.unwrap_or(8787);
 
 		Self {
-			gemini_port: 1965,
+			gemini_port,
 			gemini_hostname,
 			gemini_certs_dir,
-			http_port: 8787,
+			http_port,
 			http_hostname: IpAddr::V4(Ipv4Addr::UNSPECIFIED), // 0.0.0.0
 		}
 	}

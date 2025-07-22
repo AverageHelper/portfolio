@@ -52,7 +52,7 @@ After the site is built, this command will run a production-ready webserver:
 cargo run --release
 ```
 
-The HTTP server runs on port `8787`, and the Gemini capsule on port `1965`.
+By default, the HTTP server runs on port `8787`, and the Gemini capsule on port `1965`.
 
 ## Run the site with Docker Compose
 
@@ -62,7 +62,7 @@ This part is mainly for my own notes. Go run your own website! lol
 docker compose up -d --no-deps --build
 ```
 
-The HTTP servers run on port `8787`, and the Gemini capsule on port `1965`. You can modify these ports in [`compose.yaml`](compose.yaml) or use a `docker run` command instead.
+The HTTP servers run on port `8787`, and the Gemini capsule on port `1965`. You can modify these ports in [`compose.yaml`](compose.yaml), use a `docker run` command instead, or set the `HTTP_PORT` and `GEMINI_PORT` environment variables.
 
 ## Certificates
 

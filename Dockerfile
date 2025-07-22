@@ -88,8 +88,4 @@ COPY --from=rust-builder /app/target/release/portfolio ./
 # Use the unprivileged user created previously
 USER appuser:appuser
 
-# The port that the application listens on.
-EXPOSE 1965
-EXPOSE 8787
-
 ENTRYPOINT ["/app/portfolio"]
