@@ -22,6 +22,10 @@
 logs
 node_modules
 
+# Customizable files
+compose.yml
+compose.yaml
+
 # Generated files
 dist
 ./config
