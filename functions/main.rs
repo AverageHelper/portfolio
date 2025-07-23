@@ -128,17 +128,6 @@ fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
 	factories::nodeinfo(user_agent)
 }
 
-// MARK: On-demand TLS
-
-/// Handles Caddy's on-demand TLS requests.
-#[get("/.well-known/domains?<domain>")]
-fn on_demand_tls(domain: Option<&str>) -> (Status, ()) {
-	match domain {
-		None => (Status::BadRequest, ()),
-		Some(domain) => factories::on_demand_tls(domain),
-	}
-}
-
 // MARK: /dist
 
 static DIST: Dir = include_dir!("dist");
@@ -232,7 +221,6 @@ fn http_service(config: &Config) -> Rocket<Build> {
 				at_average,
 				webfinger,
 				nodeinfo,
-				on_demand_tls,
 				root,
 				dist,
 			],
@@ -502,39 +490,6 @@ mod tests {
 				get_with_user_agent(&client, "/.well-known/nodeinfo", "GitHub-NodeinfoQuery");
 			assert_status(&res2, Status::Found);
 			assert_headers(&res2);
-		}
-		client.terminate();
-	}
-
-	#[test]
-	fn test_on_demand_tls_serves_400_without_domain() {
-		let client = build_client();
-		{
-			let res = get(&client, "/.well-known/domains");
-			assert_status(&res, Status::BadRequest);
-			assert_headers(&res);
-		}
-		client.terminate();
-	}
-
-	#[test]
-	fn test_on_demand_tls_serves_404_with_unknown_domain() {
-		let client = build_client();
-		{
-			let res = get(&client, "/.well-known/domains?domain=example.com");
-			assert_status(&res, Status::NotFound);
-			assert_headers(&res);
-		}
-		client.terminate();
-	}
-
-	#[test]
-	fn test_on_demand_tls_serves_204_with_known_domain() {
-		let client = build_client();
-		{
-			let res = get(&client, "/.well-known/domains?domain=www.avg.name");
-			assert_status(&res, Status::NoContent);
-			assert_headers(&res);
 		}
 		client.terminate();
 	}
