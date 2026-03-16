@@ -38,6 +38,7 @@ impl Fairing for TrimSlash {
 mod tests {
 	use super::*;
 	use rocket::local::blocking::{Client, LocalResponse};
+	use test_case::test_case;
 
 	fn build_client() -> Client {
 		let service = rocket::build().attach(TrimSlash);
@@ -49,39 +50,28 @@ mod tests {
 		req.dispatch()
 	}
 
-	#[test]
-	fn test_fairing_does_nothing_for_valid_paths() {
-		let cases = vec![
-			"/", //
-			"/foo",
-			"/foo/bar",
-			"/foo/bar/baz",
-			"/foo/bar/42",
-		];
-
+	#[test_case("/")]
+	#[test_case("/foo")]
+	#[test_case("/foo/bar")]
+	#[test_case("/foo/bar/baz")]
+	#[test_case("/foo/bar/42")]
+	fn test_fairing_does_nothing_for_valid_paths(path: &'static str) {
 		let client = build_client();
-		for path in cases {
-			let res = get(&client, path);
-			assert_eq!(res.status(), Status::NotFound);
-		}
-		client.terminate();
+		let res = get(&client, path);
+		assert_eq!(res.status(), Status::NotFound);
 	}
 
-	#[test]
-	fn test_fairing_redirects_trailing_slashes_appropriately() {
-		let cases = vec![
-			("/foo/", "/foo"),
-			("/foo/bar/", "/foo/bar"),
-			("/foo/bar/baz/", "/foo/bar/baz"),
-			("/foo/bar/42/", "/foo/bar/42"),
-		];
-
+	#[test_case("/foo/", "/foo")]
+	#[test_case("/foo/bar/", "/foo/bar")]
+	#[test_case("/foo/bar/baz/", "/foo/bar/baz")]
+	#[test_case("/foo/bar/42/", "/foo/bar/42")]
+	fn test_fairing_redirects_trailing_slashes_appropriately(
+		path: &'static str,
+		dest: &'static str,
+	) {
 		let client = build_client();
-		for (path, dest) in cases {
-			let res = get(&client, path);
-			assert_eq!(res.status(), Status::MovedPermanently);
-			assert_eq!(res.headers().get_one("Location"), Some(dest));
-		}
-		client.terminate();
+		let res = get(&client, path);
+		assert_eq!(res.status(), Status::MovedPermanently);
+		assert_eq!(res.headers().get_one("Location"), Some(dest));
 	}
 }
