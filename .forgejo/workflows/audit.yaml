@@ -1,0 +1,38 @@
+# Audits us against the RustSec database
+
+name: Security audit
+
+on:
+  push:
+    paths:
+      - "**/Cargo.toml"
+      - "**/Cargo.lock"
+  schedule:
+    # Every week
+    - cron: "0 7 * * 0"
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        # TODO: Replace with actions/checkout again once it supports sha256
+        uses: https://github.com/yangskyboxlabs/action-checkout@b9de40a2281eb217887b8290be4254823d67a20b
+        with:
+          object-format: sha256
+
+      - name: Install rustup
+        run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+      - name: Setup Rust toolchain
+        run: |
+          . "$HOME/.cargo/env"
+          rustup update stable && rustup default stable
+          cargo install cargo-audit --locked
+
+      - name: RustSec audit check
+        run: |
+          . "$HOME/.cargo/env"
+          cargo audit
