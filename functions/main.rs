@@ -59,6 +59,13 @@ fn bookmarks_html() -> Redirect {
 	Redirect::found(uri!("/links.html"))
 }
 
+#[get("/now")]
+fn now() -> Redirect {
+	Redirect::found(uri!(
+		"https://git.average.name/AverageHelper?tab=repositories"
+	))
+}
+
 // MARK: Pronouns
 
 #[get("/pronouns")]
@@ -213,6 +220,7 @@ fn http_service(config: &Config) -> Rocket<Build> {
 				how_html,
 				bookmarks,
 				bookmarks_html,
+				now,
 				pronouns,
 				well_known_pronouns,
 				root_fursona_json,
@@ -652,6 +660,10 @@ mod tests {
 			("/how.html", "/ways.html"),
 			("/bookmarks", "/links"),
 			("/bookmarks.html", "/links.html"),
+			(
+				"/now",
+				"https://git.average.name/AverageHelper?tab=repositories",
+			),
 			("/pronouns", "/.well-known/pronouns"),
 			("/fursona.json", "/.well-known/fursona.json"),
 			("/.well-known/fursona", "/.well-known/fursona.json"),
