@@ -16,12 +16,12 @@ fn main() {
 			Ok(file) => Some((entry, file)),
 		})
 		.map(|(entry, file)| (entry.file_name(), WaysMeta::from(file)))
-		.flat_map(
-			|(file_name, file)| match file_name.to_string_lossy().strip_suffix(".md") {
-				None => None,
-				Some(slug) => Some((slug.to_string(), file)),
-			},
-		)
+		.flat_map(|(file_name, file)| {
+			file_name
+				.to_string_lossy()
+				.strip_suffix(".md")
+				.map(|slug| (slug.to_string(), file))
+		})
 		.map(WaysMetaWithSlug::from)
 		.collect();
 	ways_meta.sort();
@@ -113,7 +113,7 @@ fn ways_from_slug(slug: &str) -> Option<&'static str> {{
 type Lazy<T> = regex_static::once_cell::sync::Lazy<T>;
 pub type Regex = Lazy<regex::Regex>;
 
-const FRONTMATTER: Regex = lazy_regex!(r#"(?m)^---[\S\s\r\n]+title: "(.+)"[\S\s\r\n]+?---"#);
+static FRONTMATTER: Regex = lazy_regex!(r#"(?m)^---[\S\s\r\n]+title: "(.+)"[\S\s\r\n]+?---"#);
 
 fn gemtext_from_markdown(markdown_text: &str) -> String {
 	// Replace the frontmatter with only the title meta

@@ -1,8 +1,8 @@
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::{Request, Response};
 
-pub const X_PRONOUNS_ACCEPTABLE: &'static str = "X-Pronouns-Acceptable";
-pub const PRONOUNS_EN: &'static str = "she/her";
+pub static X_PRONOUNS_ACCEPTABLE: &str = "X-Pronouns-Acceptable";
+pub static PRONOUNS_EN: &str = "she/her";
 
 /// A Rocket [Fairing](https://rocket.rs/guide/v0.5/fairings/#fairings) that sets
 /// [`X-Pronouns-Acceptable`](https://www.andrewyu.org/article/x-pronouns.html) on every response.

@@ -33,13 +33,11 @@ impl Default for Config {
 			.map(PathBuf::from);
 		let gemini_port = env::var("GEMINI_PORT")
 			.ok()
-			.map(|p| p.parse::<u16>().ok())
-			.flatten()
+			.and_then(|p| p.parse::<u16>().ok())
 			.unwrap_or(1965);
 		let http_port = env::var("HTTP_PORT")
 			.ok()
-			.map(|p| p.parse::<u16>().ok())
-			.flatten()
+			.and_then(|p| p.parse::<u16>().ok())
 			.unwrap_or(8787);
 
 		Self {

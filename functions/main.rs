@@ -8,16 +8,19 @@ use capsule::gemini_service;
 use config::Config;
 use factories::{UserAgent, WebFinger};
 use include_dir::{Dir, include_dir};
-use middleware::{Clacks, ExtraSecurityHeaders, PronounsAcceptable};
-use middleware::{CorsAllowAllResponse, CorsOnlyProdResponse, PRONOUNS_EN, TrimSlash, shield};
-use rocket::http::{ContentType, Status};
-use rocket::response::content::RawJson;
-use rocket::response::status::BadRequest;
-use rocket::response::{Redirect, content::RawHtml, status::NotFound};
+use middleware::{
+	Clacks, CorsAllowAllResponse, CorsOnlyProdResponse, ExtraSecurityHeaders, PRONOUNS_EN,
+	PronounsAcceptable, TrimSlash, shield,
+};
 use rocket::{Build, Rocket, catch, catchers, get, routes, uri};
+use rocket::{
+	http::{ContentType, Status},
+	response::{
+		Redirect, content::RawHtml, content::RawJson, status::BadRequest, status::NotFound,
+	},
+};
 use rocket_async_compression::CachedCompression;
-use std::ffi::OsStr;
-use std::path::PathBuf;
+use std::{ffi::OsStr, path::PathBuf};
 
 // MARK: - Routes
 
@@ -80,8 +83,8 @@ fn well_known_fursona() -> Redirect {
 	Redirect::found(uri!(fursona()))
 }
 
-const AVATAR_IMAGE: &'static [u8] = include_bytes!("../dist/images/refs/AverageHelper-avatar.png");
-const FURSONA_JSON: &'static str = include_str!("../dist/.well-known/fursona.json");
+static AVATAR_IMAGE: &[u8] = include_bytes!("../dist/images/refs/AverageHelper-avatar.png");
+static FURSONA_JSON: &str = include_str!("../dist/.well-known/fursona.json");
 
 /// Serves my fursona avatar image, without CORS so external readers can access the file.
 #[get("/images/refs/AverageHelper-avatar.png")]
@@ -131,7 +134,7 @@ fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
 // MARK: /dist
 
 static DIST: Dir = include_dir!("dist");
-const ROOT: &'static str = include_str!("../dist/index.html");
+static ROOT: &str = include_str!("../dist/index.html");
 
 #[get("/")]
 fn root() -> CorsOnlyProdResponse<RawHtml<&'static str>> {
@@ -188,7 +191,7 @@ fn not_found() -> NotFound<RawHtml<&'static str>> {
 fn http_service(config: &Config) -> Rocket<Build> {
 	let config = config.rocket_config();
 
-	let suffixes = vec![".css", ".html", ".svg", ".xml", ".txt"]
+	let suffixes = [".css", ".html", ".svg", ".xml", ".txt"]
 		.iter()
 		.map(ToString::to_string)
 		.collect();
@@ -236,7 +239,7 @@ async fn start_gemini_service(config: &Config) {
 }
 
 async fn start_http_service(config: &Config) {
-	let rocket = match http_service(&config).ignite().await {
+	let rocket = match http_service(config).ignite().await {
 		Err(err) => {
 			eprintln!("{err}");
 			std::process::exit(1);
@@ -273,12 +276,8 @@ mod tests {
 	};
 
 	fn assert_header(res: &LocalResponse, key: &str, value: &str) {
-		assert_eq!(
-			res.headers()
-				.get_one(key)
-				.expect(&format!("{key} value should exist")),
-			value
-		);
+		let expectation = format!("{key} value should exist");
+		assert_eq!(res.headers().get_one(key).expect(&expectation), value);
 	}
 
 	fn assert_headers(res: &LocalResponse) {
@@ -289,7 +288,7 @@ mod tests {
 				.expect("Content-Security-Policy value should exist")
 				.contains("upgrade-insecure-requests")
 		);
-		assert_header(&res, header::REFERRER_POLICY.as_str(), "no-referrer");
+		assert_header(res, header::REFERRER_POLICY.as_str(), "no-referrer");
 		assert!(res.headers().contains(header::STRICT_TRANSPORT_SECURITY));
 		assert!(res.headers().contains(header::X_CONTENT_TYPE_OPTIONS));
 		assert!(res.headers().contains(header::X_FRAME_OPTIONS));
@@ -339,16 +338,18 @@ mod tests {
 	}
 
 	struct Origin(&'static str);
-	impl Into<Header<'static>> for Origin {
-		fn into(self) -> Header<'static> {
-			Header::new(header::ORIGIN.as_str(), self.0)
+
+	impl From<Origin> for Header<'static> {
+		fn from(value: Origin) -> Self {
+			Self::new(header::ORIGIN.as_str(), value.0)
 		}
 	}
 
 	struct UserAgent(String);
-	impl Into<Header<'static>> for UserAgent {
-		fn into(self) -> Header<'static> {
-			Header::new(header::USER_AGENT.as_str(), self.0)
+
+	impl From<UserAgent> for Header<'static> {
+		fn from(value: UserAgent) -> Self {
+			Self::new(header::USER_AGENT.as_str(), value.0)
 		}
 	}
 
@@ -384,7 +385,7 @@ mod tests {
 		let bytes = res.into_bytes().expect("Body should download safely");
 		let hundred_mb = 100_000_000;
 		assert!(bytes.len() < hundred_mb, "Body should be under 100 MB");
-		return bytes;
+		bytes
 	}
 
 	fn response_body(res: LocalResponse) -> String {
@@ -545,7 +546,7 @@ mod tests {
 			let has_allowed_origin = res
 				.headers()
 				.contains(header::ACCESS_CONTROL_ALLOW_ORIGIN.as_str());
-			assert_eq!(has_allowed_origin, false);
+			assert!(!has_allowed_origin);
 			let response_contents = response_body(res);
 			let expected_file_path = format!("./dist{path}");
 			assert_file_contents_match(response_contents, &expected_file_path);

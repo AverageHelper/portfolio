@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use url::Host;
 
 /// Launches a Gemini capsule with the given configuration.
-pub async fn gemini_service<'a>(config: &Config) -> Result<(), fluffer::AppErr> {
+pub async fn gemini_service(config: &Config) -> Result<(), fluffer::AppErr> {
 	let address = format!("[::]:{}", config.gemini_port);
 	let Certs { key, cert } = Certs::from_config(config);
 
@@ -80,7 +80,7 @@ struct GemtextAsset;
 async fn static_txt(client: fluffer::Client<Config>) -> Result<Vec<u8>, RequestError> {
 	route(client, async |client: fluffer::Client<Config>| {
 		let file_path = client.url.path();
-		let asset = PublicAsset::get(&file_path).ok_or(RequestError::NotFound)?;
+		let asset = PublicAsset::get(file_path).ok_or(RequestError::NotFound)?;
 		let data = match String::from_utf8(asset.data.to_vec()) {
 			Err(_) => return Err(RequestError::TemporaryFailure),
 			Ok(content) => content,
@@ -192,11 +192,11 @@ async fn route(
 		}
 		Some(url::Host::Domain(domain)) => {
 			eprintln!("Caller requested an unknown domain {domain}");
-			return Err(RequestError::WrongHost);
+			Err(RequestError::WrongHost)
 		}
 		Some(url::Host::Ipv4(_)) | Some(url::Host::Ipv6(_)) | None => {
 			eprintln!("Caller requested an unknown domain");
-			return Err(RequestError::WrongHost);
+			Err(RequestError::WrongHost)
 		}
 	}
 }

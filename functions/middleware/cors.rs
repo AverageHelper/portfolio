@@ -1,15 +1,16 @@
 use http::header;
 use rocket::{
-	http::{uri::Absolute, Header},
+	http::{Header, uri::Absolute},
 	response::Responder,
 	uri,
 };
 
 /// A response header that allows all origins.
 pub struct CorsAllowAll;
-impl Into<Header<'static>> for CorsAllowAll {
-	fn into(self) -> Header<'static> {
-		Header::new(header::ACCESS_CONTROL_ALLOW_ORIGIN.as_str(), "*")
+
+impl From<CorsAllowAll> for Header<'static> {
+	fn from(_: CorsAllowAll) -> Self {
+		Self::new(header::ACCESS_CONTROL_ALLOW_ORIGIN.as_str(), "*")
 	}
 }
 
@@ -26,13 +27,14 @@ impl<'r, T: for<'s> Responder<'s, 'static>> Responder<'r, 'static> for CorsAllow
 	}
 }
 
-const PROD_URI: Absolute<'static> = uri!("https://average.name");
+static PROD_URI: Absolute<'static> = uri!("https://average.name");
 
 /// A response header that allows only our deployment origin.
 struct CorsOnlyProd;
-impl Into<Header<'static>> for CorsOnlyProd {
-	fn into(self) -> Header<'static> {
-		Header::new(
+
+impl From<CorsOnlyProd> for Header<'static> {
+	fn from(_: CorsOnlyProd) -> Self {
+		Self::new(
 			header::ACCESS_CONTROL_ALLOW_ORIGIN.as_str(),
 			PROD_URI.to_string(),
 		)
@@ -51,7 +53,7 @@ impl<'r, T: for<'s> Responder<'s, 'static>> Responder<'r, 'static> for CorsOnlyP
 		let mut res = self.0.respond_to(request)?;
 
 		if let Some(user_provided_origin) = request.headers().get_one(header::ORIGIN.as_str()) {
-			if user_provided_origin == PROD_URI.to_string() {
+			if PROD_URI == user_provided_origin {
 				res.set_header(CorsOnlyProd);
 			}
 		}

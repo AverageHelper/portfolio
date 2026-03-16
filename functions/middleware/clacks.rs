@@ -2,7 +2,7 @@ use crate::utils::random_name;
 use rocket::fairing::{Fairing, Info, Kind};
 use rocket::{Request, Response};
 
-pub const X_CLACKS_OVERHEAD: &'static str = "X-Clacks-Overhead";
+pub static X_CLACKS_OVERHEAD: &str = "X-Clacks-Overhead";
 
 /// A Rocket [Fairing](https://rocket.rs/guide/v0.5/fairings/#fairings) that sets
 /// [`X-Clacks-Overhead`](https://xclacksoverhead.org/home/about) on every response.

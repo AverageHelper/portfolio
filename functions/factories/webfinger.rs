@@ -2,7 +2,7 @@ use crate::middleware::CorsAllowAll;
 use rocket::http::{ContentType, Status};
 use rocket::request::{self, FromRequest};
 use rocket::response::{Redirect, Responder};
-use rocket::{uri, Request, Response};
+use rocket::{Request, Response, uri};
 use serde::{Deserialize, Serialize};
 use std::convert::Infallible;
 use std::io::Cursor;
@@ -27,8 +27,8 @@ impl<'r> AvailableLink<'r> {
 		U: Into<&'r str>,
 	{
 		AvailableLink {
-			rel: "http://webfinger.net/rel/profile-page".into(),
-			r#type: Some("text/html".into()),
+			rel: "http://webfinger.net/rel/profile-page",
+			r#type: Some("text/html"),
 			href: Some(url.into()),
 			template: None,
 		}
@@ -39,8 +39,8 @@ impl<'r> AvailableLink<'r> {
 		U: Into<&'r str>,
 	{
 		AvailableLink {
-			rel: "self".into(),
-			r#type: Some("application/activity+json".into()),
+			rel: "self",
+			r#type: Some("application/activity+json"),
 			href: Some(url.into()),
 			template: None,
 		}
@@ -104,10 +104,7 @@ pub fn webfinger<'r>(
 		return Err(Status::NotFound);
 	}
 
-	let rel_queries: Vec<&str> = match rel {
-		None => vec![],
-		Some(vec) => vec,
-	};
+	let rel_queries: Vec<&str> = rel.unwrap_or_default();
 
 	let links: Vec<AvailableLink> = {
 		let mut available_links = vec![
@@ -123,17 +120,17 @@ pub fn webfinger<'r>(
 		available_links
 	};
 
-	return Ok(WebFinger {
-		subject: "acct:avghelper@gts.average.name".into(),
+	Ok(WebFinger {
+		subject: "acct:avghelper@gts.average.name",
 		aliases: vec![
-			"https://average.name/@average".into(),
-			"https://average.name/@avg".into(),
-			"https://average.name/@avghelper".into(),
-			"https://gts.average.name/@avghelper".into(),
-			"https://gts.average.name/users/avghelper".into(),
+			"https://average.name/@average",
+			"https://average.name/@avg",
+			"https://average.name/@avghelper",
+			"https://gts.average.name/@avghelper",
+			"https://gts.average.name/users/avghelper",
 		],
 		links,
-	});
+	})
 }
 
 /// A request guard that provides the request's User-Agent string, if any.
@@ -163,7 +160,7 @@ pub fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
 
 	// GitHub is asking. Point to Fedi:
 	let fedi = uri!("https://gts.average.name/.well-known/nodeinfo");
-	return Ok(Redirect::found(fedi));
+	Ok(Redirect::found(fedi))
 }
 
 // MARK: - Tests
@@ -193,10 +190,7 @@ mod tests {
 	#[test]
 	fn test_nodeinfo_returns_redirect_with_github_user_agent() {
 		let user_agent = UserAgent(Some("GitHub-NodeinfoQuery"));
-		match nodeinfo(user_agent) {
-			Err(_) => panic!("Expected 302"),
-			Ok(_) => {} // yay
-		}
+		nodeinfo(user_agent).expect("Expected 302");
 	}
 
 	#[test]
@@ -250,7 +244,7 @@ mod tests {
 	#[test]
 	fn test_webfinger_serializes_links_without_extra_keys() {
 		let link = AvailableLink {
-			rel: "foo".into(),
+			rel: "foo",
 			r#type: None,
 			href: None,
 			template: None,

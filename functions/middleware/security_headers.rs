@@ -9,11 +9,11 @@ use rocket::uri;
 use rocket::{Request, Response};
 
 // Standard headers that aren't in the http crate yet:
-const CROSS_ORIGIN_EMBEDDER_POLICY: &'static str = "Cross-Origin-Embedder-Policy";
-const CROSS_ORIGIN_OPENER_POLICY: &'static str = "Cross-Origin-Opener-Policy";
-const CROSS_ORIGIN_RESOURCE_POLICY: &'static str = "Cross-Origin-Resource-Policy";
-const X_DOWNLOAD_OPTIONS: &'static str = "X-Download-Options";
-const X_PERMITTED_CROSS_DOMAIN_POLICIES: &'static str = "X-Permitted-Cross-Domain-Policies";
+static CROSS_ORIGIN_EMBEDDER_POLICY: &str = "Cross-Origin-Embedder-Policy";
+static CROSS_ORIGIN_OPENER_POLICY: &str = "Cross-Origin-Opener-Policy";
+static CROSS_ORIGIN_RESOURCE_POLICY: &str = "Cross-Origin-Resource-Policy";
+static X_DOWNLOAD_OPTIONS: &str = "X-Download-Options";
+static X_PERMITTED_CROSS_DOMAIN_POLICIES: &str = "X-Permitted-Cross-Domain-Policies";
 
 /// A Rocket [Fairing](https://rocket.rs/guide/v0.5/fairings/#fairings) that sets
 /// security headers on every response.
@@ -119,11 +119,11 @@ impl Fairing for ExtraSecurityHeaders {
 /// some flavor of `localhost`, then the host is returned as-is with an `http` scheme.
 /// If the host is unknown, or no host is given, then our production domain name
 /// is returned.
-fn resource_origin<'a>(user_provided_host: Option<&'a Host<'_>>) -> Absolute<'static> {
+fn resource_origin(user_provided_host: Option<&Host<'_>>) -> Absolute<'static> {
 	match user_provided_host {
 		Some(untrustred) if untrustred.domain() == "localhost" => uri!("http://localhost"), // dev
 		Some(untrustred) if untrustred.domain() == "127.0.0.1" => uri!("http://127.0.0.1"), // dev
 		Some(untrustred) if untrustred.domain() == "[::1]" => uri!("http://[::1]"),         // dev
-		Some(_) | None => return uri!("https://average.name"),                              // prod
+		Some(_) | None => uri!("https://average.name"),                                     // prod
 	}
 }
