@@ -1,8 +1,5 @@
-use std::{
-	env,
-	net::{IpAddr, Ipv4Addr},
-	path::PathBuf,
-};
+use core::net::{IpAddr, Ipv4Addr};
+use std::{env, path::PathBuf};
 
 #[derive(Clone)]
 pub struct Config {

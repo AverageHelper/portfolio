@@ -1,0 +1,9 @@
+## options for `cargo clippy`
+## See https://doc.rust-lang.org/clippy/configuration.html
+
+# Panic == test failure, so these are fine:
+allow-panic-in-tests = true
+allow-unwrap-in-tests = true
+
+# Adding more methods to a type from a different module is useful for separating concerns.
+inherent-impl-lint-scope = "module"

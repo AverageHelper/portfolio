@@ -39,6 +39,64 @@ serde_norway = "0.9.42"
 [lints.rust]
 unsafe_code = "forbid"
 
+[lints.clippy]
+# See https://rust-lang.github.io/rust-clippy/stable/index.html
+pedantic = { level = "warn", priority = -1 }
+allow_attributes = "deny"                     # use #[expect()] instead
+allow_attributes_without_reason = "deny"      # docs good
+arithmetic_side_effects = "deny"              # avoid panics
+as_conversions = "deny"                       # prefer safe/correct conversions
+as_underscore = "deny"                        # "
+cargo_common_metadata = "warn"                # docs good
+create_dir = "deny"                           # use create_dir_all instead
+dbg_macro = "warn"                            # get rid of these before release
+panic = "warn"                                # "
+pointer_format = "warn"                       # "
+todo = "warn"                                 # "
+unimplemented = "warn"                        # "
+use_debug = "warn"                            # "
+unwrap_used = "warn"                          # "
+error_impl_error = "warn"                     # name errors more usefully instead
+exit = "deny"                                 # return from main instead
+filetype_is_file = "warn"                     # handle more edge cases
+float_cmp_const = "warn"                      # handle floats carefully
+indexing_slicing = "warn"                     # check indices before slicing
+infinite_loop = "deny"                        # don't accidentally hang
+integer_division = "warn"                     # handle the remainder
+iter_over_hash_type = "warn"                  # don't assume loop order
+lossy_float_literal = "warn"                  # handle floats carefully
+map_err_ignore = "warn"                       # handle errors
+map_with_unused_argument_over_ranges = "warn" # clarity
+precedence_bits = "warn"                      # "
+str_to_string = "warn"                        # "
+mem_forget = "deny"                           # avoid easy memory leaks
+missing_assert_message = "warn"               # good errors good
+missing_asserts_for_indexing = "warn"         # elide bounds checks where possible
+mod_module_files = "deny"                     # use modern module layout
+multiple_inherent_impl = "warn"               # consistency
+pub_without_shorthand = "warn"                # "
+tests_outside_test_module = "deny"            # "
+unnecessary_self_imports = "warn"             # "
+negative_feature_names = "warn"               # features are supposed to be additive
+non_zero_suggestions = "warn"                 # consistent nonzero usage
+rc_buffer = "warn"                            # think carefully about interior mutability
+rc_mutex = "warn"                             # "
+redundant_feature_names = "warn"              # what exactly is being added
+redundant_test_prefix = "warn"                # declutter
+rest_pat_in_fully_bound_structs = "warn"      # avoid accidentally eliding future fields
+return_and_then = "warn"                      # avoid extra closures
+std_instead_of_core = "deny"                  # prefer no_std compatible imports
+string_add = "deny"                           # "
+string_lit_chars_any = "warn"                 # minor performance buff
+string_slice = "warn"                         # UTF-8 safety
+suspicious_xor_used_as_pow = "warn"           # i would totally make this mistake lol
+try_err = "warn"                              # "
+tabs_in_doc_comments = "allow"                # tabs > spaces for indentation 😤
+undocumented_unsafe_blocks = "deny"           # safety
+unreachable = "warn"                          # document use of unreachable!() with #[expect()]
+wildcard_dependencies = "deny"                # this is asking for trouble
+
+
 [[bin]]
 name = "portfolio"
 path = "functions/main.rs"

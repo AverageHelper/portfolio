@@ -21,7 +21,7 @@ pub fn shield() -> Shield {
 	Shield::new()
 		.enable(NoSniff::Enable) // X-Content-Type-Options: nosniff
 		.enable(Frame::Deny) // X-Frame-Options: DENY
-		.enable(Hsts::Preload(Duration::seconds(31536000))) // Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+		.enable(Hsts::Preload(Duration::seconds(31_536_000))) // Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 		.enable(Referrer::NoReferrer) // Referrer-Policy: no-referrer
 		.enable(Prefetch::Off) // X-DNS-Prefetch-Control: off
 		.enable(

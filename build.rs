@@ -1,26 +1,35 @@
+#![expect(clippy::unwrap_used, reason = "panic is ok at build time")]
+
 use chrono::NaiveDate;
+use core::cmp::Ordering;
 use markdown::{Constructs, ParseOptions, mdast::Node};
 use regex_static::lazy_regex;
 use serde::Deserialize;
-use std::{cmp::Ordering, env, fs, io::ErrorKind, path::Path};
+use std::{env, fs, io::ErrorKind, path::Path};
 
 fn main() {
+	// Rebuild if either Ways or this script change
+	println!("cargo::rerun-if-changed=src/content/ways");
+	println!("cargo::rerun-if-changed=build.rs");
+
 	let out_dir = env::var_os("OUT_DIR").unwrap();
 
 	// Construct a ways.gmi index file:
 	let ways = "src/content/ways";
-	let original_ways = fs::read_dir(ways).unwrap().flat_map(|entry| entry.ok());
+	let original_ways = fs::read_dir(ways)
+		.unwrap()
+		.filter_map(core::result::Result::ok);
 	let mut ways_meta: Vec<WaysMetaWithSlug> = original_ways
-		.flat_map(|entry| match fs::read(entry.path()) {
+		.filter_map(|entry| match fs::read(entry.path()) {
 			Err(_) => None,
 			Ok(file) => Some((entry, file)),
 		})
-		.map(|(entry, file)| (entry.file_name(), WaysMeta::from(file)))
-		.flat_map(|(file_name, file)| {
+		.map(|(entry, file)| (entry.file_name(), WaysMeta::try_from(file).unwrap()))
+		.filter_map(|(file_name, file)| {
 			file_name
 				.to_string_lossy()
 				.strip_suffix(".md")
-				.map(|slug| (slug.to_string(), file))
+				.map(|slug| (slug.to_owned(), file))
 		})
 		.map(WaysMetaWithSlug::from)
 		.collect();
@@ -45,13 +54,18 @@ fn main() {
 
 	// Transform src/content/ways/*.md into ./ways/*.gmi files
 	let ways_container = Path::new(&out_dir).join("ways");
-	match fs::create_dir(&ways_container) {
+	match fs::create_dir_all(&ways_container) {
 		Ok(()) => {}
 		Err(err) if err.kind() == ErrorKind::AlreadyExists => {}
-		Err(err) => panic!("{err}"),
+		Err(err) => {
+			println!("cargo::error={err}");
+			return;
+		}
 	}
 
-	let original_ways = fs::read_dir(ways).unwrap().flat_map(|entry| entry.ok());
+	let original_ways = fs::read_dir(ways)
+		.unwrap()
+		.filter_map(core::result::Result::ok);
 	for original_md in original_ways {
 		if original_md.file_type().unwrap().is_dir() {
 			// Skip subdirectories
@@ -62,7 +76,7 @@ fn main() {
 		let file_name = file_name_raw.to_str().unwrap();
 		let slug = file_name.strip_suffix(".md").unwrap();
 		let content_bytes = fs::read(original_md.path()).unwrap();
-		let markdown_text = String::from_utf8(content_bytes.to_vec()).unwrap();
+		let markdown_text = String::from_utf8(content_bytes).unwrap();
 
 		// Convert file to Gemtext
 		let content = gemtext_from_markdown(&markdown_text);
@@ -80,34 +94,26 @@ fn main() {
 	}
 
 	// Create a route function that embeds all of these files and serves them at appropriate slugs
+	// TODO: Consider https://crates.io/crates/codegen instead of string interpolation
 	let map = ways_meta
 		.iter()
 		.map(|meta_with_slug| &meta_with_slug.0)
-		.map(|slug| {
-			format!(
-				r#"		"/ways/{}" => Some(include_str!("./ways/{}.gmi")),"#,
-				slug, slug
-			)
-		})
+		.map(|slug| format!(r#"		"/ways/{slug}" => Some(include_str!("./ways/{slug}.gmi")),"#))
 		.collect::<Vec<_>>()
 		.join("\n");
 
 	let dest_path = Path::new(&out_dir).join("ways.rs");
 	let ways_from_slug_fn = format!(
-		r#"/// Returns the Ways document with the given slug (including the leading `/ways/` prefix).
+		"/// Returns the Ways document with the given slug (including the leading `/ways/` prefix).
 fn ways_from_slug(slug: &str) -> Option<&'static str> {{
 	match slug {{
 {map}
 		_ => None,
 	}}
 }}
-"#
+"
 	);
 	fs::write(&dest_path, ways_from_slug_fn).unwrap();
-
-	// Rebuild if either Ways or this script change
-	println!("cargo::rerun-if-changed=src/content/ways");
-	println!("cargo::rerun-if-changed=build.rs");
 }
 
 type Lazy<T> = regex_static::once_cell::sync::Lazy<T>;
@@ -147,16 +153,18 @@ struct WaysMeta {
 	date: NaiveDate,
 }
 
-impl From<Vec<u8>> for WaysMeta {
-	fn from(data: Vec<u8>) -> Self {
+impl TryFrom<Vec<u8>> for WaysMeta {
+	type Error = &'static str;
+
+	fn try_from(data: Vec<u8>) -> Result<Self, Self::Error> {
 		let markdown_text = String::from_utf8(data).unwrap();
 		let ast = markdown_ast(&markdown_text);
 		if let Node::Root(root) = ast
 			&& let Some(Node::Yaml(yaml)) = root.children.first()
 		{
-			return serde_norway::from_str(&yaml.value).expect("Valid YAML");
+			return Ok(serde_norway::from_str(&yaml.value).expect("Valid YAML"));
 		}
-		panic!("Malformed or missing Markdown frontmatter");
+		Err("Malformed or missing Markdown frontmatter")
 	}
 }
 
@@ -175,8 +183,8 @@ impl PartialOrd for WaysMeta {
 #[derive(PartialEq, Eq)]
 struct WaysMetaWithSlug(String, WaysMeta);
 
-impl std::fmt::Display for WaysMetaWithSlug {
-	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl core::fmt::Display for WaysMetaWithSlug {
+	fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
 		let slug = &self.0;
 		let file = &self.1;
 		let date = file.date.format("%b %e, %Y");

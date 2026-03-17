@@ -1,10 +1,10 @@
 use crate::middleware::CorsAllowAll;
+use core::{borrow::Borrow, convert::Infallible};
 use rocket::http::{ContentType, Status};
 use rocket::request::{self, FromRequest};
 use rocket::response::{Redirect, Responder};
 use rocket::{Request, Response, uri};
 use serde::{Deserialize, Serialize};
-use std::convert::Infallible;
 use std::io::Cursor;
 use url::Url;
 
@@ -69,21 +69,22 @@ impl<'r> Responder<'r, 'static> for WebFinger<'r> {
 	}
 }
 
-/// Answers Webfinger requests. See https://www.rfc-editor.org/rfc/rfc7033.html.
+/// Answers Webfinger requests. See <https://www.rfc-editor.org/rfc/rfc7033.html>.
 pub fn webfinger<'r>(
 	resource: &'r str,
 	rel: Option<Vec<&'r str>>,
 ) -> Result<WebFinger<'r>, Status> {
 	// "If the "resource" parameter is absent or malformed, [...] indicate that the request is bad"
 	let resource_uri = match Url::parse(resource) {
-		Err(_) => {
+		Err(err) => {
+			eprintln!("bad resource URI: {err}");
 			return Err(Status::BadRequest);
 		}
 		Ok(value) => value,
 	};
 
 	// Fail if URI is only a protocol
-	if resource_uri.as_str().ends_with(":") {
+	if resource_uri.as_str().ends_with(':') {
 		return Err(Status::BadRequest);
 	}
 
@@ -99,7 +100,7 @@ pub fn webfinger<'r>(
 	}
 
 	// "If the "resource" parameter is a value for which the server has no information, the server MUST indicate [not found]"
-	let host = resource.split("@").last().unwrap_or("");
+	let host = resource.split('@').next_back().unwrap_or("");
 	if !host.ends_with("average.name") && host != "fosstodon.org" {
 		return Err(Status::NotFound);
 	}
@@ -147,8 +148,9 @@ impl<'r> FromRequest<'r> for UserAgent<'r> {
 }
 
 /// Returns my Fedi's nodeinfo if the requester is GitHub's noneinfo query bot.
-pub fn nodeinfo(user_agent: UserAgent<'_>) -> Result<Redirect, Status> {
+pub fn nodeinfo<'r, U: Borrow<UserAgent<'r>>>(user_agent: U) -> Result<Redirect, Status> {
 	// Who's asking?
+	let user_agent = user_agent.borrow();
 	if user_agent.0.is_none()
 		|| user_agent
 			.0
@@ -170,7 +172,7 @@ mod tests {
 	use super::*;
 
 	#[test]
-	fn test_nodeinfo_returns_not_found_without_user_agent() {
+	fn nodeinfo_returns_not_found_without_user_agent() {
 		let no_user_agent = UserAgent(None);
 		match nodeinfo(no_user_agent) {
 			Ok(_) => panic!("Expected 404"),
@@ -179,7 +181,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_nodeinfo_returns_not_found_with_regular_user_agent() {
+	fn nodeinfo_returns_not_found_with_regular_user_agent() {
 		let user_agent = UserAgent(Some("foo"));
 		match nodeinfo(user_agent) {
 			Ok(_) => panic!("Expected 404"),
@@ -188,13 +190,13 @@ mod tests {
 	}
 
 	#[test]
-	fn test_nodeinfo_returns_redirect_with_github_user_agent() {
+	fn nodeinfo_returns_redirect_with_github_user_agent() {
 		let user_agent = UserAgent(Some("GitHub-NodeinfoQuery"));
 		nodeinfo(user_agent).expect("Expected 302");
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_param_is_empty() {
+	fn webfinger_fails_if_resource_param_is_empty() {
 		match webfinger("", None) {
 			Ok(_) => panic!("Expected 400"),
 			Err(status) => assert_eq!(status, Status::BadRequest),
@@ -202,7 +204,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_param_is_not_a_url() {
+	fn webfinger_fails_if_resource_param_is_not_a_url() {
 		match webfinger("foo", None) {
 			Ok(_) => panic!("Expected 400"),
 			Err(status) => assert_eq!(status, Status::BadRequest),
@@ -210,7 +212,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_param_is_only_protocol() {
+	fn webfinger_fails_if_resource_param_is_only_protocol() {
 		match webfinger("acct:", None) {
 			Ok(_) => panic!("Expected 400"),
 			Err(status) => assert_eq!(status, Status::BadRequest),
@@ -218,7 +220,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_param_is_not_acct() {
+	fn webfinger_fails_if_resource_param_is_not_acct() {
 		match webfinger("https:foo.bar", None) {
 			Ok(_) => panic!("Expected 404"),
 			Err(status) => assert_eq!(status, Status::NotFound),
@@ -226,7 +228,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_url_param_host_is_not_known() {
+	fn webfinger_fails_if_resource_url_param_host_is_not_known() {
 		match webfinger("acct:foo.bar", None) {
 			Ok(_) => panic!("Expected 404"),
 			Err(status) => assert_eq!(status, Status::NotFound),
@@ -234,7 +236,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_if_resource_account_param_host_is_not_known() {
+	fn webfinger_fails_if_resource_account_param_host_is_not_known() {
 		match webfinger("acct:foo@foo.bar", None) {
 			Ok(_) => panic!("Expected 404"),
 			Err(status) => assert_eq!(status, Status::NotFound),
@@ -242,7 +244,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_serializes_links_without_extra_keys() {
+	fn webfinger_serializes_links_without_extra_keys() {
 		let link = AvailableLink {
 			rel: "foo",
 			r#type: None,
@@ -257,9 +259,8 @@ mod tests {
 	}
 
 	fn assert_base_finger(result: Result<WebFinger<'_>, Status>) {
-		let data = match result {
-			Ok(wf) => wf,
-			Err(_) => panic!("Expected 200"),
+		let Ok(data) = result else {
+			panic!("Expected 200");
 		};
 
 		assert_eq!(data.subject, "acct:avghelper@gts.average.name");
@@ -274,10 +275,10 @@ mod tests {
 			]
 		);
 
-		let links = data.links;
-		assert_eq!(links.len(), 2);
+		let [ref link0, ref link1] = data.links[..] else {
+			panic!("expected exactly 2 links");
+		};
 
-		let link0 = links[0].clone();
 		assert_eq!(link0.rel, "http://webfinger.net/rel/profile-page");
 		assert_eq!(link0.r#type.expect("kind should be present"), "text/html");
 		assert_eq!(
@@ -285,7 +286,6 @@ mod tests {
 			"https://gts.average.name/@avghelper"
 		);
 
-		let link1 = links[1].clone();
 		assert_eq!(link1.rel, "self");
 		assert_eq!(
 			link1.r#type.expect("kind should be present"),
@@ -298,67 +298,66 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_average_name() {
+	fn webfinger_succeeds_with_resource_acct_average_name() {
 		let res = webfinger("acct:average.name", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_average_average_name() {
+	fn webfinger_succeeds_with_resource_acct_average_average_name() {
 		let res = webfinger("acct:average@average.name", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_gts_average_average_name() {
+	fn webfinger_succeeds_with_resource_acct_gts_average_average_name() {
 		let res = webfinger("acct:average@gts.average.name", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_social_average_average_name() {
+	fn webfinger_succeeds_with_resource_acct_social_average_average_name() {
 		let res = webfinger("acct:average@social.average.name", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_any_subdomain_average_average_name() {
+	fn webfinger_succeeds_with_resource_acct_any_subdomain_average_average_name() {
 		let res = webfinger("acct:average@thissubdomaindoesnotexist.average.name", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_fosstodon_org() {
+	fn webfinger_succeeds_with_resource_acct_fosstodon_org() {
 		let res = webfinger("acct:fosstodon.org", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_succeeds_with_resource_acct_avghelper_fosstodon_org() {
+	fn webfinger_succeeds_with_resource_acct_avghelper_fosstodon_org() {
 		let res = webfinger("acct:avghelper@fosstodon.org", None);
 		assert_base_finger(res);
 	}
 
 	#[test]
-	fn test_webfinger_responds_with_rel_self() {
-		let data = match webfinger("acct:avghelper@fosstodon.org", Some(vec!["self"])) {
-			Ok(wf) => wf,
-			Err(_) => panic!("Expected 200"),
+	fn webfinger_responds_with_rel_self() {
+		let Ok(data) = webfinger("acct:avghelper@fosstodon.org", Some(vec!["self"])) else {
+			panic!("Expected 200");
 		};
 		assert_eq!(data.subject, "acct:avghelper@gts.average.name");
 		assert!(!data.aliases.is_empty(), "Aliases should be nonempty");
 
-		let links = data.links;
-		assert_eq!(links.len(), 1);
+		let [ref link] = data.links[..] else {
+			panic!("expected exactly 1 link");
+		};
 
-		let link0 = links[0].clone();
-		assert_eq!(link0.rel, "self");
+		assert_eq!(link.rel, "self");
 		assert_eq!(
-			link0.r#type.expect("kind should be present"),
+			link.r#type.expect("kind should be present"),
 			"application/activity+json"
 		);
 		assert_eq!(
-			link0.href.expect("href should be present"),
+			link.href.expect("href should be present"),
 			"https://gts.average.name/users/avghelper"
 		);
 	}

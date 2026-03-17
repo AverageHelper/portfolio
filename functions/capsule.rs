@@ -33,11 +33,13 @@ pub async fn gemini_service(config: &Config) -> Result<(), fluffer::AppErr> {
 include!(concat!(env!("OUT_DIR"), "/ways.rs"));
 
 /// Serves the capsule index file.
+#[expect(clippy::unused_async, reason = "fluffer requirement")]
 async fn root() -> &'static str {
 	include_str!("../src/content/gemtext/index.gmi")
 }
 
 /// Serves the Ways index file.
+#[expect(clippy::unused_async, reason = "fluffer requirement")]
 async fn ways() -> &'static str {
 	include_str!(concat!(env!("OUT_DIR"), "/ways.gmi"))
 }
@@ -60,9 +62,8 @@ async fn static_gmi(client: fluffer::Client<Config>) -> Result<Vec<u8>, RequestE
 			str
 		};
 		let asset = GemtextAsset::get(&file_path).ok_or(RequestError::NotFound)?;
-		let data = match String::from_utf8(asset.data.to_vec()) {
-			Err(_) => return Err(RequestError::TemporaryFailure),
-			Ok(content) => content,
+		let Ok(data) = String::from_utf8(asset.data.to_vec()) else {
+			return Err(RequestError::TemporaryFailure);
 		};
 
 		Ok(data) // text/gemini
@@ -81,9 +82,8 @@ async fn static_txt(client: fluffer::Client<Config>) -> Result<Vec<u8>, RequestE
 	route(client, async |client: fluffer::Client<Config>| {
 		let file_path = client.url.path();
 		let asset = PublicAsset::get(file_path).ok_or(RequestError::NotFound)?;
-		let data = match String::from_utf8(asset.data.to_vec()) {
-			Err(_) => return Err(RequestError::TemporaryFailure),
-			Ok(content) => content,
+		let Ok(data) = String::from_utf8(asset.data.to_vec()) else {
+			return Err(RequestError::TemporaryFailure);
 		};
 
 		Ok((Status::Success, "text/plain", data))
@@ -113,14 +113,18 @@ impl Certs {
 			.gemini_certs_dir
 			.as_ref()
 			.expect("Missing Gemini certs directory config");
-		if !certs_dir.is_dir() {
-			panic!("Gemini certs directory not found: {}", certs_dir.display());
-		}
+		assert!(
+			certs_dir.is_dir(),
+			"Gemini certs directory not found: {}",
+			certs_dir.display()
+		);
 		let key = certs_dir.join("key.pem");
 		let cert = certs_dir.join("cert.pem");
-		if !key.exists() || !cert.exists() {
-			panic!("Gemini certs files not found in {}", certs_dir.display());
-		}
+		assert!(
+			!(!key.exists() || !cert.exists()),
+			"Gemini certs files not found in {}",
+			certs_dir.display()
+		);
 
 		Self { key, cert }
 	}
@@ -155,6 +159,8 @@ impl fluffer::GemBytes for RequestError {
 	}
 }
 
+const URL_MAX_BYTES: usize = 1024;
+
 async fn route(
 	client: fluffer::Client<Config>,
 	handler: impl fluffer::GemCall<Config> + 'static + Sync + Send,
@@ -163,8 +169,7 @@ async fn route(
 	let hostname = &config.gemini_hostname;
 
 	// Make sure the URL is the correct size
-	const URL_MAX_SIZE: usize = 1024;
-	if client.url.as_str().len() > URL_MAX_SIZE {
+	if client.url.as_str().len() > URL_MAX_BYTES {
 		return Err(RequestError::BadRequest);
 	}
 
@@ -194,7 +199,7 @@ async fn route(
 			eprintln!("Caller requested an unknown domain {domain}");
 			Err(RequestError::WrongHost)
 		}
-		Some(url::Host::Ipv4(_)) | Some(url::Host::Ipv6(_)) | None => {
+		Some(url::Host::Ipv4(_) | url::Host::Ipv6(_)) | None => {
 			eprintln!("Caller requested an unknown domain");
 			Err(RequestError::WrongHost)
 		}

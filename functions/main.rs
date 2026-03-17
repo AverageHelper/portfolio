@@ -20,6 +20,7 @@ use rocket::{
 	},
 };
 use rocket_async_compression::CachedCompression;
+use std::process::ExitCode;
 use std::{ffi::OsStr, path::PathBuf};
 
 // MARK: - Routes
@@ -239,36 +240,61 @@ fn http_service(config: &Config) -> Rocket<Build> {
 		.register("/", catchers![bad_request, not_found])
 }
 
-async fn start_gemini_service(config: &Config) {
-	if let Err(err) = gemini_service(config).await {
-		eprintln!("{err}");
-		std::process::exit(1);
+async fn start_gemini_service(config: &Config) -> Result<(), AppError> {
+	gemini_service(config).await?;
+	Ok(())
+}
+
+async fn start_http_service(config: &Config) -> Result<(), AppError> {
+	http_service(config).ignite().await?.launch().await?;
+	Ok(())
+}
+
+#[derive(Debug)]
+enum AppError {
+	Gemini(fluffer::AppErr),
+	Http(rocket::Error),
+}
+
+impl core::fmt::Display for AppError {
+	fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+		match self {
+			Self::Gemini(err) => write!(f, "{err}"),
+			Self::Http(err) => write!(f, "{err}"),
+		}
 	}
 }
 
-async fn start_http_service(config: &Config) {
-	let rocket = match http_service(config).ignite().await {
-		Err(err) => {
-			eprintln!("{err}");
-			std::process::exit(1);
-		}
-		Ok(rocket) => rocket,
-	};
-	if let Err(err) = rocket.launch().await {
-		eprintln!("{err}");
-		std::process::exit(1);
+impl core::error::Error for AppError {}
+
+impl From<fluffer::AppErr> for AppError {
+	fn from(value: fluffer::AppErr) -> Self {
+		Self::Gemini(value)
+	}
+}
+
+impl From<rocket::Error> for AppError {
+	fn from(value: rocket::Error) -> Self {
+		Self::Http(value)
 	}
 }
 
 #[rocket::main]
-async fn main() {
+async fn main() -> ExitCode {
 	let config = Config::default();
 
 	// Run both webservers at once, and kill the other when one dies:
-	tokio::select! {
-		_ = start_gemini_service(&config) => {},
-		_ = start_http_service(&config) => {},
+	let res = tokio::select! {
+		r = start_gemini_service(&config) => r,
+		r = start_http_service(&config) => r,
 	};
+
+	if let Err(err) = res {
+		eprintln!("{err}");
+		ExitCode::FAILURE
+	} else {
+		ExitCode::SUCCESS
+	}
 }
 
 // MARK: - Tests
@@ -321,20 +347,20 @@ mod tests {
 	}
 
 	fn assert_status(res: &LocalResponse, status_code: Status) {
-		assert_eq!(res.status(), status_code, "Status should be {status_code}")
+		assert_eq!(res.status(), status_code, "Status should be {status_code}");
 	}
 
 	fn assert_content_type(res: &LocalResponse, content_type: ContentType) {
 		assert_eq!(res.content_type(), Some(content_type));
 	}
 
-	fn assert_file_contents_match(response_contents: String, expected_file_path: &str) {
+	fn assert_file_contents_match(response_contents: &str, expected_file_path: &str) {
 		let file_contents =
 			std::fs::read_to_string(expected_file_path).expect("File should exist and be readable");
 		assert_eq!(response_contents, file_contents);
 	}
 
-	fn assert_file_bytes_match(response_contents: Vec<u8>, expected_file_path: &str) {
+	fn assert_file_bytes_match(response_contents: &[u8], expected_file_path: &str) {
 		let file_contents =
 			std::fs::read(expected_file_path).expect("File should exist and be readable");
 		assert_eq!(response_contents, file_contents);
@@ -372,7 +398,7 @@ mod tests {
 	) -> LocalResponse<'r> {
 		let mut req = client.get(path);
 		if let Some(origin) = origin {
-			req = req.header(Origin(origin))
+			req = req.header(Origin(origin));
 		}
 		req.dispatch()
 	}
@@ -381,7 +407,7 @@ mod tests {
 		path: &'r str,
 		user_agent: &'r str,
 	) -> LocalResponse<'r> {
-		let req = client.get(path).header(UserAgent(user_agent.to_string()));
+		let req = client.get(path).header(UserAgent(user_agent.to_owned()));
 		req.dispatch()
 	}
 	fn head<'r>(client: &'r Client, path: &'r str) -> LocalResponse<'r> {
@@ -398,11 +424,11 @@ mod tests {
 
 	fn response_body(res: LocalResponse) -> String {
 		let body_bytes = response_bytes(res);
-		String::from_utf8(body_bytes.to_vec()).expect("Body should be valid UTF-8")
+		String::from_utf8(body_bytes).expect("Body should be valid UTF-8")
 	}
 
 	#[test]
-	fn test_answers_favicon() {
+	fn answers_favicon() {
 		let client = build_client();
 		let res = get(&client, "/favicon.ico");
 		assert_status(&res, Status::NotFound);
@@ -413,7 +439,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_answers_pronouns() {
+	fn answers_pronouns() {
 		let client = build_client();
 		let res = get(&client, "/.well-known/pronouns");
 		assert_status(&res, Status::Ok);
@@ -425,7 +451,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_serves_webfinger() {
+	fn serves_webfinger() {
 		let client = build_client();
 		{
 			let res = get(
@@ -451,7 +477,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_serves_webfinger_with_rel() {
+	fn serves_webfinger_with_rel() {
 		let client = build_client();
 		{
 			let res = get(
@@ -477,7 +503,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_webfinger_fails_without_resource_param() {
+	fn webfinger_fails_without_resource_param() {
 		let client = build_client();
 		{
 			let res = get(&client, "/.well-known/webfinger");
@@ -488,7 +514,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_serves_nodeinfo() {
+	fn serves_nodeinfo() {
 		let client = build_client();
 		{
 			let res = get(&client, "/.well-known/nodeinfo");
@@ -504,7 +530,7 @@ mod tests {
 	}
 
 	#[test]
-	fn test_serves_static_files() {
+	fn serves_static_files() {
 		let file_paths = vec![
 			("/robots.txt", ContentType::Plain, "https://average.name"),
 			("/sitemap.html", ContentType::HTML, "https://average.name"),
@@ -528,14 +554,14 @@ mod tests {
 			assert_content_type(&res, mime.clone());
 			let response_contents = response_body(res);
 			let expected_file_path = format!("./dist{path}");
-			assert_file_contents_match(response_contents, &expected_file_path);
+			assert_file_contents_match(&response_contents, &expected_file_path);
 		}
 
 		client.terminate();
 	}
 
 	#[test]
-	fn test_omits_cors_header_for_unknown_origin() {
+	fn omits_cors_header_for_unknown_origin() {
 		let file_paths = vec![
 			("/robots.txt", ContentType::Plain),
 			("/sitemap.html", ContentType::HTML),
@@ -557,13 +583,13 @@ mod tests {
 			assert!(!has_allowed_origin);
 			let response_contents = response_body(res);
 			let expected_file_path = format!("./dist{path}");
-			assert_file_contents_match(response_contents, &expected_file_path);
+			assert_file_contents_match(&response_contents, &expected_file_path);
 		}
 		client.terminate();
 	}
 
 	#[test]
-	fn test_serves_static_files_without_extension() {
+	fn serves_static_files_without_extension() {
 		let file_paths = vec![
 			("/sitemap", "sitemap.html"),
 			("/", "index.html"),
@@ -578,14 +604,14 @@ mod tests {
 			assert_content_type(&res, ContentType::HTML);
 			let response_contents = response_body(res);
 			let expected_file_path = format!("./dist/{file_name}");
-			assert_file_contents_match(response_contents, &expected_file_path);
+			assert_file_contents_match(&response_contents, &expected_file_path);
 		}
 
 		client.terminate();
 	}
 
 	#[test]
-	fn test_serves_404_for_unknown_page() {
+	fn serves_404_for_unknown_page() {
 		let file_paths = vec![
 			"/foo_bar_nothing_to_see_here", //
 			"/contact/no-thanks",
@@ -598,7 +624,7 @@ mod tests {
 			assert_headers(&res);
 			assert_content_type(&res, ContentType::HTML);
 			let response_contents = response_body(res);
-			assert_file_contents_match(response_contents, "./dist/404.html");
+			assert_file_contents_match(&response_contents, "./dist/404.html");
 		}
 
 		client.terminate();
@@ -632,20 +658,20 @@ mod tests {
 		assert_cors(&res, "*");
 
 		let response_contents = response_bytes(res);
-		assert_file_bytes_match(response_contents, &format!("./dist{path}"));
+		assert_file_bytes_match(&response_contents, &format!("./dist{path}"));
 
 		client.terminate();
 	}
 
 	#[test]
-	fn test_serves_fursona_ref() {
+	fn serves_fursona_ref() {
 		let path = "/images/refs/AverageHelper-avatar.png";
 		assert_would_serve_file(path, ContentType::PNG);
 		assert_serves_file("/images/refs/AverageHelper-avatar.png", ContentType::PNG);
 	}
 
 	#[test]
-	fn test_serves_fursona_json() {
+	fn serves_fursona_json() {
 		assert_would_serve_file("/.well-known/fursona.json", ContentType::JSON);
 		assert_serves_file("/.well-known/fursona.json", ContentType::JSON);
 	}
@@ -653,7 +679,7 @@ mod tests {
 	// TODO: Test that all internal links go where they're supposed to go
 
 	#[test]
-	fn test_redirects() {
+	fn redirects() {
 		let redirects = vec![
 			("/ip", "https://ip.average.name"),
 			("/how", "/ways"),
