@@ -52,10 +52,10 @@ impl<'r, T: for<'s> Responder<'s, 'static>> Responder<'r, 'static> for CorsOnlyP
 	fn respond_to(self, request: &'r rocket::Request<'_>) -> rocket::response::Result<'static> {
 		let mut res = self.0.respond_to(request)?;
 
-		if let Some(user_provided_origin) = request.headers().get_one(header::ORIGIN.as_str()) {
-			if PROD_URI == user_provided_origin {
-				res.set_header(CorsOnlyProd);
-			}
+		if let Some(user_provided_origin) = request.headers().get_one(header::ORIGIN.as_str())
+			&& PROD_URI == user_provided_origin
+		{
+			res.set_header(CorsOnlyProd);
 		}
 
 		Ok(res)

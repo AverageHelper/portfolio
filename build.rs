@@ -151,10 +151,10 @@ impl From<Vec<u8>> for WaysMeta {
 	fn from(data: Vec<u8>) -> Self {
 		let markdown_text = String::from_utf8(data).unwrap();
 		let ast = markdown_ast(&markdown_text);
-		if let Node::Root(root) = ast {
-			if let Some(Node::Yaml(yaml)) = root.children.first() {
-				return serde_yml::from_str(&yaml.value).expect("Valid YAML");
-			}
+		if let Node::Root(root) = ast
+			&& let Some(Node::Yaml(yaml)) = root.children.first()
+		{
+			return serde_norway::from_str(&yaml.value).expect("Valid YAML");
 		}
 		panic!("Malformed or missing Markdown frontmatter");
 	}

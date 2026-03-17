@@ -1,4 +1,4 @@
-use rand::seq::SliceRandom;
+use rand::{Rng, seq::IndexedRandom};
 
 /// A list of names of people to memorialize in X-Clacks-Overhead
 const NAMES: &[&str] = &[
@@ -7,8 +7,6 @@ const NAMES: &[&str] = &[
 ];
 
 /// Returns a random memorial name.
-pub fn random_name() -> &'static str {
-	NAMES
-		.choose(&mut rand::thread_rng())
-		.expect("Names array should not be empty")
+pub fn random_name<R: Rng>(rng: &mut R) -> &'static str {
+	NAMES.choose(rng).expect("Names array should not be empty")
 }

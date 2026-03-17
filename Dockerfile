@@ -39,7 +39,7 @@ EOF
 ################################################################################
 # Create a stage for building the application.
 
-FROM docker.io/library/rust:1.86.0-alpine AS rust-builder
+FROM docker.io/library/rust:1.94.0-alpine AS rust-builder
 
 # Prepare static linker and install OpenSSL dependency
 RUN apk add musl-dev pkgconf openssl-dev openssl-libs-static

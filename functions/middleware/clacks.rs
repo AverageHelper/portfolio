@@ -18,7 +18,8 @@ impl Fairing for Clacks {
 	}
 
 	async fn on_response<'r>(&self, _: &'r Request<'_>, response: &mut Response<'r>) {
-		let name = random_name();
+		let mut rng = rand::rng();
+		let name = random_name(&mut rng);
 
 		response.set_raw_header(X_CLACKS_OVERHEAD, format!("GNU {name}"));
 	}

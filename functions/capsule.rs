@@ -174,10 +174,10 @@ async fn route(
 	}
 
 	// Make sure the port number is correct, if given
-	if let Some(port) = client.url.port() {
-		if port != config.gemini_port {
-			return Err(RequestError::WrongHost);
-		}
+	if let Some(port) = client.url.port()
+		&& port != config.gemini_port
+	{
+		return Err(RequestError::WrongHost);
 	}
 
 	// Make sure the caller found us through the correct domain!

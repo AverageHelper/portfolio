@@ -1,0 +1,67 @@
+## options for `cargo deny`
+## See https://github.com/EmbarkStudios/cargo-deny/blob/main/deny.template.toml
+
+[graph]
+all-features = true
+
+[output]
+feature-depth = 1
+
+# See https://embarkstudios.github.io/cargo-deny/checks/advisories/cfg.html
+[advisories]
+ignore = [
+	{ id = "RUSTSEC-2024-0370", reason = "waiting on rust-embed's dep tree to publish an update" },
+]
+git-fetch-with-cli = false
+
+# See https://embarkstudios.github.io/cargo-deny/checks/licenses/cfg.html
+[licenses]
+# These are compatible with AGPLv3, per https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses
+allow = [
+	"0BSD",
+	"AGPL-3.0-or-later",
+	"Apache-2.0",
+	"BSD-2-Clause",
+	"BSD-3-Clause",
+	"CC0-1.0",
+	"GPL-3.0-only",
+	"MIT",
+	"Unicode-3.0",
+	"Zlib",
+]
+confidence-threshold = 0.95
+exceptions = [
+	# AGPL-compatible according to https://blueoakcouncil.org/license-faq
+	{ allow = ["BlueOak-1.0.0"], name = "md2gemtext", version = "0.1.0" },
+]
+
+[licenses.private]
+ignore = false
+registries = [
+	"https://git.average.name/AverageHelper/_cargo-index.git",
+	"https://github.com/rust-lang/crates.io-index",
+]
+
+# See https://embarkstudios.github.io/cargo-deny/checks/bans/cfg.html
+[bans]
+wildcards = "warn"
+highlight = "all"
+workspace-default-features = "allow"
+external-default-features = "allow"
+deny = [
+	{ crate = "const-str:>0.6.3", reason = "Copilot 🤢 Use const_format instead." },
+	{ crate = "url-macro", reason = "Basically written by 'AI' 😔 Use url-static instead." },
+	{ crate = "s-zip", reason = "AI. Use mtzip and/or rc-zip instead." },
+	{ crate = "zip", reason = "AI. Use mtzip and/or rc-zip instead." },
+]
+multiple-versions = "allow"
+
+# See https://embarkstudios.github.io/cargo-deny/checks/sources/cfg.html
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = [
+	"https://github.com/rust-lang/crates.io-index",
+	# "https://git.average.name/AverageHelper/_cargo-index.git",
+]
+allow-git = []
