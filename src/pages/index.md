@@ -29,10 +29,3 @@ Here's a few things I built myself that I'm proud of:
 And lots more on [my git forge](https://git.average.name/AverageHelper?tab=repositories). See also my [status page](https://status.average.name) for my self-hosting endeavors.
 
 <!-- TODO: Add a thing about Rainverse Wiki. That's not something I did *myself*, but a project I'm on that I'm proud of. Probs don't mention that I own the domain, since I don't want that to be forever. Maybe reorganize this part? Use a /now page for projects? Idk -->
-
----
-
-## Stuff I get paid for
-
-Not much yet, but I do try to freelance. [Hire me](/work), if you'd like!
-

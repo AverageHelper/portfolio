@@ -36,6 +36,16 @@ fn ip() -> Redirect {
 	Redirect::found(uri!("https://ip.average.name"))
 }
 
+#[get("/work")]
+fn work() -> Redirect {
+	Redirect::to(uri!("/"))
+}
+
+#[get("/work.html")]
+fn work_html() -> Redirect {
+	Redirect::to(uri!("/"))
+}
+
 // MARK: Ways
 
 #[get("/how")]
@@ -217,6 +227,8 @@ fn http_service(config: &Config) -> Rocket<Build> {
 			routes![
 				favicon,
 				ip,
+				work,
+				work_html,
 				how,
 				how_html,
 				bookmarks,
